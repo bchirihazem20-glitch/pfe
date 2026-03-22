@@ -1,0 +1,51 @@
+<app-header></app-header>
+<section class="min-h-screen bg-gray-900 text-white px-6 py-20">
+
+  <!-- TITLE -->
+  <h2 class="text-4xl font-bold text-center text-yellow-400 mb-12">
+    🛒 Boutique de l'Académie
+  </h2>
+
+  <!-- GRID PRODUITS -->
+  <div class="grid md:grid-cols-3 gap-10">
+
+    <!-- PRODUIT CARD -->
+    <div *ngFor="let produit of produits"
+         class="bg-gray-800 rounded-2xl shadow-lg overflow-hidden hover:scale-105 transition">
+
+      <!-- IMAGE -->
+      <img [src]="produit.image"
+           class="w-full h-56 object-cover">
+
+      <!-- CONTENT -->
+      <div class="p-5 space-y-3">
+
+        <h3 class="text-xl font-bold">
+          {{ produit.nom }}
+        </h3>
+
+        <!-- PRIX -->
+        <div class="flex items-center space-x-3">
+          <span class="text-yellow-400 text-lg font-bold">
+            {{ produit.prix }} DT
+          </span>
+
+          <span *ngIf="produit.promo > 0"
+                class="line-through text-gray-400">
+            {{ produit.prix + produit.promo }} DT
+          </span>
+        </div>
+
+        <!-- BUTTON -->
+        <button (click)="acheter(produit)"
+                class="w-full bg-yellow-400 text-black py-2 rounded-lg hover:bg-yellow-500 transition">
+          Acheter
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>

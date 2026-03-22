@@ -1,0 +1,132 @@
+<div class="min-h-screen flex items-center justify-center bg-gray-100">
+
+  <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
+
+    <h2 class="text-2xl font-bold text-center text-blue-600 mb-6">
+      Inscription
+    </h2>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="space-y-4">
+
+      <!-- Nom et Prénom -->
+      <div class="grid grid-cols-2 gap-4">
+
+        <div>
+          <input type="text"
+          placeholder="Nom"
+          formControlName="nom"
+          class="border p-2 rounded-lg focus:ring-2 focus:ring-blue-400 w-full">
+
+          <small class="text-red-500" *ngIf="f['nom'].touched && f['nom'].invalid">
+            Nom obligatoire
+          </small>
+        </div>
+
+        <div>
+          <input type="text"
+          placeholder="Prénom"
+          formControlName="prenom"
+          class="border p-2 rounded-lg focus:ring-2 focus:ring-blue-400 w-full">
+
+          <small class="text-red-500" *ngIf="f['prenom'].touched && f['prenom'].invalid">
+            Prénom obligatoire
+          </small>
+        </div>
+
+      </div>
+
+      <!-- Email -->
+      <div>
+        <input type="email"
+        placeholder="Email"
+        formControlName="email"
+        class="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-400">
+
+        <small class="text-red-500" *ngIf="f['email'].touched && f['email'].errors?.['required']">
+          Email obligatoire
+        </small>
+
+        <small class="text-red-500" *ngIf="f['email'].errors?.['email']">
+          Email invalide
+        </small>
+      </div>
+
+      <!-- Password -->
+      <div>
+        <input type="password"
+        placeholder="Mot de passe"
+        formControlName="password"
+        class="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-400">
+
+        <small class="text-red-500" *ngIf="f['password'].touched && f['password'].errors?.['required']">
+          Mot de passe obligatoire
+        </small>
+
+        <small class="text-red-500" *ngIf="f['password'].errors?.['minlength']">
+          Minimum 6 caractères
+        </small>
+      </div>
+
+      <!-- Confirm Password -->
+      <div>
+        <input type="password"
+        placeholder="Confirmation mot de passe"
+        formControlName="confirmPassword"
+        class="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-400">
+
+        <small class="text-red-500"
+        *ngIf="f['confirmPassword'].touched && f['confirmPassword'].errors?.['mismatch']">
+          Les mots de passe ne correspondent pas
+        </small>
+      </div>
+
+      <!-- Adresse -->
+      <div>
+        <input type="text"
+        placeholder="Adresse"
+        formControlName="adresse"
+        class="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-400">
+
+        <small class="text-red-500" *ngIf="f['adresse'].touched && f['adresse'].invalid">
+          Adresse obligatoire
+        </small>
+      </div>
+
+      <!-- Téléphone -->
+      <div>
+        <input type="text"
+        placeholder="Numéro téléphone"
+        formControlName="telephone"
+        class="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-400">
+
+        <small class="text-red-500" *ngIf="f['telephone'].touched && f['telephone'].errors?.['required']">
+          Téléphone obligatoire
+        </small>
+
+        <small class="text-red-500" *ngIf="f['telephone'].errors?.['pattern']">
+          Numéro invalide
+        </small>
+      </div>
+
+      <!-- Date naissance -->
+      <div>
+        <input type="date"
+        formControlName="dateNaissance"
+        class="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-400">
+
+        <small class="text-red-500" *ngIf="f['dateNaissance'].touched && f['dateNaissance'].invalid">
+          Date obligatoire
+        </small>
+      </div>
+
+      <!-- Bouton -->
+      <button type="submit"
+      class="w-full bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700 transition">
+        S'inscrire
+      </button>
+
+    </form>
+
+  </div>
+
+</div>

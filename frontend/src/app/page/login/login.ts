@@ -41,13 +41,10 @@ export class Login implements OnInit {
         next: (res) => {
           console.log("Connexion réussie", res);
 
-          // stocker token si existe
-          localStorage.setItem("user", JSON.stringify(res));
-
           alert("Connexion réussie");
 
           // redirection vers dashboard
-          // this.router.navigate(['/dashboard']);
+          this.router.navigate(['/']);
         },
 
         error: (err) => {

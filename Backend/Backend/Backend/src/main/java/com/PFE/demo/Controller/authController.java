@@ -34,7 +34,7 @@ public class authController {
         }
         // Encrypt password
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRole("client");
+        user.setRole("JOUEUR");
         userRepository.save(user);
         return  ResponseEntity.status(201)
                 .body(Map.of("message", "User registered successfully!"));
@@ -75,6 +75,7 @@ public class authController {
 
         return ResponseEntity.ok(Map.of(
                 "id", user.getId(),
+                "nom",user.getNom(),
                 "email", user.getEmail(),
                 "role", user.getRole()
         ));

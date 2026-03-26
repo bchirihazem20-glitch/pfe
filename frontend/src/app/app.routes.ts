@@ -7,14 +7,16 @@ import { Activite } from './page/activite/activite';
 import { Contact } from './page/contact/contact';
 import { Boutique } from './page/boutique/boutique';
 import { guestGuard } from './guards/guest-guard';
+import { Dashboard } from './page/dashboard/dashboard';
 
 export const routes: Routes = [
     {path: "login", component:Login,canActivate:[guestGuard]},
     {path: "", component:Home},
     {path: "concept", component:Concept},
-    {path: "inscripition", component:Inscripition,canActivate:[guestGuard]},
+    {path: "inscription", component:Inscripition,canActivate:[guestGuard]},
     {path: "activites", component:Activite},
     {path: "contact", component:Contact},
     {path: "boutique", component:Boutique},
+    {path: "dashboard", component:Dashboard},
 
 ];

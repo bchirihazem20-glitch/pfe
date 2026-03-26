@@ -12,16 +12,5 @@ import { AuthInterceptor } from './interceptors/auth-interceptor';
 })
 export class App {
   protected readonly title = signal('angular');
-
-  constructor(private authService: AuthService) {}
-
-  ngOnInit() {
-    this.authService.getProfile().subscribe({
-      next: (user) => {console.log(user)},
-      error: () => {
-        this.authService.logout();
-      }
-    });
-  }
   
 }

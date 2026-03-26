@@ -1,35 +1,49 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../../service/auth/auth';
-import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-header',
-  imports: [RouterModule,CommonModule],
+  standalone: true,
+  imports: [CommonModule, RouterModule],
   templateUrl: './header.html',
-  styleUrl: './header.css',
 })
 export class Header {
+
   user: any = null;
+  menuOpen = false;
 
   constructor(private authService: AuthService) {}
 
-  ngOnInit(): void {
-    this.authService.user$.subscribe(user => {
-      this.user = user;
-    });
+  ngOnInit() {
+    this.loadUser();
+  }
 
+  loadUser() {
     this.authService.getProfile().subscribe({
-      next: () => {},
-      // error: () => {
-      //   this.authService.logout();
-      // }
+      next: (data) => {
+        this.user = data;
+      },
+      error: () => {
+        this.user = null;
+      }
     });
+  }
+
+  getInitials(): string {
+    if (!this.user) return '';
+    return this.user.nom.charAt(0).toUpperCase();
+  }
+
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen;
   }
 
   logout() {
     this.authService.logout();
+    this.user = null;
+    this.menuOpen = false;
   }
 }
-
-

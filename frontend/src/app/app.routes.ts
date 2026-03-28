@@ -7,6 +7,9 @@ import { Activite } from './page/activite/activite';
 import { Contact } from './page/contact/contact';
 import { Boutique } from './page/boutique/boutique';
 import { guestGuard } from './guards/guest-guard';
+import { Dashboard } from './page/dashboard/dashboard';
+import { authGuard } from './guards/auth-guard';
+import { DashboardBoutique } from './page/dashboard/dashboardboutique/dashboardboutique';
 
 export const routes: Routes = [
     {path: "login", component:Login,canActivate:[guestGuard]},
@@ -16,5 +19,8 @@ export const routes: Routes = [
     {path: "activites", component:Activite},
     {path: "contact", component:Contact},
     {path: "boutique", component:Boutique},
+    {path: "dashboard", component:Dashboard,canActivate:[authGuard],children:[
+        {path:"boutique",component:DashboardBoutique}
+    ]},
 
 ];

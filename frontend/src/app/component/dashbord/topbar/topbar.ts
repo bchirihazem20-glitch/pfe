@@ -22,6 +22,7 @@ export class Topbar {
   }
 
   getInitials() {
-    return this.user?.nom?.charAt(0).toUpperCase();
-  }
+  if (!this.user || !this.user.nom) return '';
+  return this.user.nom.charAt(0).toUpperCase();
+}
 }

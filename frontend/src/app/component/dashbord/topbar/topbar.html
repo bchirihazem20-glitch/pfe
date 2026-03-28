@@ -5,6 +5,7 @@
     Dashboard
   </h1>
 
+<<<<<<< HEAD
   <div class="flex items-center space-x-3" *ngIf="user">
 
   <div class="text-right">
@@ -18,4 +19,20 @@
 
 </div>
 
+=======
+  <!-- User -->
+  <div class="flex items-center space-x-3">
+
+    <div class="text-right">
+      <p class="font-semibold">{{ user?.nom }}</p>
+      <p class="text-sm text-gray-500">{{ user?.role }}</p>
+    </div>
+
+    <div class="w-10 h-10 bg-yellow-400 rounded-full flex items-center justify-center font-bold">
+      {{ getInitials() }}
+    </div>
+
+  </div>
+
+>>>>>>> b7c2b2968028bd5fe3056a1f28e00175ae8225a6
 </div>

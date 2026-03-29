@@ -1,0 +1,15 @@
+<div class="container mt-4">
+
+  <h2>Ajouter Produit</h2>
+
+  <form (ngSubmit)="addProduit()">
+
+  <input type="text" [(ngModel)]="produit.nom" name="nom" required>
+  <input type="number" [(ngModel)]="produit.prix" name="prix" required>
+  <input type="number" [(ngModel)]="produit.promo" name="promo">
+  <input type="file" (change)="onFileSelected($event)" required>
+
+  <button type="submit">Ajouter Produit</button>
+</form>
+
+</div>

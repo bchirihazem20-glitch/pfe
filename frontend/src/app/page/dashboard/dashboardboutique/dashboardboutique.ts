@@ -1,22 +1,26 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Produit } from '../../../models/produit';
-import { Observable } from 'rxjs';
+import { CommonModule } from "@angular/common";
+import { Component } from "@angular/core";
+import {  ProduitsService } from "../../../service/produit/produit";
+import { Router, RouterModule } from "@angular/router";
 
-@Injectable({
-  providedIn: 'root'
+@Component({
+  selector: 'app-dashboard-boutique',
+  imports:[CommonModule,RouterModule],
+  templateUrl: './dashboardboutique.html'
 })
 export class DashboardBoutique {
+   produits: any[] = [];
 
-  private apiUrl = 'http://localhost:8080/api/produits';
+  constructor(private service: ProduitsService,private router:Router) {}
 
-  constructor(private http: HttpClient) {}
 
-  getProduits(): Observable<Produit[]> {
-    return this.http.get<Produit[]>(this.apiUrl);
+
+  ngOnInit() {
+    this.service.getProduits().subscribe(data => {
+      this.produits = data;
+    });
   }
-
-  addProduit(produit: Produit): Observable<Produit> {
-    return this.http.post<Produit>(this.apiUrl, produit);
+   goToAdd() {
+    this.router.navigate(['dashboard/boutique/add-produit']);
   }
 }

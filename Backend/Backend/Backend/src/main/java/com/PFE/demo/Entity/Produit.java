@@ -37,7 +37,7 @@ public class Produit {
     public void setPromo(double promo) { this.promo = promo; }
 
     public String getImage() { return image; }
-    public void setImages(String image) { this.image = image; }
+    public void setImage(String image) { this.image = image; }
 
     public List<Paiement> getPaiements() { return paiements; }
     public void setPaiements(List<Paiement> paiements) { this.paiements = paiements; }

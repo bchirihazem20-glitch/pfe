@@ -11,6 +11,8 @@ import { Dashboard } from './page/dashboard/dashboard';
 import { authGuard } from './guards/auth-guard';
 import { DashboardBoutique } from './page/dashboard/dashboardboutique/dashboardboutique';
 import { PlanningComponent } from './page/planning/planning';
+import { AddProduit } from './page/dashboard/addproduit/addproduit';
+import { adminFileGuard } from './guards/admin-file-guard';
 
 export const routes: Routes = [
     {path: "login", component:Login,canActivate:[guestGuard]},
@@ -22,8 +24,8 @@ export const routes: Routes = [
     {path: "boutique", component:Boutique},
     {path: "planning", component:PlanningComponent},
     {path: "dashboard", component:Dashboard,canActivate:[authGuard],children:[
-      
-  {path:"boutique",component:DashboardBoutique}
+      {path:"boutique",component:DashboardBoutique,canActivate:[adminFileGuard]},
+      {path:"boutique/add-produit",component:AddProduit,canActivate:[adminFileGuard]}
 
     ]},
 

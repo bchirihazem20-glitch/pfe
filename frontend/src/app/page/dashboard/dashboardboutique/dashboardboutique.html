@@ -10,7 +10,7 @@
     <div class="col-md-4" *ngFor="let p of produits">
       <div class="card mb-3">
 
-        <img [src]="p.image" class="card-img-top" height="200">
+<img [src]="'http://localhost:8080' + p.image" class="card-img-top" height="200">
 
         <div class="card-body">
           <h5>{{ p.nom }}</h5>

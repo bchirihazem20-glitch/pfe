@@ -1,9 +1,22 @@
-import { Component } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Produit } from '../../../models/produit';
+import { Observable } from 'rxjs';
 
-@Component({
-  selector: 'app-dashboardboutique',
-  imports: [],
-  templateUrl: './dashboardboutique.html',
-  styleUrl: './dashboardboutique.css',
+@Injectable({
+  providedIn: 'root'
 })
-export class DashboardBoutique {}
+export class DashboardBoutique {
+
+  private apiUrl = 'http://localhost:8080/api/produits';
+
+  constructor(private http: HttpClient) {}
+
+  getProduits(): Observable<Produit[]> {
+    return this.http.get<Produit[]>(this.apiUrl);
+  }
+
+  addProduit(produit: Produit): Observable<Produit> {
+    return this.http.post<Produit>(this.apiUrl, produit);
+  }
+}

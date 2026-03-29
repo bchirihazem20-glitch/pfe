@@ -8,11 +8,9 @@ import { Contact } from './page/contact/contact';
 import { Boutique } from './page/boutique/boutique';
 import { guestGuard } from './guards/guest-guard';
 import { Dashboard } from './page/dashboard/dashboard';
-<<<<<<< HEAD
 import { authGuard } from './guards/auth-guard';
 import { DashboardBoutique } from './page/dashboard/dashboardboutique/dashboardboutique';
-=======
->>>>>>> b7c2b2968028bd5fe3056a1f28e00175ae8225a6
+import { PlanningComponent } from './page/planning/planning';
 
 export const routes: Routes = [
     {path: "login", component:Login,canActivate:[guestGuard]},
@@ -22,12 +20,11 @@ export const routes: Routes = [
     {path: "activites", component:Activite},
     {path: "contact", component:Contact},
     {path: "boutique", component:Boutique},
-<<<<<<< HEAD
+    {path: "planning", component:PlanningComponent},
     {path: "dashboard", component:Dashboard,canActivate:[authGuard],children:[
-        {path:"boutique",component:DashboardBoutique}
+      
+  {path:"boutique",component:DashboardBoutique}
+
     ]},
-=======
-    {path: "dashboard", component:Dashboard},
->>>>>>> b7c2b2968028bd5fe3056a1f28e00175ae8225a6
 
 ];

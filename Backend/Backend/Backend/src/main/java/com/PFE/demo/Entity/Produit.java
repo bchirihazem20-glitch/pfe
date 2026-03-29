@@ -17,8 +17,8 @@ public class Produit {
     private double promo;
 
     // Relation avec ImageProduit
-    @OneToMany(mappedBy = "produit", cascade = CascadeType.ALL)
-    private List<ProduitImage> images;
+
+    private String image;
 
     // Relation avec Paiement
     @OneToMany(mappedBy = "produit", cascade = CascadeType.ALL)
@@ -36,8 +36,8 @@ public class Produit {
     public double getPromo() { return promo; }
     public void setPromo(double promo) { this.promo = promo; }
 
-    public List<ProduitImage> getImages() { return images; }
-    public void setImages(List<ProduitImage> images) { this.images = images; }
+    public String getImage() { return image; }
+    public void setImages(String image) { this.image = image; }
 
     public List<Paiement> getPaiements() { return paiements; }
     public void setPaiements(List<Paiement> paiements) { this.paiements = paiements; }

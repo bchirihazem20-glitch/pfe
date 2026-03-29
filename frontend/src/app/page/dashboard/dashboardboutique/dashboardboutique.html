@@ -1,1 +1,25 @@
-<p>dashboardboutique works!</p>
+<div class="container mt-4">
+
+  <h2>Liste des Produits</h2>
+
+  <button class="btn btn-primary mb-3" (click)="goToAdd()">
+    ➕ Ajouter Produit
+  </button>
+
+  <div class="row">
+    <div class="col-md-4" *ngFor="let p of produits">
+      <div class="card mb-3">
+
+        <img [src]="p.image" class="card-img-top" height="200">
+
+        <div class="card-body">
+          <h5>{{ p.nom }}</h5>
+          <p>Prix: {{ p.prix }} DT</p>
+          <p>Promo: {{ p.promo }} %</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,20 @@
+<div class="p-6">
+  <h1 class="text-3xl font-bold mb-6">Planning des activités</h1>
+
+  <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+    <thead class="bg-yellow-400 text-black">
+      <tr>
+        <th class="py-3 px-6 text-left">Jour</th>
+        <th class="py-3 px-6 text-left">Activité</th>
+        <th class="py-3 px-6 text-left">Heure</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of planning" class="border-b hover:bg-gray-100">
+        <td class="py-3 px-6">{{ p.jour }}</td>
+        <td class="py-3 px-6">{{ p.activite }}</td>
+        <td class="py-3 px-6">{{ p.heure }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

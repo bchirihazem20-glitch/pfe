@@ -5,16 +5,15 @@ import { CommonModule } from '@angular/common';
   selector: 'app-planning',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './planning.html',
-  styleUrls: ['./planning.css']
+  templateUrl: './planning.html'
 })
 export class PlanningComponent {
- 
+
   planning = [
-    { jour: 'Lundi', activite: 'Football U10', heure: '16:00 - 17:30' },
-    { jour: 'Mardi', activite: 'Fitness U12', heure: '16:00 - 17:30' },
-    { jour: 'Mercredi', activite: 'Football U14', heure: '17:00 - 18:30' },
-    { jour: 'Jeudi', activite: 'Technique Avancée', heure: '16:00 - 17:30' },
-    { jour: 'Vendredi', activite: 'Match Amical', heure: '17:00 - 18:30' },
+    { categorie: 'U10', lundi: '18:00', mardi: '18:00', mercredi: '-', jeudi: '-', vendredi: '17:30', samedi: '14:00', dimanche: '-' },
+    { categorie: 'U12', lundi: '-', mardi: '-', mercredi: '18:00', jeudi: '-', vendredi: '-', samedi: '12:30', dimanche: '09:30' },
+    { categorie: 'U14', lundi: '-', mardi: '-', mercredi: '-', jeudi: '-', vendredi: '-', samedi: '15:30', dimanche: '08:00' },
+    { categorie: 'U16', lundi: '-', mardi: '-', mercredi: '-', jeudi: '-', vendredi: '-', samedi: '17:00', dimanche: '11:00' }
   ];
+
 }

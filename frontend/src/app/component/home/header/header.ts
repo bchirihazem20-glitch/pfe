@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../../service/auth/auth';
 
-
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -23,12 +22,8 @@ export class Header {
 
   loadUser() {
     this.authService.getProfile().subscribe({
-      next: (data) => {
-        this.user = data;
-      },
-      error: () => {
-        this.user = null;
-      }
+      next: (data) => this.user = data,
+      error: () => this.user = null
     });
   }
 

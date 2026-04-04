@@ -1,9 +1,194 @@
+/* PLANNING — refined table & panel */
+
+.min-h-screen.bg-gray-50.py-16 {
+  background: var(--bg) !important;
+  padding: 5rem 1.5rem 3.5rem !important;
+}
+
+.min-h-screen.bg-gray-50.py-16 > .max-w-7xl {
+  gap: 2.5rem !important;
+}
+
+.min-h-screen.bg-gray-50.py-16 .bg-white.shadow-lg {
+  background: var(--white) !important;
+  border-radius: var(--radius-lg) !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: var(--shadow) !important;
+  padding: 1.75rem !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.min-h-screen.bg-gray-50.py-16 .bg-white.shadow-lg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #000000, #d4af37);
+}
+
+.min-h-screen.bg-gray-50.py-16 h2.text-2xl {
+  font-family: var(--font-display), 'Cormorant Garamond', serif !important;
+  font-size: 1.5rem !important;
+  font-weight: 600 !important;
+  color: var(--black) !important;
+  -webkit-text-fill-color: var(--black);
+  margin-bottom: 1.25rem !important;
+  letter-spacing: -0.02em;
+}
+
 table {
-  border-collapse: collapse;
+  border-collapse: separate !important;
+  border-spacing: 0;
+  width: 100%;
+  font-family: var(--font-sans), 'Outfit', sans-serif;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
 }
-th, td {
-  border-bottom: 1px solid #ddd;
+
+thead {
+  background: var(--black) !important;
 }
-tr:hover {
-  background-color: #f3f3f3;
+
+thead tr th {
+  color: var(--white) !important;
+  font-size: 0.68rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.85rem 0.5rem !important;
+  border: none !important;
+}
+
+tbody tr {
+  transition: background 0.18s;
+}
+
+tbody tr:nth-child(even) {
+  background: var(--navy-xlight);
+}
+
+tbody tr td {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  padding: 0.75rem 0.45rem !important;
+  border: none !important;
+  border-bottom: 1px solid var(--border) !important;
+}
+
+tbody tr td:first-child {
+  font-weight: 700;
+  color: var(--black);
+}
+
+tbody tr:hover {
+  background: rgba(212, 175, 55, 0.08) !important;
+}
+
+tbody tr:last-child td {
+  border-bottom: none !important;
+}
+
+tbody tr td:last-child {
+  font-weight: 600;
+  color: #d4af37;
+}
+
+.min-h-screen.bg-gray-50.py-16 h1.text-4xl {
+  font-family: var(--font-display), 'Cormorant Garamond', serif !important;
+  font-size: 2.35rem !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.03em;
+  color: var(--black) !important;
+  -webkit-text-fill-color: var(--black);
+  margin-bottom: 0.75rem !important;
+}
+
+.min-h-screen.bg-gray-50.py-16 h1.text-4xl::after {
+  content: '';
+  display: block;
+  width: 2.5rem;
+  height: 2px;
+  background: #d4af37;
+  border-radius: 2px;
+  margin-top: 0.85rem;
+}
+
+.min-h-screen.bg-gray-50.py-16 p.text-gray-600 {
+  font-family: var(--font-sans), 'Outfit', sans-serif;
+  font-size: 0.9375rem;
+  color: var(--text-muted) !important;
+  line-height: 1.75;
+  margin-bottom: 1.5rem;
+}
+
+.min-h-screen.bg-gray-50.py-16 ul.space-y-4 {
+  list-style: none !important;
+  padding: 0 !important;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem !important;
+}
+
+.min-h-screen.bg-gray-50.py-16 ul.space-y-4 li {
+  font-family: var(--font-sans), 'Outfit', sans-serif;
+  font-size: 0.9375rem;
+  color: var(--text);
+  padding: 0.75rem 1rem 0.75rem 2.65rem;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+  position: relative;
+  transition: all 0.22s var(--ease);
+}
+
+.min-h-screen.bg-gray-50.py-16 ul.space-y-4 li::before {
+  content: '';
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  background: #d4af37;
+  border-radius: 50%;
+}
+
+.min-h-screen.bg-gray-50.py-16 ul.space-y-4 li:hover {
+  transform: translateX(4px);
+  border-color: rgba(212, 175, 55, 0.45);
+}
+
+.min-h-screen.bg-gray-50.py-16 .bg-yellow-400 {
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.95), #c9a227) !important;
+  border-radius: var(--radius-lg) !important;
+  padding: 1.5rem 1.65rem !important;
+  box-shadow: 0 12px 40px rgba(212, 175, 55, 0.28);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.min-h-screen.bg-gray-50.py-16 .bg-yellow-400 h3 {
+  font-family: var(--font-sans), 'Outfit', sans-serif !important;
+  font-size: 0.7rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--black) !important;
+  -webkit-text-fill-color: var(--black);
+  margin-bottom: 0.5rem;
+  opacity: 0.75;
+}
+
+.min-h-screen.bg-gray-50.py-16 .bg-yellow-400 p {
+  font-family: var(--font-display), 'Cormorant Garamond', serif;
+  font-size: 1.15rem;
+  font-weight: 500;
+  font-style: italic;
+  color: var(--black) !important;
+  -webkit-text-fill-color: var(--black);
+  line-height: 1.55;
 }

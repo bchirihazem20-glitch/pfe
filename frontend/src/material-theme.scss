@@ -5,8 +5,9 @@ html {
   @include mat.theme(
     (
       color: (
+        theme-type: light,
         primary: mat.$azure-palette,
-        tertiary: mat.$blue-palette,
+        tertiary: mat.$azure-palette,
       ),
       typography: Roboto,
       density: 0,
@@ -16,9 +17,9 @@ html {
 
 body {
   color-scheme: light;
-  background-color: var(--mat-sys-surface);
-  color: var(--mat-sys-on-surface);
-  font: var(--mat-sys-body-medium);
+  background-color: #ffffff;
+  color: #000000;
+  font-family: 'Outfit', system-ui, sans-serif;
   margin: 0;
   height: 100%;
 }

@@ -1,0 +1,117 @@
+/* ACTIVITÉS — luxury cards */
+
+.min-h-screen.bg-gray-100.py-10 {
+  background: var(--bg) !important;
+  padding: 4rem 1.25rem 4rem !important;
+}
+
+.min-h-screen.bg-gray-100.py-10 .max-w-6xl.bg-white {
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+}
+
+.min-h-screen.bg-gray-100.py-10 h1.text-3xl {
+  font-family: var(--font-display), 'Cormorant Garamond', serif !important;
+  font-size: 2.35rem !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.02em;
+  color: var(--black) !important;
+  -webkit-text-fill-color: var(--black);
+  text-align: center;
+  margin-bottom: 0.5rem !important;
+}
+
+.min-h-screen.bg-gray-100.py-10 p.text-gray-700.mb-6 {
+  font-family: var(--font-sans), 'Outfit', sans-serif;
+  font-size: 1rem;
+  color: var(--text-muted) !important;
+  text-align: center;
+  max-width: 36rem;
+  margin: 0 auto 2.5rem !important;
+  line-height: 1.75;
+}
+
+.min-h-screen.bg-gray-100.py-10 .grid {
+  gap: 1.35rem !important;
+}
+
+.min-h-screen.bg-gray-100.py-10 .bg-gray-50 {
+  background: var(--white) !important;
+  border-radius: var(--radius-lg) !important;
+  border: 1px solid var(--border) !important;
+  padding: 1.65rem 1.5rem !important;
+  box-shadow: var(--shadow-sm);
+  transition:
+    transform 0.35s var(--spring),
+    box-shadow 0.35s,
+    border-color 0.35s;
+  position: relative;
+  overflow: hidden;
+  animation: fadeUp 0.45s var(--ease) both;
+}
+
+.min-h-screen.bg-gray-100.py-10 .bg-gray-50:nth-child(1) {
+  animation-delay: 0s;
+}
+.min-h-screen.bg-gray-100.py-10 .bg-gray-50:nth-child(2) {
+  animation-delay: 0.06s;
+}
+.min-h-screen.bg-gray-100.py-10 .bg-gray-50:nth-child(3) {
+  animation-delay: 0.12s;
+}
+
+.min-h-screen.bg-gray-100.py-10 .bg-gray-50::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #d4af37, transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.min-h-screen.bg-gray-100.py-10 .bg-gray-50:hover {
+  transform: translateY(-5px) !important;
+  box-shadow: var(--shadow-lg) !important;
+  border-color: rgba(212, 175, 55, 0.35) !important;
+}
+
+.min-h-screen.bg-gray-100.py-10 .bg-gray-50:hover::before {
+  opacity: 1;
+}
+
+.min-h-screen.bg-gray-100.py-10 h2.text-xl {
+  font-family: var(--font-display), 'Cormorant Garamond', serif !important;
+  font-size: 1.35rem !important;
+  font-weight: 600 !important;
+  color: var(--black) !important;
+  -webkit-text-fill-color: var(--black);
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.min-h-screen.bg-gray-100.py-10 p.text-gray-600 {
+  font-family: var(--font-sans), 'Outfit', sans-serif;
+  font-size: 0.875rem;
+  color: var(--text-muted) !important;
+  line-height: 1.65;
+  margin-bottom: 0.75rem;
+}
+
+.min-h-screen.bg-gray-100.py-10 span.text-sm {
+  font-family: var(--font-sans), 'Outfit', sans-serif;
+  font-size: 0.7rem !important;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--black);
+  color: var(--white) !important;
+  -webkit-text-fill-color: var(--white);
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  display: inline-block;
+}

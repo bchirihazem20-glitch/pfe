@@ -1,10 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Header } from '../../component/home/header/header';
 
 @Component({
   selector: 'app-contact',
-  imports: [Header],
+  standalone: true,
+  imports: [CommonModule, Header],
   templateUrl: './contact.html',
   styleUrl: './contact.css',
 })
-export class Contact {}
+export class Contact {
+  @Input() showHeader = true;
+}

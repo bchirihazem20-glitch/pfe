@@ -1,4 +1,4 @@
-<app-header></app-header>
+<app-header *ngIf="showHeader"></app-header>
 <section class="min-h-screen bg-gray-900 text-white flex items-center justify-center px-6 py-20">
 
   <div class="max-w-6xl w-full grid md:grid-cols-2 gap-10">
@@ -11,13 +11,13 @@
 
       <p class="mb-6 text-gray-300">
         Vous avez une question ou souhaitez inscrire votre enfant ?
-        N'hésitez pas à nous contacter 👇
+        N'hésitez pas à nous contacter.
       </p>
 
       <div class="space-y-4">
-        <p>📍 Adresse : Tunis, Tunisie</p>
-        <p>📞 Téléphone : +216 12 345 678</p>
-        <p>📧 Email : contact@academie.com</p>
+        <p>Adresse : Tunis, Tunisie</p>
+        <p>Téléphone : +216 12 345 678</p>
+        <p>Email : contact@academie.com</p>
       </div>
     </div>
 

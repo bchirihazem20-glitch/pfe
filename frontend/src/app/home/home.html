@@ -1,37 +1,71 @@
-<!-- NAVBAR -->
 <app-header></app-header>
 
+<section id="accueil" class="hero relative min-h-screen flex items-center overflow-hidden text-white scroll-mt-0">
 
-<!-- HERO SECTION VIDEO -->
-<section class="relative h-screen flex items-center justify-center text-center text-white overflow-hidden">
+  <img
+    [src]="heroImageSrc"
+    alt=""
+    class="hero-photo absolute inset-0 h-full w-full object-cover object-center md:object-[center_40%]"
+    width="1920"
+    height="1080"
+    loading="eager"
+    decoding="async"
+  />
 
-  <!-- Video background -->
-  <video autoplay muted loop playsinline
-  class="absolute top-0 left-0 w-full h-full object-cover">
+  <div class="hero-scrim absolute inset-0" aria-hidden="true"></div>
 
-    <source src="assets/video/football.mp4" type="video/mp4">
+  <div class="relative z-10 flex w-full flex-col items-stretch justify-center gap-10 px-6 py-24 md:flex-row md:items-center md:justify-between md:px-10 md:pt-32">
 
-  </video>
+    <div class="max-w-xl hero-copy">
 
-  <!-- Overlay -->
-  <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+      <h1 class="hero-title hero-title--brand mb-6 text-4xl font-semibold leading-tight sm:text-5xl md:text-[3.25rem]">
+        {{ academyName }} <span class="hero-title-accent">{{ academyHighlight }}</span><br />
+        <span class="hero-title-city">{{ academyCity }}</span>
+      </h1>
 
-  <!-- Content -->
-  <div class="relative z-10 px-6">
+      <p class="hero-lede mb-8 text-base sm:text-lg">
+        {{ heroDescription }}
+      </p>
 
-    <h1 class="text-5xl md:text-6xl font-bold mb-6">
-      Académie Football
-    </h1>
+      <div class="hero-rating">
 
-    <p class="text-xl mb-8 max-w-2xl mx-auto">
-      Gérez vos joueurs, entraînements et compétitions facilement avec notre plateforme intelligente.
-    </p>
+        <p class="hero-rating-label mb-3 text-sm font-semibold tracking-wide uppercase">
+          {{ reviewsLabel }}
+        </p>
 
-    <a routerLink="/inscription"
-    class="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold py-3 px-8 rounded-full shadow-lg transition">
-      S'inscrire Maintenant
-    </a>
+        <div class="mb-3 flex items-baseline gap-3">
+          <span class="hero-stars" aria-hidden="true">★★★★★</span>
+          <span class="text-sm text-white/70">({{ rating }}/5)</span>
+        </div>
+
+        <p class="hero-satisfaction text-lg font-semibold md:text-xl">
+          {{ satisfaction }}% {{ satisfactionLabel }}
+        </p>
+
+      </div>
+
+    </div>
 
   </div>
 
 </section>
+
+<div id="concept" class="scroll-mt-24">
+  <app-concept [showHeader]="false"></app-concept>
+</div>
+
+<div id="activites" class="scroll-mt-24">
+  <app-activite [showHeader]="false"></app-activite>
+</div>
+
+<div id="planning" class="scroll-mt-24">
+  <app-planning></app-planning>
+</div>
+
+<div id="contact" class="scroll-mt-24">
+  <app-contact [showHeader]="false"></app-contact>
+</div>
+
+<div id="boutique" class="scroll-mt-24">
+  <app-boutique [showHeader]="false"></app-boutique>
+</div>

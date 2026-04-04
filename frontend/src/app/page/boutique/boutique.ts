@@ -1,14 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Header } from '../../component/home/header/header';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-boutique',
-  imports: [Header,CommonModule],
+  standalone: true,
+  imports: [Header, CommonModule],
   templateUrl: './boutique.html',
   styleUrl: './boutique.css',
 })
 export class Boutique {
+  @Input() showHeader = true;
+
    produits = [
     {
       id: 1,

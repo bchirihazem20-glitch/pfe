@@ -1,23 +1,104 @@
-<div class="container mt-4">
+<div class="page-wrapper">
 
-  <h2>Liste des Produits</h2>
+  <!-- Header -->
+  <div class="dashboard-header">
+    <div class="header-left">
+      <span class="eyebrow">Tableau de bord</span>
+      <h1>Ma <span class="accent">Boutique</span></h1>
+    </div>
+    <div class="header-right">
+      <div class="stat-chip">
+        <span class="stat-num">{{ produits.length }}</span> produits
+      </div>
+      <button class="btn-add" (click)="goToAdd()">
+        <span class="icon">+</span> Ajouter Produit
+      </button>
+    </div>
+  </div>
 
-  <button class="btn btn-primary mb-3" (click)="goToAdd()">
-    ➕ Ajouter Produit
-  </button>
+  <!-- Loading State -->
+  <div class="loading-state" *ngIf="loading">
+    <div class="spinner"></div>
+    <p>Chargement des produits…</p>
+  </div>
 
-  <div class="row">
-    <div class="col-md-4" *ngFor="let p of produits">
-      <div class="card mb-3">
+  <!-- Error State -->
+  <div class="error-state" *ngIf="error && !loading">
+    <div class="error-icon" aria-hidden="true">!</div>
+    <p>{{ error }}</p>
+    <button class="btn-retry" (click)="loadProduits()">Réessayer</button>
+  </div>
 
-        <img [src]="p.image" class="card-img-top" height="200">
+  <!-- Empty State -->
+  <div class="empty-state" *ngIf="!loading && !error && produits.length === 0">
+    <div class="empty-icon" aria-hidden="true">—</div>
+    <h3>Aucun produit</h3>
+    <p>Commencez par ajouter votre premier produit.</p>
+    <button class="btn-add" (click)="goToAdd()">
+      <span class="icon">+</span> Ajouter Produit
+    </button>
+  </div>
 
-        <div class="card-body">
-          <h5>{{ p.nom }}</h5>
-          <p>Prix: {{ p.prix }} DT</p>
-          <p>Promo: {{ p.promo }} %</p>
+  <!-- Product Grid -->
+  <div class="grid" *ngIf="!loading && !error && produits.length > 0">
+    <div class="card" *ngFor="let p of produits; let i = index"
+         [style.animation-delay]="(i * 0.07) + 's'">
+
+      <!-- Image -->
+      <div class="card-image">
+        <img
+          *ngIf="p.image"
+          [src]="baseUrl + p.image"
+          [alt]="p.nom"
+          (error)="onImgError($event)"
+        />
+        <div class="img-placeholder" *ngIf="!p.image">🖼</div>
+
+        <!-- Promo Badge -->
+        <span class="promo-badge" *ngIf="p.promo > 0">−{{ p.promo }}%</span>
+      </div>
+
+      <!-- Body -->
+      <div class="card-body">
+        <div class="card-category">{{ p.categorie || 'Produit' }}</div>
+        <div class="card-name">{{ p.nom }}</div>
+
+        <div class="card-footer">
+          <div class="price-block">
+            <div class="price-label">Prix</div>
+            <div class="price-value">
+              {{ p.prix | number:'1.0-2' }}<span class="currency"> DT</span>
+            </div>
+            <!-- Prix après promo -->
+            <div class="price-after" *ngIf="p.promo > 0">
+              {{ getPrixApresPromo(p) | number:'1.0-2' }} DT
+            </div>
+          </div>
+
+          <div class="promo-block" *ngIf="p.promo > 0">
+            <div class="promo-label">Promo</div>
+            <div class="promo-value">{{ p.promo }}%</div>
+          </div>
         </div>
 
+        <!-- Actions -->
+        <div class="card-actions">
+          <button class="btn-edit" (click)="goToEdit(p.id)">Modifier</button>
+          <button class="btn-delete" (click)="confirmDelete(p)" aria-label="Supprimer">×</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Delete Confirm Modal -->
+  <div class="modal-overlay" *ngIf="produitToDelete" (click)="cancelDelete()">
+    <div class="modal" (click)="$event.stopPropagation()">
+      <h3>Supprimer le produit ?</h3>
+      <p>« {{ produitToDelete?.nom }} » sera définitivement supprimé.</p>
+      <div class="modal-actions">
+        <button class="btn-cancel" (click)="cancelDelete()">Annuler</button>
+        <button class="btn-confirm-delete">Supprimer</button>
       </div>
     </div>
   </div>

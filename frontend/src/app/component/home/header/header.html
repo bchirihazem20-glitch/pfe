@@ -1,36 +1,36 @@
-<nav class="absolute top-0 left-0 w-full z-50 text-white">
+<nav class="lux-nav fixed top-0 left-0 w-full z-50 border-b border-[#D4AF37]/25 bg-black/88 backdrop-blur-md text-white">
 
-  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+  <div class="max-w-7xl mx-auto px-6 py-3.5 flex items-center justify-between">
 
     <!-- Logo -->
-    <div class="text-2xl font-bold">
-      ⚽ Académie
-    </div>
+    <a routerLink="/" fragment="accueil" class="lux-nav__brand font-semibold tracking-tight text-white hover:text-[#D4AF37] transition-colors duration-300">
+      Académie
+    </a>
 
     <!-- Menu -->
-    <ul class="hidden md:flex space-x-8 font-semibold">
+    <ul class="hidden md:flex items-center gap-1 lg:gap-2 font-medium">
 
-      <li><a routerLink="/" class="hover:text-yellow-400">Accueil</a></li>
-      <li><a routerLink="/concept" class="hover:text-yellow-400">Concept</a></li>
-      <li><a routerLink="/activites" class="hover:text-yellow-400">Activités</a></li>
-      <li><a routerLink="/planning" class="hover:text-yellow-400">Planning</a></li>
-      <li><a routerLink="/contact" class="hover:text-yellow-400">Contact</a></li>
-      <li><a routerLink="/boutique" class="hover:text-yellow-400">Boutique</a></li>
+      <li><a routerLink="/" fragment="accueil" class="lux-nav__link">Accueil</a></li>
+      <li><a routerLink="/" fragment="concept" class="lux-nav__link">Concept</a></li>
+      <li><a routerLink="/" fragment="activites" class="lux-nav__link">Activités</a></li>
+      <li><a routerLink="/" fragment="planning" class="lux-nav__link">Planning</a></li>
+      <li><a routerLink="/" fragment="contact" class="lux-nav__link">Contact</a></li>
+      <li><a routerLink="/" fragment="boutique" class="lux-nav__link">Boutique</a></li>
 
     </ul>
 
     <!-- Partie droite -->
-    <div class="hidden md:flex items-center space-x-4">
+    <div class="hidden md:flex items-center gap-3">
 
       <!-- NON CONNECTÉ -->
       <ng-container *ngIf="!user">
         <a routerLink="/login"
-           class="border border-white px-4 py-2 rounded-lg hover:bg-white hover:text-black transition">
+           class="lux-nav__btn-outline">
           Login
         </a>
 
         <a routerLink="/inscription"
-           class="bg-yellow-400 text-black px-4 py-2 rounded-lg hover:bg-yellow-500 transition">
+           class="lux-nav__btn-solid">
           S'inscrire
         </a>
       </ng-container>
@@ -42,37 +42,37 @@
 
           <!-- Avatar -->
           <div (click)="toggleMenu()"
-               class="w-10 h-10 bg-yellow-400 text-black rounded-full flex items-center justify-center font-bold cursor-pointer">
+               class="lux-nav__avatar">
             {{ getInitials() }}
           </div>
 
           <!-- Menu dropdown -->
           <div *ngIf="menuOpen"
-               class="absolute right-0 mt-2 w-56 bg-white text-black rounded-lg shadow-lg p-4">
+               class="lux-nav__dropdown">
 
             <!-- Info user -->
-            <div class="border-b pb-2 mb-2">
-              <p class="font-bold">{{ user.nom }}</p>
-              <p class="text-sm text-gray-500">{{ user.role }}</p>
+            <div class="lux-nav__dropdown-head">
+              <p class="font-semibold">{{ user.nom }}</p>
+              <p class="text-sm text-black/50">{{ user.role }}</p>
             </div>
 
             <!-- Liens -->
-            <ul class="space-y-2">
+            <ul class="space-y-0.5">
 
               <li>
-                <a routerLink="/dashboard" class="block hover:text-yellow-500">
+                <a routerLink="/dashboard" class="lux-nav__dropdown-link">
                   Tableau de bord
                 </a>
               </li>
 
               <li>
-                <a routerLink="/parametres" class="block hover:text-yellow-500">
+                <a routerLink="/parametres" class="lux-nav__dropdown-link">
                   Paramètres
                 </a>
               </li>
 
               <li>
-                <button (click)="logout()" class="w-full text-left hover:text-red-500">
+                <button (click)="logout()" class="lux-nav__dropdown-logout">
                   Déconnexion
                 </button>
               </li>

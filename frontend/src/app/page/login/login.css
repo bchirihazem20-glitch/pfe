@@ -1,0 +1,133 @@
+/* LOGIN — luxury minimal */
+
+.min-h-screen.flex.items-center.justify-center.bg-gray-100 {
+  background: linear-gradient(165deg, #000000 0%, #141414 100%) !important;
+  padding: 2.5rem 1rem;
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.min-h-screen.flex.items-center.justify-center.bg-gray-100::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 520px 480px at 85% 5%, rgba(212, 175, 55, 0.09) 0%, transparent 65%),
+    radial-gradient(ellipse 420px 400px at 5% 95%, rgba(212, 175, 55, 0.06) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.min-h-screen.flex.items-center.justify-center.bg-gray-100 > .bg-white {
+  background: var(--white) !important;
+  border-radius: var(--radius-lg) !important;
+  padding: 2.5rem 2.25rem !important;
+  max-width: 420px !important;
+  width: 100%;
+  box-shadow: var(--shadow-lg) !important;
+  border: 1px solid var(--border) !important;
+  animation: fadeUp 0.45s var(--spring);
+  position: relative;
+  overflow: hidden;
+}
+
+.min-h-screen.flex.items-center.justify-center.bg-gray-100 > .bg-white::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #000000, #d4af37, #000000);
+}
+
+.min-h-screen.flex.items-center.justify-center.bg-gray-100 > .bg-white > h2 {
+  font-family: var(--font-display), 'Cormorant Garamond', serif !important;
+  font-size: 1.75rem !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.02em;
+  color: var(--black) !important;
+  -webkit-text-fill-color: var(--black) !important;
+  margin-bottom: 1.5rem !important;
+}
+
+.min-h-screen.flex.items-center.justify-center.bg-gray-100 input[type='email'],
+.min-h-screen.flex.items-center.justify-center.bg-gray-100 input[type='password'] {
+  font-family: var(--font-sans), 'Outfit', sans-serif;
+  font-size: 0.9375rem;
+  color: var(--black);
+  background: var(--navy-xlight);
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-sm) !important;
+  padding: 0.75rem 0.9rem !important;
+  width: 100%;
+  outline: none;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.min-h-screen.flex.items-center.justify-center.bg-gray-100 input:focus {
+  border-color: #d4af37 !important;
+  background: var(--white);
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
+}
+
+.min-h-screen.flex.items-center.justify-center.bg-gray-100 input::placeholder {
+  color: var(--text-light);
+}
+
+.min-h-screen.flex.items-center.justify-center.bg-gray-100 small.text-red-500 {
+  font-family: var(--font-sans), 'Outfit', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #b91c1c !important;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: var(--radius-sm);
+  padding: 0.25rem 0.6rem;
+  display: inline-flex;
+  margin-top: 0.35rem;
+}
+
+.min-h-screen.flex.items-center.justify-center.bg-gray-100 button[type='submit'] {
+  width: 100%;
+  padding: 0.8rem !important;
+  background: var(--black) !important;
+  color: var(--white) !important;
+  font-family: var(--font-sans), 'Outfit', sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  border-radius: 999px !important;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
+  transition: all 0.28s var(--spring);
+}
+
+.min-h-screen.flex.items-center.justify-center.bg-gray-100 button[type='submit']:hover {
+  background: #d4af37 !important;
+  color: var(--black) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(212, 175, 55, 0.4);
+}
+
+.min-h-screen.flex.items-center.justify-center.bg-gray-100 p.text-center.text-sm {
+  font-family: var(--font-sans), 'Outfit', sans-serif;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.min-h-screen.flex.items-center.justify-center.bg-gray-100 a.text-blue-600 {
+  font-weight: 600;
+  color: #d4af37 !important;
+  -webkit-text-fill-color: #d4af37 !important;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+
+.min-h-screen.flex.items-center.justify-center.bg-gray-100 a.text-blue-600:hover {
+  border-bottom-color: #d4af37;
+}

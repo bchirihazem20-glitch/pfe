@@ -1,0 +1,69 @@
+/* CONCEPT — luxury minimal */
+
+.min-h-screen.bg-gray-100.py-10 {
+  background: var(--bg) !important;
+  padding: 5.5rem 1.25rem 4rem !important;
+}
+
+.min-h-screen.bg-gray-100.py-10 .max-w-5xl.bg-white {
+  background: var(--white) !important;
+  border-radius: var(--radius-lg) !important;
+  padding: 3rem 3.25rem !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: var(--shadow) !important;
+  position: relative;
+  overflow: hidden;
+  animation: fadeUp 0.45s var(--ease);
+}
+
+.min-h-screen.bg-gray-100.py-10 .max-w-5xl.bg-white::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #000000, #d4af37, #000000);
+}
+
+.min-h-screen.bg-gray-100.py-10 h1.text-3xl {
+  font-family: var(--font-display), 'Cormorant Garamond', serif !important;
+  font-size: 2.15rem !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.02em;
+  color: var(--black) !important;
+  -webkit-text-fill-color: var(--black);
+  text-align: center;
+  margin-bottom: 2rem !important;
+}
+
+.min-h-screen.bg-gray-100.py-10 p.text-gray-700:first-of-type {
+  font-size: 1rem;
+  color: var(--text) !important;
+  font-weight: 500;
+  line-height: 1.8;
+  background: var(--navy-xlight);
+  border-left: 2px solid #d4af37;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.min-h-screen.bg-gray-100.py-10 p.text-gray-700 {
+  font-family: var(--font-sans), 'Outfit', sans-serif;
+  font-size: 0.9375rem;
+  color: var(--text-muted) !important;
+  line-height: 1.85;
+  margin-bottom: 1rem;
+}
+
+.min-h-screen.bg-gray-100.py-10 strong {
+  color: var(--black);
+  font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  .min-h-screen.bg-gray-100.py-10 .max-w-5xl.bg-white {
+    padding: 1.75rem 1.25rem !important;
+  }
+}

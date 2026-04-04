@@ -1,10 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Header } from '../../component/home/header/header';
 
 @Component({
   selector: 'app-concept',
-  imports: [Header],
+  standalone: true,
+  imports: [CommonModule, Header],
   templateUrl: './concept.html',
-  styleUrl: './concept.css',
+  styleUrls: ['./concept.css'],
 })
-export class Concept {}
+export class Concept {
+  /** When embedded in the home page, hide the duplicate navbar. */
+  @Input() showHeader = true;
+}

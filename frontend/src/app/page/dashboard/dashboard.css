@@ -1,0 +1,14 @@
+/* DASHBOARD SHELL — clean admin surface */
+
+.flex {
+  font-family: var(--font-sans), 'Outfit', sans-serif;
+}
+
+.flex > .flex-1.bg-gray-100 {
+  background: #fafafa !important;
+  min-height: 100vh;
+}
+
+.flex > .flex-1.bg-gray-100 .p-6 {
+  padding: 1.75rem 2rem !important;
+}

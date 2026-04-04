@@ -1,0 +1,112 @@
+/* HOME HERO — luxury contrast */
+
+.hero {
+  font-family: var(--font-sans, 'Outfit', sans-serif);
+}
+
+.hero-scrim {
+  background: linear-gradient(
+    115deg,
+    rgba(0, 0, 0, 0.88) 0%,
+    rgba(0, 0, 0, 0.55) 45%,
+    rgba(0, 0, 0, 0.2) 100%
+  );
+}
+
+@media (max-width: 767px) {
+  .hero-scrim {
+    background: rgba(0, 0, 0, 0.78);
+  }
+}
+
+.hero-photo {
+  transform: scale(1.03);
+  transition: transform 10s ease;
+}
+.hero:hover .hero-photo {
+  transform: scale(1.05);
+}
+
+@keyframes hero-fade {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-copy {
+  animation: hero-fade 0.9s var(--ease, ease);
+}
+
+/* Titre principal : jaune (Stars Academy + Médenine) */
+.hero-title--brand {
+  color: #ffeb3b;
+  -webkit-text-fill-color: #ffeb3b;
+  text-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.55),
+    0 0 48px rgba(255, 235, 59, 0.35);
+}
+
+.hero-title {
+  font-family: var(--font-display, 'Cormorant Garamond', serif);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+.hero-title-city {
+  color: inherit;
+  -webkit-text-fill-color: inherit;
+}
+
+/* « Academy » : même jaune, italique */
+.hero-title-accent {
+  color: inherit;
+  -webkit-text-fill-color: inherit;
+  font-style: italic;
+  font-weight: 500;
+}
+
+.hero-lede {
+  font-family: var(--font-sans, 'Outfit', sans-serif);
+  line-height: 1.75;
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 241, 118, 0.35);
+  border-radius: var(--radius-lg, 22px);
+  padding: 1.1rem 1.35rem;
+  backdrop-filter: blur(12px);
+}
+
+.hero-rating {
+  width: fit-content;
+  max-width: 100%;
+  padding: 1.35rem 1.5rem;
+  border-radius: var(--radius-lg, 22px);
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35);
+  animation: hero-fade 0.9s var(--ease, ease) 0.15s both;
+}
+
+.hero-rating-label {
+  font-family: var(--font-sans, 'Outfit', sans-serif);
+  color: rgba(255, 255, 255, 0.85);
+  letter-spacing: 0.12em;
+}
+
+.hero-stars {
+  font-size: 1.35rem;
+  letter-spacing: 0.15em;
+  color: #fff59d;
+}
+
+.hero-satisfaction {
+  font-family: var(--font-sans, 'Outfit', sans-serif);
+  color: #fff176;
+  letter-spacing: 0.02em;
+}

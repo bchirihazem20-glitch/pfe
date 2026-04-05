@@ -4,14 +4,6 @@
   font-family: var(--font-sans, 'Outfit', sans-serif);
 }
 
-.lux-nav__brand {
-  font-family: var(--font-display, 'Cormorant Garamond', serif);
-  font-size: 1.35rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
 .lux-nav__link {
   display: block;
   padding: 0.45rem 0.85rem;

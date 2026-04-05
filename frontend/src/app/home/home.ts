@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { Header } from '../component/home/header/header';
 import { Concept } from '../page/concept/concept';
 import { Activite } from '../page/activite/activite';
@@ -10,6 +11,7 @@ import { PlanningComponent } from '../page/planning/planning';
   selector: 'app-home',
   standalone: true,
   imports: [
+    RouterModule,
     Header,
     Concept,
     Activite,
@@ -40,5 +42,10 @@ export class Home {
 
   rating = 4.8;
   satisfaction = 95;
+
+  readonly footerTagline =
+    'Former – Inspirer – Révéler les talents de demain';
+
+  readonly year = new Date().getFullYear();
 
 }

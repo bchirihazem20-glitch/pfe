@@ -1,54 +1,121 @@
 <app-header *ngIf="showHeader"></app-header>
-<section class="min-h-screen bg-gray-900 text-white flex items-center justify-center px-6 py-20">
 
-  <div class="max-w-6xl w-full grid md:grid-cols-2 gap-10">
+<section class="contact-page min-h-screen text-white flex items-center justify-center px-6">
 
-    <!-- LEFT : Infos -->
-    <div>
-      <h2 class="text-4xl font-bold mb-6 text-yellow-400">
-        Contactez-nous
-      </h2>
+  <div class="contact-page__shell max-w-7xl w-full">
 
-      <p class="mb-6 text-gray-300">
-        Vous avez une question ou souhaitez inscrire votre enfant ?
-        N'hésitez pas à nous contacter.
-      </p>
+    <div class="contact-page__grid grid gap-12 lg:grid-cols-[1fr_minmax(300px,380px)] lg:items-start lg:gap-10">
 
-      <div class="space-y-4">
-        <p>Adresse : Tunis, Tunisie</p>
-        <p>Téléphone : +216 12 345 678</p>
-        <p>Email : contact@academie.com</p>
+      <!-- Bloc principal : 3 colonnes (inchangé visuellement, style capture) -->
+      <div class="contact-page__main relative overflow-hidden rounded-3xl border border-white/10 px-6 py-12 md:px-10 md:py-14">
+        <div class="contact-page__main-bg" aria-hidden="true"></div>
+        <div class="contact-page__main-waves" aria-hidden="true"></div>
+
+        <div class="relative z-10">
+          <h2 class="contact-page__title text-center text-2xl font-bold tracking-[0.2em] text-white md:text-3xl">
+            CONTACTEZ-NOUS
+          </h2>
+
+          <div class="mt-14 grid gap-10 sm:grid-cols-3 sm:gap-6 md:gap-10">
+            <!-- Email -->
+            <div class="contact-card text-center">
+              <div class="contact-card__icon-wrap contact-card__icon-wrap--email mx-auto mb-4" aria-hidden="true">
+                <svg class="contact-card__icon contact-card__icon--email" viewBox="0 0 48 48" role="img">
+                  <defs>
+                    <linearGradient id="contactMailGrad" x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" stop-color="#5c9ded" />
+                      <stop offset="100%" stop-color="#1a56b8" />
+                    </linearGradient>
+                  </defs>
+                  <rect x="6" y="10" width="36" height="26" rx="4" fill="url(#contactMailGrad)" />
+                  <path d="M6 14 L24 26 L42 14" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+                  <path d="M6 34 L18 22" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" opacity="0.9" />
+                  <path d="M42 34 L30 22" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" opacity="0.9" />
+                </svg>
+              </div>
+              <p class="contact-card__label text-sm font-semibold uppercase tracking-wider text-white/90">Email</p>
+              <a class="contact-card__value mt-2 inline-block text-sm text-white/85 break-all hover:text-amber-200 transition-colors" href="mailto:contact@starsacademy-medenine.tn">
+                contact@starsacademy-medenine.tn
+              </a>
+            </div>
+
+            <!-- Téléphone -->
+            <div class="contact-card text-center">
+              <div class="contact-card__icon-wrap contact-card__icon-wrap--phone mx-auto mb-4" aria-hidden="true">
+                <svg class="contact-card__icon contact-card__icon--phone" viewBox="0 0 48 48" role="img">
+                  <circle cx="38" cy="10" r="5.5" fill="#22c55e" />
+                  <path
+                    fill="none"
+                    stroke="#ffffff"
+                    stroke-width="1.6"
+                    stroke-linecap="round"
+                    d="M35.5 10h5M38 7.5v5"
+                  />
+                  <path
+                    fill="#0f172a"
+                    transform="translate(11, 13) scale(1.05)"
+                    d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"
+                  />
+                </svg>
+              </div>
+              <p class="contact-card__label text-sm font-semibold uppercase tracking-wider text-white/90">Téléphone</p>
+              <a class="contact-card__value mt-2 inline-block text-sm text-white/85 hover:text-amber-200 transition-colors" href="tel:+21653848500">
+                +216 53 848 500
+              </a>
+            </div>
+
+            <!-- Adresse -->
+            <div class="contact-card text-center">
+              <div class="contact-card__icon-wrap contact-card__icon-wrap--address mx-auto mb-4" aria-hidden="true">
+                <svg class="contact-card__icon contact-card__icon--address" viewBox="0 0 48 48" role="img">
+                  <path
+                    d="M24 6c-5.5 0-10 4.3-10 9.6 0 7.2 10 20.4 10 20.4s10-13.2 10-20.4C34 10.3 29.5 6 24 6z"
+                    fill="#dc2626"
+                  />
+                  <circle cx="24" cy="15.5" r="3.8" fill="#ffffff" />
+                  <ellipse cx="24" cy="42" rx="9" ry="3" fill="#000000" opacity="0.12" />
+                </svg>
+              </div>
+              <p class="contact-card__label text-sm font-semibold uppercase tracking-wider text-white/90">Adresse</p>
+              <p class="contact-card__value mt-2 text-sm text-white/85 leading-relaxed">
+                Médenine, Tunisie
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
+
+      <!-- À droite : formulaire (ajout / colonne dédiée) -->
+      <aside class="contact-page__aside lg:sticky lg:top-28">
+        <form class="contact-page__form bg-gray-800 p-8 rounded-2xl shadow-lg space-y-6" aria-label="Envoyer un message">
+          <p class="contact-page__form-lead text-sm font-semibold uppercase tracking-wider text-gray-600 mb-1">Écrivez-nous</p>
+          <p class="text-sm text-gray-500 mb-4">Une question ou une inscription ? Laissez-nous un message.</p>
+
+          <div>
+            <label class="block mb-2" for="contact-nom">Nom</label>
+            <input id="contact-nom" type="text"
+                   class="w-full p-3 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:border-yellow-400">
+          </div>
+
+          <div>
+            <label class="block mb-2" for="contact-email">Email</label>
+            <input id="contact-email" type="email"
+                   class="w-full p-3 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:border-yellow-400">
+          </div>
+
+          <div>
+            <label class="block mb-2" for="contact-message">Message</label>
+            <textarea id="contact-message" rows="4"
+                      class="w-full p-3 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:border-yellow-400"></textarea>
+          </div>
+
+          <button type="submit"
+                  class="w-full bg-yellow-400 text-black py-3 rounded-lg hover:bg-yellow-500 transition font-semibold">
+            Envoyer
+          </button>
+        </form>
+      </aside>
     </div>
-
-    <!-- RIGHT : Formulaire -->
-    <form class="bg-gray-800 p-8 rounded-2xl shadow-lg space-y-6">
-
-      <div>
-        <label class="block mb-2">Nom</label>
-        <input type="text"
-               class="w-full p-3 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:border-yellow-400">
-      </div>
-
-      <div>
-        <label class="block mb-2">Email</label>
-        <input type="email"
-               class="w-full p-3 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:border-yellow-400">
-      </div>
-
-      <div>
-        <label class="block mb-2">Message</label>
-        <textarea rows="4"
-                  class="w-full p-3 rounded-lg bg-gray-700 border border-gray-600 focus:outline-none focus:border-yellow-400"></textarea>
-      </div>
-
-      <button type="submit"
-              class="w-full bg-yellow-400 text-black py-3 rounded-lg hover:bg-yellow-500 transition font-semibold">
-        Envoyer
-      </button>
-
-    </form>
-
   </div>
 
 </section>

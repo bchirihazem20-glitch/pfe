@@ -69,3 +69,87 @@
 <div id="boutique" class="scroll-mt-24">
   <app-boutique [showHeader]="false"></app-boutique>
 </div>
+
+<footer id="pied-de-page" class="site-footer scroll-mt-24" aria-label="Pied de page">
+  <div class="site-footer__backdrop" aria-hidden="true">
+    <div class="site-footer__mesh"></div>
+    <div class="site-footer__glow site-footer__glow--gold"></div>
+    <div class="site-footer__glow site-footer__glow--blue"></div>
+    <div class="site-footer__grain"></div>
+    <svg
+      class="site-footer__wave"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 1440 96"
+      preserveAspectRatio="none"
+      aria-hidden="true"
+    >
+      <defs>
+        <linearGradient id="siteFooterWaveFill" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#1a4a7a" stop-opacity="0.55" />
+          <stop offset="100%" stop-color="#0d1f35" stop-opacity="0.95" />
+        </linearGradient>
+      </defs>
+      <path
+        fill="url(#siteFooterWaveFill)"
+        d="M0,56 C240,8 480,104 720,48 C960,-8 1200,88 1440,40 L1440,96 L0,96 Z"
+      />
+    </svg>
+  </div>
+
+  <div class="site-footer__inner relative z-10 max-w-7xl mx-auto px-6 py-14 md:py-16">
+    <div class="grid gap-10 md:grid-cols-2 lg:grid-cols-4 lg:gap-12">
+      <div class="lg:col-span-1">
+        <p class="site-footer__title font-semibold text-lg md:text-xl text-[#e8c547] tracking-tight">
+          Stars Academy Médenine
+        </p>
+        <p class="mt-3 text-sm text-white/65 leading-relaxed max-w-xs">
+          {{ footerTagline }}
+        </p>
+      </div>
+
+      <div>
+        <h2 class="site-footer__heading">À propos</h2>
+        <ul class="site-footer__links">
+          <li><a routerLink="/" fragment="accueil">Accueil</a></li>
+          <li><a routerLink="/" fragment="concept">Concept</a></li>
+          <li><a routerLink="/" fragment="activites">Activités</a></li>
+          <li><a routerLink="/" fragment="planning">Planning</a></li>
+          <li><a routerLink="/" fragment="activites">Galerie</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="site-footer__heading">Nos programmes</h2>
+        <ul class="site-footer__links">
+          <li><a routerLink="/" fragment="activites">Formation enfants</a></li>
+          <li><a routerLink="/" fragment="concept">Encadrement professionnel</a></li>
+          <li><a routerLink="/" fragment="boutique">Kit d'entraînement</a></li>
+          <li><a routerLink="/" fragment="activites">Organisation d'événements</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="site-footer__heading">Autres services</h2>
+        <ul class="site-footer__links">
+          <li><a routerLink="/" fragment="contact">Contact &amp; infos</a></li>
+          <li><a routerLink="/" fragment="planning">Séances &amp; planning</a></li>
+          <li><a routerLink="/" fragment="boutique">Boutique</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="site-footer__bar mt-12 pt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between border-t border-white/10">
+      <p class="text-xs text-white/45">
+        © {{ year }} Stars Academy Médenine. Tous droits réservés.
+      </p>
+      <a
+        routerLink="/"
+        fragment="accueil"
+        class="site-footer__top inline-flex items-center justify-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#d4af37] hover:text-[#e8c547] transition-colors"
+      >
+        Haut de page
+        <span class="site-footer__top-icon" aria-hidden="true">↑</span>
+      </a>
+    </div>
+  </div>
+</footer>

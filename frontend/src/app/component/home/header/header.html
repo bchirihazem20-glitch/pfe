@@ -1,14 +1,12 @@
-<nav class="lux-nav fixed top-0 left-0 w-full z-50 border-b border-[#D4AF37]/25 bg-black/88 backdrop-blur-md text-white">
+<nav class="lux-nav fixed top-0 left-0 w-full z-50 border-b border-[#D4AF37]/25 bg-black/88 backdrop-blur-md text-white" aria-label="Navigation principale — Stars Academy Médenine">
 
-  <div class="max-w-7xl mx-auto px-6 py-3.5 flex items-center justify-between">
+  <div class="max-w-7xl mx-auto px-6 py-3.5 flex items-center w-full">
 
-    <!-- Logo -->
-    <a routerLink="/" fragment="accueil" class="lux-nav__brand font-semibold tracking-tight text-white hover:text-[#D4AF37] transition-colors duration-300">
-      Académie
-    </a>
+    <!-- Équilibre gauche : même flex que la droite → menu visuellement centré -->
+    <div class="hidden md:block flex-1 min-w-0" aria-hidden="true"></div>
 
-    <!-- Menu -->
-    <ul class="hidden md:flex items-center gap-1 lg:gap-2 font-medium">
+    <!-- Menu (centré sur la page) -->
+    <ul class="hidden md:flex items-center justify-center gap-1 lg:gap-2 font-medium shrink-0">
 
       <li><a routerLink="/" fragment="accueil" class="lux-nav__link">Accueil</a></li>
       <li><a routerLink="/" fragment="concept" class="lux-nav__link">Concept</a></li>
@@ -19,8 +17,8 @@
 
     </ul>
 
-    <!-- Partie droite -->
-    <div class="hidden md:flex items-center gap-3">
+    <!-- Partie droite (alignée à droite, même largeur flexible que la gauche) -->
+    <div class="hidden md:flex flex-1 min-w-0 items-center justify-end gap-3">
 
       <!-- NON CONNECTÉ -->
       <ng-container *ngIf="!user">

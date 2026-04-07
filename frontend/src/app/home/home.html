@@ -37,7 +37,6 @@
           <span class="hero-stars" aria-hidden="true">★★★★★</span>
           <span class="text-sm text-white/70">({{ rating }}/5)</span>
         </div>
-<app-galerie></app-galerie>
         <p class="hero-satisfaction text-lg font-semibold md:text-xl">
           {{ satisfaction }}% {{ satisfactionLabel }}
         </p>
@@ -68,6 +67,10 @@
 
 <div id="boutique" class="scroll-mt-24">
   <app-boutique [showHeader]="false"></app-boutique>
+</div>
+
+<div id="galerie" class="scroll-mt-24">
+    <app-galerie></app-galerie>
 </div>
 
 <footer id="pied-de-page" class="site-footer scroll-mt-24" aria-label="Pied de page">

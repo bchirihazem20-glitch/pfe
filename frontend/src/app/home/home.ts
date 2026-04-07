@@ -6,11 +6,14 @@ import { Activite } from '../page/activite/activite';
 import { Contact } from '../page/contact/contact';
 import { Boutique } from '../page/boutique/boutique';
 import { PlanningComponent } from '../page/planning/planning';
+import { Galerie } from '../gallary/gallary';
+
+
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [
+  imports:[
     RouterModule,
     Header,
     Concept,
@@ -18,6 +21,7 @@ import { PlanningComponent } from '../page/planning/planning';
     Contact,
     Boutique,
     PlanningComponent,
+    Galerie,
   ],
   templateUrl: './home.html',
   styleUrls: ['./home.css'],

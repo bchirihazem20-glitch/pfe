@@ -9,6 +9,7 @@ import { DashboardBoutique } from './page/dashboard/dashboardboutique/dashboardb
 import { AddProduit } from './page/dashboard/addproduit/addproduit';
 import { adminFileGuard } from './guards/admin-file-guard';
 
+
 export const routes: Routes = [
     {path: "login", component:Login,canActivate:[guestGuard]},
     {path: "", component:Home},

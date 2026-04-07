@@ -8,13 +8,14 @@ import {
   ReactiveFormsModule
 } from '@angular/forms';
 import { AuthService } from '../../service/auth/auth';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './inscription.html',
-  styleUrl: './inscription.css',
+  imports: [CommonModule, ReactiveFormsModule,MatIconModule],
+  templateUrl: './inscripition.html',
+  styleUrl: './inscripition.css',
 })
 
 export class Inscripition implements OnInit {
@@ -48,15 +49,25 @@ export class Inscripition implements OnInit {
   }
 
   passwordMatchValidator(form: AbstractControl) {
-    const password = form.get('password')?.value;
-    const confirmPassword = form.get('confirmPassword')?.value;
+  const password = form.get('password')?.value;
+  const confirmPasswordControl = form.get('confirmPassword');
 
-    if (password !== confirmPassword) {
-      form.get('confirmPassword')?.setErrors({ mismatch: true });
-    } else {
-      form.get('confirmPassword')?.setErrors(null);
+  if (!confirmPasswordControl) return;
+
+  if (password !== confirmPasswordControl.value) {
+    confirmPasswordControl.setErrors({
+      ...confirmPasswordControl.errors,
+      mismatch: true
+    });
+  } else {
+    if (confirmPasswordControl.errors) {
+      delete confirmPasswordControl.errors['mismatch'];
+      if (Object.keys(confirmPasswordControl.errors).length === 0) {
+        confirmPasswordControl.setErrors(null);
+      }
     }
   }
+}
 
   get f() {
     return this.registerForm.controls;

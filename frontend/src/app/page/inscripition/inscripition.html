@@ -1,6 +1,6 @@
 <section class="min-h-screen flex items-center justify-center bg-gray-100">
 
-  <form [formGroup]="registerForm" (ngSubmit)="onSubmit"
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()"
         class="bg-white p-8 rounded-2xl shadow-lg w-full max-w-lg">
 
     <h2 class="text-2xl font-bold text-center mb-6">Inscription</h2>
@@ -26,7 +26,9 @@
         class="w-full p-3 border rounded-lg"
       >
       <span class="eye" (click)="togglePassword()">
-  {{ showPassword ? '🙈' : '👁️' }}
+        <mat-icon>
+  {{ showPassword ? 'visibility' : 'visibility_off' }}
+  </mat-icon>
 </span>
     </div>
 
@@ -39,12 +41,14 @@
         class="w-full p-3 border rounded-lg"
       >
       <span class="eye" (click)="toggleConfirmPassword()">
-        {{ showConfirmPassword ? '🙈' : '👁️' }}
+        <mat-icon>
+  {{ showConfirmPassword ? 'visibility' : 'visibility_off' }}
+  </mat-icon>
       </span>
     </div>
 
     <!-- Erreur -->
-    <div *ngIf="f.confirmPassword.touched && f.confirmPassword.errors?.mismatch"
+    <div *ngIf="f['confirmPassword'].touched && f['confirmPassword'].errors?.['mismatch']"
          class="text-red-500 text-sm mb-3">
       Les mots de passe ne correspondent pas
     </div>

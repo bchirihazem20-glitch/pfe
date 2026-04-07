@@ -5,8 +5,8 @@ import { CommonModule } from '@angular/common';
   selector: 'app-galerie',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './galerie.html',
-  styleUrls: ['./galerie.css']
+  templateUrl: './gallary.html',
+  styleUrls: ['./gallary.css']
 })
 export class Galerie {
 

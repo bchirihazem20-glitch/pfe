@@ -13,9 +13,10 @@ import { AuthService } from '../../service/auth/auth';
   selector: 'app-register',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './inscripition.html',
-  styleUrl: './inscripition.css',
+  templateUrl: './inscription.html',
+  styleUrl: './inscription.css',
 })
+
 export class Inscripition implements OnInit {
 
   registerForm!: FormGroup;

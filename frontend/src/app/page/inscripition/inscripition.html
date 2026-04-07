@@ -1,132 +1,72 @@
-<div class="min-h-screen flex items-center justify-center bg-gray-100">
+<section class="min-h-screen flex items-center justify-center bg-gray-100">
 
-  <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit"
+        class="bg-white p-8 rounded-2xl shadow-lg w-full max-w-lg">
 
-    <h2 class="text-2xl font-bold text-center text-blue-600 mb-6">
-      Inscription
-    </h2>
+    <h2 class="text-2xl font-bold text-center mb-6">Inscription</h2>
 
-    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="space-y-4">
+    <!-- Nom -->
+    <input type="text" placeholder="Nom" formControlName="nom"
+      class="w-full p-3 mb-3 border rounded-lg">
 
-      <!-- Nom et Prénom -->
-      <div class="grid grid-cols-2 gap-4">
+    <!-- Prénom -->
+    <input type="text" placeholder="Prénom" formControlName="prenom"
+      class="w-full p-3 mb-3 border rounded-lg">
 
-        <div>
-          <input type="text"
-          placeholder="Nom"
-          formControlName="nom"
-          class="border p-2 rounded-lg focus:ring-2 focus:ring-blue-400 w-full">
+    <!-- Email -->
+    <input type="email" placeholder="Email" formControlName="email"
+      class="w-full p-3 mb-3 border rounded-lg">
 
-          <small class="text-red-500" *ngIf="f['nom'].touched && f['nom'].invalid">
-            Nom obligatoire
-          </small>
-        </div>
-
-        <div>
-          <input type="text"
-          placeholder="Prénom"
-          formControlName="prenom"
-          class="border p-2 rounded-lg focus:ring-2 focus:ring-blue-400 w-full">
-
-          <small class="text-red-500" *ngIf="f['prenom'].touched && f['prenom'].invalid">
-            Prénom obligatoire
-          </small>
-        </div>
-
-      </div>
-
-      <!-- Email -->
-      <div>
-        <input type="email"
-        placeholder="Email"
-        formControlName="email"
-        class="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-400">
-
-        <small class="text-red-500" *ngIf="f['email'].touched && f['email'].errors?.['required']">
-          Email obligatoire
-        </small>
-
-        <small class="text-red-500" *ngIf="f['email'].errors?.['email']">
-          Email invalide
-        </small>
-      </div>
-
-      <!-- Password -->
-      <div>
-        <input type="password"
+    <!-- Password -->
+    <div class="relative mb-3">
+      <input
+        [type]="showPassword ? 'text' : 'password'"
         placeholder="Mot de passe"
         formControlName="password"
-        class="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-400">
+        class="w-full p-3 border rounded-lg"
+      >
+      <span class="eye" (click)="togglePassword()">
+        {{ showPassword ? '🙈' : '👁️' }}
+      </span>
+    </div>
 
-        <small class="text-red-500" *ngIf="f['password'].touched && f['password'].errors?.['required']">
-          Mot de passe obligatoire
-        </small>
-
-        <small class="text-red-500" *ngIf="f['password'].errors?.['minlength']">
-          Minimum 6 caractères
-        </small>
-      </div>
-
-      <!-- Confirm Password -->
-      <div>
-        <input type="password"
-        placeholder="Confirmation mot de passe"
+    <!-- Confirm Password -->
+    <div class="relative mb-3">
+      <input
+        [type]="showConfirmPassword ? 'text' : 'password'"
+        placeholder="Confirmer mot de passe"
         formControlName="confirmPassword"
-        class="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-400">
+        class="w-full p-3 border rounded-lg"
+      >
+      <span class="eye" (click)="toggleConfirmPassword()">
+        {{ showConfirmPassword ? '🙈' : '👁️' }}
+      </span>
+    </div>
 
-        <small class="text-red-500"
-        *ngIf="f['confirmPassword'].touched && f['confirmPassword'].errors?.['mismatch']">
-          Les mots de passe ne correspondent pas
-        </small>
-      </div>
+    <!-- Erreur -->
+    <div *ngIf="f.confirmPassword.touched && f.confirmPassword.errors?.mismatch"
+         class="text-red-500 text-sm mb-3">
+      Les mots de passe ne correspondent pas
+    </div>
 
-      <!-- Adresse -->
-      <div>
-        <input type="text"
-        placeholder="Adresse"
-        formControlName="adresse"
-        class="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-400">
+    <!-- Adresse -->
+    <input type="text" placeholder="Adresse" formControlName="adresse"
+      class="w-full p-3 mb-3 border rounded-lg">
 
-        <small class="text-red-500" *ngIf="f['adresse'].touched && f['adresse'].invalid">
-          Adresse obligatoire
-        </small>
-      </div>
+    <!-- Téléphone -->
+    <input type="text" placeholder="Téléphone" formControlName="telephone"
+      class="w-full p-3 mb-3 border rounded-lg">
 
-      <!-- Téléphone -->
-      <div>
-        <input type="text"
-        placeholder="Numéro téléphone"
-        formControlName="telephone"
-        class="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-400">
+    <!-- Date naissance -->
+    <input type="date" formControlName="dateNaissance"
+      class="w-full p-3 mb-5 border rounded-lg">
 
-        <small class="text-red-500" *ngIf="f['telephone'].touched && f['telephone'].errors?.['required']">
-          Téléphone obligatoire
-        </small>
+    <!-- Button -->
+    <button type="submit"
+      class="w-full bg-black text-white py-3 rounded-lg hover:bg-gray-800 transition">
+      S'inscrire
+    </button>
 
-        <small class="text-red-500" *ngIf="f['telephone'].errors?.['pattern']">
-          Numéro invalide
-        </small>
-      </div>
+  </form>
 
-      <!-- Date naissance -->
-      <div>
-        <input type="date"
-        formControlName="dateNaissance"
-        class="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-400">
-
-        <small class="text-red-500" *ngIf="f['dateNaissance'].touched && f['dateNaissance'].invalid">
-          Date obligatoire
-        </small>
-      </div>
-
-      <!-- Bouton -->
-      <button type="submit"
-      class="w-full bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700 transition">
-        S'inscrire
-      </button>
-
-    </form>
-
-  </div>
-
-</div>
+</section>

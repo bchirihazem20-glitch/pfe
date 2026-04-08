@@ -1,7 +1,183 @@
+:host {
+  display: block;
+}
+
+.inscription-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Navy background with subtle gradient */
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  padding: 2rem 1rem;
+  font-family: 'Inter', 'Roboto', sans-serif;
+}
+
+.inscription-card {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 600px;
+  padding: 3rem;
+  box-sizing: border-box;
+  animation: slideUp 0.5s ease-out forwards;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.title {
+  color: #0f172a; /* Navy */
+  font-size: 2rem;
+  font-weight: 800;
+  margin: 0 0 0.5rem 0;
+}
+
+.subtitle {
+  color: #64748b;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.inscription-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 600px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.input-group label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+.input-group input {
+  padding: 0.875rem 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background-color: #f8fafc;
+  outline: none;
+}
+
+.input-group input:focus {
+  border-color: #d4af37; /* Gold */
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2); /* Gold focus ring */
+  background-color: #ffffff;
+}
+
+.password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-wrapper input {
+  width: 100%;
+  padding-right: 3rem;
+}
+
 .eye {
   position: absolute;
   right: 12px;
-  top: 12px;
   cursor: pointer;
-  font-size: 18px;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  transition: color 0.3s ease;
+}
+
+.eye:hover {
+  color: #d4af37; /* Gold */
+}
+
+.error-msg {
+  color: #ef4444;
+  font-size: 0.875rem;
+  margin-top: -0.5rem;
+}
+
+.submit-btn {
+  background-color: #0f172a; /* Navy */
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background-color: #1e293b;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(15, 23, 42, 0.2);
+}
+
+.submit-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.5); /* Gold outline */
+}
+
+.submit-btn:disabled {
+  background-color: #94a3b8;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.login-link {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 0.95rem;
+  color: #475569;
+}
+
+.login-link a {
+  color: #d4af37; /* Gold */
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.login-link a:hover {
+  color: #bfa030; /* Darker Gold */
+  text-decoration: underline;
 }

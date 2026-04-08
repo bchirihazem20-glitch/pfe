@@ -5,7 +5,8 @@ import {
   FormGroup,
   Validators,
   AbstractControl,
-  ReactiveFormsModule
+  ReactiveFormsModule,
+  ValidationErrors
 } from '@angular/forms';
 import { AuthService } from '../../service/auth/auth';
 import { MatIconModule } from '@angular/material/icon';
@@ -13,11 +14,10 @@ import { MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule,MatIconModule],
+  imports: [CommonModule, ReactiveFormsModule, MatIconModule],
   templateUrl: './inscripition.html',
   styleUrl: './inscripition.css',
 })
-
 export class Inscripition implements OnInit {
 
   registerForm!: FormGroup;
@@ -25,9 +25,16 @@ export class Inscripition implements OnInit {
   showPassword = false;
   showConfirmPassword = false;
 
+  maxDate!: string;
+
   constructor(private fb: FormBuilder, private authService: AuthService) {}
 
   ngOnInit(): void {
+    // 🔥 calcul date max (aujourd’hui - 4 ans)
+    const today = new Date();
+    today.setFullYear(today.getFullYear() - 4);
+    this.maxDate = today.toISOString().split('T')[0];
+
     this.registerForm = this.fb.group({
       nom: ['', [Validators.required, Validators.minLength(2)]],
       prenom: ['', [Validators.required, Validators.minLength(2)]],
@@ -36,8 +43,49 @@ export class Inscripition implements OnInit {
       confirmPassword: ['', Validators.required],
       adresse: ['', Validators.required],
       telephone: ['', [Validators.required, Validators.pattern('^[0-9]{8,10}$')]],
-      dateNaissance: ['', Validators.required]
+      dateNaissance: ['', [Validators.required, this.minAgeValidator(4)]]
     }, { validators: this.passwordMatchValidator });
+  }
+
+  // 🔒 validator âge minimum
+  minAgeValidator(minAge: number) {
+    return (control: AbstractControl): ValidationErrors | null => {
+      if (!control.value) return null;
+
+      const today = new Date();
+      const birthDate = new Date(control.value);
+
+      let age = today.getFullYear() - birthDate.getFullYear();
+      const m = today.getMonth() - birthDate.getMonth();
+
+      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+      }
+
+      return age >= minAge ? null : { minAge: true };
+    };
+  }
+
+  // 🔑 validation password = confirm
+  passwordMatchValidator(form: AbstractControl) {
+    const password = form.get('password')?.value;
+    const confirmPasswordControl = form.get('confirmPassword');
+
+    if (!confirmPasswordControl) return;
+
+    if (password !== confirmPasswordControl.value) {
+      confirmPasswordControl.setErrors({
+        ...confirmPasswordControl.errors,
+        mismatch: true
+      });
+    } else {
+      if (confirmPasswordControl.errors) {
+        delete confirmPasswordControl.errors['mismatch'];
+        if (Object.keys(confirmPasswordControl.errors).length === 0) {
+          confirmPasswordControl.setErrors(null);
+        }
+      }
+    }
   }
 
   togglePassword() {
@@ -47,27 +95,6 @@ export class Inscripition implements OnInit {
   toggleConfirmPassword() {
     this.showConfirmPassword = !this.showConfirmPassword;
   }
-
-  passwordMatchValidator(form: AbstractControl) {
-  const password = form.get('password')?.value;
-  const confirmPasswordControl = form.get('confirmPassword');
-
-  if (!confirmPasswordControl) return;
-
-  if (password !== confirmPasswordControl.value) {
-    confirmPasswordControl.setErrors({
-      ...confirmPasswordControl.errors,
-      mismatch: true
-    });
-  } else {
-    if (confirmPasswordControl.errors) {
-      delete confirmPasswordControl.errors['mismatch'];
-      if (Object.keys(confirmPasswordControl.errors).length === 0) {
-        confirmPasswordControl.setErrors(null);
-      }
-    }
-  }
-}
 
   get f() {
     return this.registerForm.controls;

@@ -1,117 +1,179 @@
-/* ACTIVITÉS — luxury cards */
-
-.min-h-screen.bg-gray-100.py-10 {
-  background: var(--bg) !important;
-  padding: 4rem 1.25rem 4rem !important;
+:host {
+  display: block;
+  font-family: 'Inter', 'Roboto', sans-serif;
+  background-color: #0f172a; /* Navy */
+  min-height: 100vh;
 }
 
-.min-h-screen.bg-gray-100.py-10 .max-w-6xl.bg-white {
-  background: transparent !important;
-  box-shadow: none !important;
-  border-radius: 0 !important;
-  padding: 0 !important;
+.activity-container {
+  padding: 5rem 1.5rem;
 }
 
-.min-h-screen.bg-gray-100.py-10 h1.text-3xl {
-  font-family: var(--font-display), 'Cormorant Garamond', serif !important;
-  font-size: 2.35rem !important;
-  font-weight: 600 !important;
-  letter-spacing: -0.02em;
-  color: var(--black) !important;
-  -webkit-text-fill-color: var(--black);
+.activity-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.activity-header {
   text-align: center;
-  margin-bottom: 0.5rem !important;
+  margin-bottom: 4rem;
+  animation: fadeDown 0.6s ease-out forwards;
 }
 
-.min-h-screen.bg-gray-100.py-10 p.text-gray-700.mb-6 {
-  font-family: var(--font-sans), 'Outfit', sans-serif;
-  font-size: 1rem;
-  color: var(--text-muted) !important;
-  text-align: center;
-  max-width: 36rem;
-  margin: 0 auto 2.5rem !important;
-  line-height: 1.75;
+.title {
+  color: #ffffff;
+  font-size: 2.8rem;
+  font-weight: 800;
+  margin: 0 0 1rem 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-.min-h-screen.bg-gray-100.py-10 .grid {
-  gap: 1.35rem !important;
+.subtitle {
+  color: #cbd5e1; /* Light Slate */
+  font-size: 1.15rem;
+  max-width: 800px;
+  margin: 0 auto 1.5rem auto;
+  line-height: 1.6;
 }
 
-.min-h-screen.bg-gray-100.py-10 .bg-gray-50 {
-  background: var(--white) !important;
-  border-radius: var(--radius-lg) !important;
-  border: 1px solid var(--border) !important;
-  padding: 1.65rem 1.5rem !important;
-  box-shadow: var(--shadow-sm);
-  transition:
-    transform 0.35s var(--spring),
-    box-shadow 0.35s,
-    border-color 0.35s;
+.gold-divider {
+  width: 80px;
+  height: 4px;
+  background-color: #d4af37; /* Gold */
+  margin: 0 auto;
+  border-radius: 2px;
+}
+
+.activity-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2.5rem;
+}
+
+.activity-card {
+  background: #1e293b;
+  border-radius: 16px;
+  padding: 2.5rem 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+  opacity: 0;
+  animation: fadeUp 0.6s ease-out forwards;
+  min-height: 320px;
   position: relative;
   overflow: hidden;
-  animation: fadeUp 0.45s var(--ease) both;
 }
 
-.min-h-screen.bg-gray-100.py-10 .bg-gray-50:nth-child(1) {
-  animation-delay: 0s;
-}
-.min-h-screen.bg-gray-100.py-10 .bg-gray-50:nth-child(2) {
-  animation-delay: 0.06s;
-}
-.min-h-screen.bg-gray-100.py-10 .bg-gray-50:nth-child(3) {
-  animation-delay: 0.12s;
-}
-
-.min-h-screen.bg-gray-100.py-10 .bg-gray-50::before {
+/* Subtle glow effect on hover */
+.activity-card::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
+  top: 0; left: 0; right: 0;
+  height: 3px;
   background: linear-gradient(90deg, transparent, #d4af37, transparent);
   opacity: 0;
-  transition: opacity 0.3s;
+  transition: opacity 0.4s ease;
 }
 
-.min-h-screen.bg-gray-100.py-10 .bg-gray-50:hover {
-  transform: translateY(-5px) !important;
-  box-shadow: var(--shadow-lg) !important;
-  border-color: rgba(212, 175, 55, 0.35) !important;
+.activity-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  border-color: rgba(212, 175, 55, 0.3); /* Gold border visible on hover */
 }
 
-.min-h-screen.bg-gray-100.py-10 .bg-gray-50:hover::before {
+.activity-card:hover::before {
   opacity: 1;
 }
 
-.min-h-screen.bg-gray-100.py-10 h2.text-xl {
-  font-family: var(--font-display), 'Cormorant Garamond', serif !important;
-  font-size: 1.35rem !important;
-  font-weight: 600 !important;
-  color: var(--black) !important;
-  -webkit-text-fill-color: var(--black);
-  margin-bottom: 0.5rem;
-  letter-spacing: -0.02em;
+.icon-wrapper {
+  background: rgba(212, 175, 55, 0.1);
+  width: 64px;
+  height: 64px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+  transition: background 0.3s ease;
 }
 
-.min-h-screen.bg-gray-100.py-10 p.text-gray-600 {
-  font-family: var(--font-sans), 'Outfit', sans-serif;
-  font-size: 0.875rem;
-  color: var(--text-muted) !important;
-  line-height: 1.65;
-  margin-bottom: 0.75rem;
+.activity-icon {
+  width: 32px;
+  height: 32px;
+  color: #d4af37; /* Gold */
 }
 
-.min-h-screen.bg-gray-100.py-10 span.text-sm {
-  font-family: var(--font-sans), 'Outfit', sans-serif;
-  font-size: 0.7rem !important;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  background: var(--black);
-  color: var(--white) !important;
-  -webkit-text-fill-color: var(--white);
-  padding: 0.35rem 0.85rem;
-  border-radius: 999px;
+.activity-card:hover .icon-wrapper {
+  background: rgba(212, 175, 55, 0.2);
+}
+
+.card-title {
+  color: #ffffff;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 1rem 0;
+}
+
+.card-desc {
+  color: #94a3b8; /* Slate gray */
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0 0 2rem 0;
+}
+
+.card-footer {
+  margin-top: auto;
+}
+
+.duration-badge {
   display: inline-block;
+  background: rgba(255, 255, 255, 0.05);
+  color: #d4af37;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  letter-spacing: 0.5px;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+/* Animations */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 2.2rem;
+  }
+  .activity-container {
+    padding: 3rem 1rem;
+  }
 }

@@ -1,76 +1,96 @@
-<section class="min-h-screen flex items-center justify-center bg-gray-100">
-
-  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()"
-        class="bg-white p-8 rounded-2xl shadow-lg w-full max-w-lg">
-
-    <h2 class="text-2xl font-bold text-center mb-6">Inscription</h2>
-
-    <!-- Nom -->
-    <input type="text" placeholder="Nom" formControlName="nom"
-      class="w-full p-3 mb-3 border rounded-lg">
-
-    <!-- Prénom -->
-    <input type="text" placeholder="Prénom" formControlName="prenom"
-      class="w-full p-3 mb-3 border rounded-lg">
-
-    <!-- Email -->
-    <input type="email" placeholder="Email" formControlName="email"
-      class="w-full p-3 mb-3 border rounded-lg">
-
-    <!-- Password -->
-    <div class="relative mb-3">
-      <input
-        [type]="showPassword ? 'text' : 'password'"
-        placeholder="Mot de passe"
-        formControlName="password"
-        class="w-full p-3 border rounded-lg"
-      >
-      <span class="eye" (click)="togglePassword()">
-        <mat-icon>
-  {{ showPassword ? 'visibility' : 'visibility_off' }}
-  </mat-icon>
-</span>
+<section class="inscription-container">
+  <div class="inscription-card">
+    <div class="card-header">
+      <h2 class="title">Rejoignez les Stars</h2>
+      <p class="subtitle">Créez votre compte pour accéder à l'Académie</p>
     </div>
 
-    <!-- Confirm Password -->
-    <div class="relative mb-3">
-      <input
-        [type]="showConfirmPassword ? 'text' : 'password'"
-        placeholder="Confirmer mot de passe"
-        formControlName="confirmPassword"
-        class="w-full p-3 border rounded-lg"
-      >
-      <span class="eye" (click)="toggleConfirmPassword()">
-        <mat-icon>
-  {{ showConfirmPassword ? 'visibility' : 'visibility_off' }}
-  </mat-icon>
-      </span>
-    </div>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="inscription-form">
+      
+      <div class="form-grid">
+        <!-- Nom -->
+        <div class="input-group">
+          <label>Nom</label>
+          <input type="text" placeholder="Entrez votre nom" formControlName="nom">
+        </div>
 
-    <!-- Erreur -->
-    <div *ngIf="f['confirmPassword'].touched && f['confirmPassword'].errors?.['mismatch']"
-         class="text-red-500 text-sm mb-3">
-      Les mots de passe ne correspondent pas
-    </div>
+        <!-- Prénom -->
+        <div class="input-group">
+          <label>Prénom</label>
+          <input type="text" placeholder="Entrez votre prénom" formControlName="prenom">
+        </div>
+      </div>
 
-    <!-- Adresse -->
-    <input type="text" placeholder="Adresse" formControlName="adresse"
-      class="w-full p-3 mb-3 border rounded-lg">
+      <!-- Email -->
+      <div class="input-group">
+        <label>Adresse Email</label>
+        <input type="email" placeholder="Entrez votre adresse email" formControlName="email">
+      </div>
 
-    <!-- Téléphone -->
-    <input type="text" placeholder="Téléphone" formControlName="telephone"
-      class="w-full p-3 mb-3 border rounded-lg">
+      <div class="form-grid">
+        <!-- Password -->
+        <div class="input-group">
+          <label>Mot de passe</label>
+          <div class="password-wrapper">
+            <input [type]="showPassword ? 'text' : 'password'" placeholder="Créer un mot de passe" formControlName="password">
+            <span class="eye" (click)="togglePassword()">
+              <mat-icon>{{ showPassword ? 'visibility' : 'visibility_off' }}</mat-icon>
+            </span>
+          </div>
+        </div>
 
-    <!-- Date naissance -->
-    <input type="date" formControlName="dateNaissance"
-      class="w-full p-3 mb-5 border rounded-lg">
+        <!-- Confirm Password -->
+        <div class="input-group">
+          <label>Confirmer</label>
+          <div class="password-wrapper">
+            <input [type]="showConfirmPassword ? 'text' : 'password'" placeholder="Confirmer le mot de passe" formControlName="confirmPassword">
+            <span class="eye" (click)="toggleConfirmPassword()">
+              <mat-icon>{{ showConfirmPassword ? 'visibility' : 'visibility_off' }}</mat-icon>
+            </span>
+          </div>
+        </div>
+      </div>
 
-    <!-- Button -->
-    <button type="submit"
-      class="w-full bg-black text-white py-3 rounded-lg hover:bg-gray-800 transition">
-      S'inscrire
-    </button>
+      <!-- Erreur Password -->
+      <div *ngIf="f['confirmPassword'].touched && f['confirmPassword'].errors?.['mismatch']" class="error-msg">
+        Les mots de passe ne correspondent pas
+      </div>
 
-  </form>
+      <div class="form-grid">
+        <!-- Adresse -->
+        <div class="input-group">
+          <label>Adresse</label>
+          <input type="text" placeholder="Votre adresse" formControlName="adresse">
+        </div>
 
+        <!-- Téléphone -->
+        <div class="input-group">
+          <label>Téléphone</label>
+          <input type="text" placeholder="Votre téléphone" formControlName="telephone">
+        </div>
+      </div>
+
+      <!-- Date naissance -->
+      <div class="input-group">
+        <label>Date de naissance</label>
+        <input type="date" formControlName="dateNaissance" [max]="maxDate">
+      </div>
+
+      <div *ngIf="f['dateNaissance'].errors?.['required'] && f['dateNaissance'].touched" class="error-msg">
+        Date de naissance obligatoire
+      </div>
+      <div *ngIf="f['dateNaissance'].errors?.['minAge'] && f['dateNaissance'].touched" class="error-msg">
+        L'âge minimum est 4 ans
+      </div>
+
+      <!-- Button -->
+      <button type="submit" class="submit-btn" [disabled]="registerForm.invalid">
+        S'inscrire à l'Académie
+      </button>
+
+      <p class="login-link">
+        Déjà membre ? <a routerLink="/login">Se connecter</a>
+      </p>
+    </form>
+  </div>
 </section>

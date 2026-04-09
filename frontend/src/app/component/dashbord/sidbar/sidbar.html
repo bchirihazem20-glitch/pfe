@@ -2,41 +2,127 @@
 
   <h2 class="text-2xl font-bold mb-8 lux-sidebar-brand">Académie</h2>
 
-  <ul class="space-y-4">
+  <ul class="space-y-4" *ngIf="user as u">
 
-    <li>
-      <a routerLink="/dashboard" class="block hover:text-yellow-400">
-        <mat-icon>space_dashboard</mat-icon>Dashboard
-      </a>
-    </li>
+    <!-- Joueur -->
+    <ng-container *ngIf="u.role === 'JOUEUR'">
+      <li>
+        <a routerLink="/dashboard/emploi" routerLinkActive="text-yellow-400" class="block hover:text-yellow-400 flex items-center gap-2">
+          <mat-icon>work</mat-icon>
+          Emploi
+        </a>
+      </li>
+      <li>
+        <a routerLink="/dashboard/paiement" routerLinkActive="text-yellow-400" class="block hover:text-yellow-400 flex items-center gap-2">
+          <mat-icon>payments</mat-icon>
+          Paiement
+        </a>
+      </li>
+      <li>
+        <a routerLink="/dashboard/messages" routerLinkActive="text-yellow-400" class="block hover:text-yellow-400 flex items-center gap-2">
+          <mat-icon>chat</mat-icon>
+          Message
+        </a>
+      </li>
+      <li>
+        <a routerLink="/dashboard/profil" routerLinkActive="text-yellow-400" class="block hover:text-yellow-400 flex items-center gap-2">
+          <mat-icon>person</mat-icon>
+          Profil
+        </a>
+      </li>
+      <li>
+        <a routerLink="/dashboard/statistiques" routerLinkActive="text-yellow-400" class="block hover:text-yellow-400 flex items-center gap-2">
+          <mat-icon>bar_chart</mat-icon>
+          Statistiques
+        </a>
+      </li>
+    </ng-container>
 
-    <li>
-      <a routerLink="/joueurs" class="block hover:text-yellow-400">
-        <mat-icon>groups</mat-icon>
-        Joueurs
-      </a>
-    </li>
+    <!-- Coach -->
+    <ng-container *ngIf="u.role === 'COACH'">
+      <li>
+        <a routerLink="/dashboard/emploi" routerLinkActive="text-yellow-400" class="block hover:text-yellow-400 flex items-center gap-2">
+          <mat-icon>work</mat-icon>
+          Emploi
+        </a>
+      </li>
+      <li>
+        <a routerLink="/dashboard/joueurs" routerLinkActive="text-yellow-400" class="block hover:text-yellow-400 flex items-center gap-2">
+          <mat-icon>groups</mat-icon>
+          Liste des joueurs
+        </a>
+      </li>
+      <li>
+        <a routerLink="/dashboard/messages" routerLinkActive="text-yellow-400" class="block hover:text-yellow-400 flex items-center gap-2">
+          <mat-icon>chat</mat-icon>
+          Message
+        </a>
+      </li>
+      <li>
+        <a routerLink="/dashboard/entrainements" routerLinkActive="text-yellow-400" class="block hover:text-yellow-400 flex items-center gap-2">
+          <mat-icon>fitness_center</mat-icon>
+          Gestion entraînements
+        </a>
+      </li>
+      <li>
+        <a routerLink="/dashboard/performance" routerLinkActive="text-yellow-400" class="block hover:text-yellow-400 flex items-center gap-2">
+          <mat-icon>trending_up</mat-icon>
+          Suivi performance
+        </a>
+      </li>
+      <li>
+        <a routerLink="/dashboard/presence" routerLinkActive="text-yellow-400" class="block hover:text-yellow-400 flex items-center gap-2">
+          <mat-icon>event_available</mat-icon>
+          Présence
+        </a>
+      </li>
+      <li>
+        <a routerLink="/dashboard/rapports" routerLinkActive="text-yellow-400" class="block hover:text-yellow-400 flex items-center gap-2">
+          <mat-icon>assessment</mat-icon>
+          Rapports
+        </a>
+      </li>
+    </ng-container>
 
-    <li>
-      <a routerLink="/" fragment="planning" class="block hover:text-yellow-400">
-        <mat-icon>calendar_today</mat-icon>
-        Planning
-      </a>
-    </li>
-
-    <li>
-      <a routerLink="/dashboard/boutique" class="block hover:text-yellow-400">
-        <mat-icon>shopping_cart</mat-icon>
-        Boutique
-      </a>
-    </li>
-
-    <li>
-      <a routerLink="/parametres" class="block hover:text-yellow-400">
-        <mat-icon>settings</mat-icon>
-        Paramètres
-      </a>
-    </li>
+    <!-- Administrateur -->
+    <ng-container *ngIf="u.role === 'ADMIN'">
+      <li>
+        <a routerLink="/dashboard/analyse" routerLinkActive="text-yellow-400" class="block hover:text-yellow-400 flex items-center gap-2">
+          <mat-icon>analytics</mat-icon>
+          Analyse de données
+        </a>
+      </li>
+      <li>
+        <a routerLink="/dashboard/utilisateurs" routerLinkActive="text-yellow-400" class="block hover:text-yellow-400 flex items-center gap-2">
+          <mat-icon>people</mat-icon>
+          Liste utilisateurs
+        </a>
+      </li>
+      <li>
+        <a routerLink="/dashboard/boutique" routerLinkActive="text-yellow-400" class="block hover:text-yellow-400 flex items-center gap-2">
+          <mat-icon>shopping_cart</mat-icon>
+          Boutique
+        </a>
+      </li>
+      <li>
+        <a routerLink="/dashboard/messages" routerLinkActive="text-yellow-400" class="block hover:text-yellow-400 flex items-center gap-2">
+          <mat-icon>chat</mat-icon>
+          Message
+        </a>
+      </li>
+      <li>
+        <a routerLink="/dashboard/tableau-entrainement" routerLinkActive="text-yellow-400" class="block hover:text-yellow-400 flex items-center gap-2">
+          <mat-icon>calendar_view_week</mat-icon>
+          Tableau d'entraînement
+        </a>
+      </li>
+      <li>
+        <a routerLink="/dashboard/groupes" routerLinkActive="text-yellow-400" class="block hover:text-yellow-400 flex items-center gap-2">
+          <mat-icon>group_work</mat-icon>
+          Groupes
+        </a>
+      </li>
+    </ng-container>
 
   </ul>
 

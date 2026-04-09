@@ -1,0 +1,109 @@
+<div class="page-wrapper">
+
+  <div class="dashboard-header">
+    <div class="header-left">
+      <span class="eyebrow">Administration</span>
+      <h1>Analyse de <span class="accent">données</span></h1>
+      <p class="header-sub">
+        Vue d’ensemble des comptes et de la boutique pour piloter l’académie.
+      </p>
+    </div>
+    <div class="header-right">
+      <button type="button" class="btn-refresh" (click)="load()" [disabled]="loading">
+        Actualiser
+      </button>
+    </div>
+  </div>
+
+  <div class="loading-state" *ngIf="loading">
+    <div class="spinner"></div>
+    <p>Chargement des indicateurs…</p>
+  </div>
+
+  <div class="error-state" *ngIf="error && !loading">
+    <div class="error-icon" aria-hidden="true">!</div>
+    <p>{{ error }}</p>
+    <button type="button" class="btn-retry" (click)="load()">Réessayer</button>
+  </div>
+
+  <ng-container *ngIf="data && !loading && !error">
+    <section class="kpi-grid" aria-label="Indicateurs clés">
+      <article class="kpi-card">
+        <span class="kpi-label">Utilisateurs</span>
+        <span class="kpi-value">{{ data.totalUsers }}</span>
+        <span class="kpi-hint">comptes enregistrés</span>
+      </article>
+      <article class="kpi-card kpi-card--gold">
+        <span class="kpi-label">Joueurs</span>
+        <span class="kpi-value">{{ data.joueurs }}</span>
+        <span class="kpi-hint">{{ pct(data.joueurs) }} % du total</span>
+      </article>
+      <article class="kpi-card">
+        <span class="kpi-label">Coachs</span>
+        <span class="kpi-value">{{ data.coachs }}</span>
+        <span class="kpi-hint">{{ pct(data.coachs) }} % du total</span>
+      </article>
+      <article class="kpi-card">
+        <span class="kpi-label">Administrateurs</span>
+        <span class="kpi-value">{{ data.admins }}</span>
+        <span class="kpi-hint">{{ pct(data.admins) }} % du total</span>
+      </article>
+      <article class="kpi-card kpi-card--dark">
+        <span class="kpi-label">Produits boutique</span>
+        <span class="kpi-value">{{ data.totalProduits }}</span>
+        <span class="kpi-hint">référence(s) catalogue</span>
+      </article>
+    </section>
+
+    <section class="panel" aria-labelledby="repartition-title">
+      <h2 id="repartition-title" class="panel-title">Répartition des rôles</h2>
+      <p class="panel-desc">
+        Répartition des utilisateurs par rôle (hors « autres » si des rôles
+        hérités existent en base).
+      </p>
+
+      <ul class="bar-list">
+        <li class="bar-row">
+          <span class="bar-label">Joueurs</span>
+          <div class="bar-track" role="presentation">
+            <div class="bar-fill bar-fill--joueur" [style.width.%]="pct(data.joueurs)"></div>
+          </div>
+          <span class="bar-num">{{ data.joueurs }}</span>
+        </li>
+        <li class="bar-row">
+          <span class="bar-label">Coachs</span>
+          <div class="bar-track" role="presentation">
+            <div class="bar-fill bar-fill--coach" [style.width.%]="pct(data.coachs)"></div>
+          </div>
+          <span class="bar-num">{{ data.coachs }}</span>
+        </li>
+        <li class="bar-row">
+          <span class="bar-label">Administrateurs</span>
+          <div class="bar-track" role="presentation">
+            <div class="bar-fill bar-fill--admin" [style.width.%]="pct(data.admins)"></div>
+          </div>
+          <span class="bar-num">{{ data.admins }}</span>
+        </li>
+        <li class="bar-row" *ngIf="data.autres > 0">
+          <span class="bar-label">Autres rôles</span>
+          <div class="bar-track" role="presentation">
+            <div class="bar-fill bar-fill--autres" [style.width.%]="pct(data.autres)"></div>
+          </div>
+          <span class="bar-num">{{ data.autres }}</span>
+        </li>
+      </ul>
+    </section>
+
+    <section class="actions-panel" aria-label="Raccourcis">
+      <a routerLink="/dashboard/utilisateurs" class="action-link">
+        <span class="action-title">Liste utilisateurs</span>
+        <span class="action-desc">Gérer les comptes (à venir)</span>
+      </a>
+      <a routerLink="/dashboard/boutique" class="action-link">
+        <span class="action-title">Boutique</span>
+        <span class="action-desc">Catalogue et stocks</span>
+      </a>
+    </section>
+  </ng-container>
+
+</div>

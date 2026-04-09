@@ -1,0 +1,60 @@
+<div class="p-6 bg-gray-100 min-h-screen">
+
+  <h1 class="text-2xl font-bold mb-6">Analyse de données</h1>
+
+  <!-- Stats -->
+  <div class="grid grid-cols-4 gap-6 mb-8">
+
+    <div class="bg-white p-4 rounded-xl shadow">
+      <h2 class="text-gray-500">Joueurs</h2>
+      <p class="text-2xl font-bold">{{ stats.totalJoueurs }}</p>
+    </div>
+
+    <div class="bg-white p-4 rounded-xl shadow">
+      <h2 class="text-gray-500">Coachs</h2>
+      <p class="text-2xl font-bold">{{ stats.totalCoachs }}</p>
+    </div>
+
+    <div class="bg-white p-4 rounded-xl shadow">
+      <h2 class="text-gray-500">Revenus</h2>
+      <p class="text-2xl font-bold">{{ stats.revenus }} TND</p>
+    </div>
+
+    <div class="bg-white p-4 rounded-xl shadow">
+      <h2 class="text-gray-500">Abonnements</h2>
+      <p class="text-2xl font-bold">{{ stats.abonnements }}</p>
+    </div>
+
+  </div>
+
+  <!-- Graph Joueurs -->
+  <div class="bg-white p-6 rounded-xl shadow mb-8">
+    <h2 class="text-lg font-semibold mb-4">Évolution des joueurs</h2>
+
+    <div class="flex items-end gap-4 h-40">
+      <div *ngFor="let j of joueursParMois" class="flex flex-col items-center">
+        <div 
+          class="bg-blue-500 w-10 rounded"
+          [style.height.px]="j.value * 2">
+        </div>
+        <span class="mt-2 text-sm">{{ j.mois }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Graph Paiements -->
+  <div class="bg-white p-6 rounded-xl shadow">
+    <h2 class="text-lg font-semibold mb-4">Revenus mensuels</h2>
+
+    <div class="flex items-end gap-4 h-40">
+      <div *ngFor="let p of paiements" class="flex flex-col items-center">
+        <div 
+          class="bg-green-500 w-10 rounded"
+          [style.height.px]="p.montant / 50">
+        </div>
+        <span class="mt-2 text-sm">{{ p.mois }}</span>
+      </div>
+    </div>
+  </div>
+
+</div>

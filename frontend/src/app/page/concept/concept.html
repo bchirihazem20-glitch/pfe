@@ -1,90 +1,50 @@
 <app-header *ngIf="showHeader"></app-header>
-<section class="concept-container">
-  <div class="concept-wrapper">
+<section class="concept-section">
+  <div class="concept-container mx-auto px-6 max-w-7xl">
     
-    <div class="concept-header">
-      <h1 class="title">Notre Concept</h1>
-      <div class="gold-divider"></div>
-      <p class="subtitle">L'alliance parfaite entre l'excellence sportive et l'innovation technologique</p>
-    </div>
-
     <div class="concept-grid">
-      <!-- Left Content -->
-      <div class="concept-content delay-1">
-        
-        <div class="text-block highlight-block">
-          <div class="icon-bulb">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-            </svg>
-          </div>
-          <p>
-            Cette plateforme a été conçue pour révolutionner la gestion de notre académie sportive. Elle fluidifie la communication entre l’administration, les entraîneurs, les joueurs et les parents.
-          </p>
-        </div>
+      <!-- Partie Gauche -->
+      <div class="concept-left">
+        <h2 class="concept-title">Star Academy Mednine</h2>
+        <p class="concept-desc">
+          Un espace dédié à l'éveil et à la formation des enfants passionnés de football, avec un encadrement professionnel et des services adaptés.
+        </p>
 
-        <div class="text-block delay-2">
-          <p>
-            Grâce à cette solution digitale, les processus sont simplifiés : inscriptions en ligne, consultation de plannings, et suivi des activités sportives en temps réel.
-          </p>
-        </div>
-
-        <div class="text-block delay-3">
-          <p>
-            Les entraîneurs bénéficient d'un outil sur mesure pour organiser les séances
-            d’entraînement, évaluer les compétences et suivre l'évolution des performances individuelles et collectives.
-          </p>
-        </div>
-
-      </div>
-
-      <!-- Right Tech Stack -->
-      <div class="tech-panel delay-4">
-        <h3 class="panel-title">Architecture Technique</h3>
-        <p class="panel-desc">Une infrastructure moderne, rapide et entièrement sécurisée.</p>
-        
-        <ul class="tech-list">
+        <ul class="concept-list">
           <li>
-            <div class="tech-icon">
-              <!-- Frontend Icon -->
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-              </svg>
-            </div>
-            <div class="tech-text">
-              <strong>Angular</strong>
-              <span>Interface Utilisateur Réactive</span>
-            </div>
+            <span class="bullet" aria-hidden="true"></span>
+            Formation enfants U4 à U16
           </li>
-          
           <li>
-            <div class="tech-icon">
-              <!-- Backend Icon -->
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
-              </svg>
-            </div>
-            <div class="tech-text">
-              <strong>Spring Boot</strong>
-              <span>API Performante & Backend</span>
-            </div>
+            <span class="bullet" aria-hidden="true"></span>
+            Encadrement professionnel
           </li>
-          
           <li>
-            <div class="tech-icon">
-              <!-- Security Icon -->
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-              </svg>
-            </div>
-            <div class="tech-text">
-              <strong>JWT Security</strong>
-              <span>Authentification Chiffrée</span>
-            </div>
+            <span class="bullet" aria-hidden="true"></span>
+            Kit d'entraînement fourni
+          </li>
+          <li>
+            <span class="bullet" aria-hidden="true"></span>
+            Organisation de tournois
           </li>
         </ul>
       </div>
 
+      <!-- Partie Droite (Visuel) -->
+      <div class="concept-right">
+        <!-- Images (sans fond bleu) -->
+        <div class="image-wrapper relative">
+          <img src="assets/image/gallery_coach_player.png" alt="Coach et joueur" class="img-main drop-shadow-2xl" />
+          
+          <!-- Texte superposé sur la tenue (positionné de manière centrale/basse) -->
+          <div class="absolute inset-0 flex flex-col items-center justify-center top-[30%] pointer-events-none">
+             <span class="text-white font-black text-sm lg:text-base uppercase tracking-widest text-center leading-tight drop-shadow-[0_2px_4px_rgba(0,0,0,1)] -rotate-3" style="-webkit-text-stroke: 1px rgba(0,0,0,0.8);">
+              Star Academy<br>Mednine
+            </span>
+          </div>
+        </div>
+      </div>
     </div>
+
   </div>
 </section>

@@ -15,10 +15,10 @@ export class Boutique {
    produits = [
     {
       id: 1,
-      nom: 'Maillot Académie',
+      nom: 'Maillot Académie (avec logo)',
       prix: 80,
       promo: 10,
-      image: 'assets/produits/maillot.jpg'
+      image: 'assets/image/star_academy_jersey.png'
     },
     {
       id: 2,

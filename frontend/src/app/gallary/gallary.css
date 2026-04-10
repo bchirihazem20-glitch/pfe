@@ -1,110 +1,341 @@
-:host {
-  display: block;
-  font-family: 'Inter', 'Roboto', sans-serif;
-  background-color: #f0f2fa; /* Light pale blue background matching screenshot */
+/* Galerie — style moderne clair (grille 3×2, cartes lumineuses) */
+
+.gallery-page--light {
+  --g-bg: #eef1f8;
+  --g-bg2: #f5f3fb;
+  --g-card: #ffffff;
+  --g-text: #1a2233;
+  --g-muted: rgba(26, 34, 51, 0.58);
+  --g-gold: #c9a227;
+  --g-shadow: 0 12px 40px rgba(26, 38, 75, 0.1);
+  --g-shadow-hover: 0 22px 50px rgba(26, 38, 75, 0.14);
+  --g-radius: 18px;
+
+  position: relative;
+  font-family: var(--font-sans, 'Outfit', system-ui, sans-serif);
+  color: var(--g-text);
   min-height: 100vh;
+  background: linear-gradient(165deg, var(--g-bg) 0%, var(--g-bg2) 48%, #ebe8f5 100%);
 }
 
-.gallery-container {
-  padding: 4rem 3rem;
-  max-width: 1400px;
+.gallery-page--light::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at 20% 10%, rgba(201, 162, 39, 0.06) 0%, transparent 45%),
+    radial-gradient(circle at 88% 70%, rgba(100, 130, 200, 0.08) 0%, transparent 42%);
+  pointer-events: none;
+}
+
+.gallery-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1180px;
   margin: 0 auto;
+  padding: 3.5rem 1.25rem 4rem;
 }
 
-/* If a title is placed back it will have these styles */
-.gallery-header {
+@media (min-width: 768px) {
+  .gallery-inner {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+.gallery-intro {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 2.75rem;
+  max-width: 34rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 
+.gallery-eyebrow {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--g-gold);
+  margin: 0 0 0.6rem;
+}
+
+.gallery-title {
+  font-family: var(--font-display, 'Cormorant Garamond', serif);
+  font-size: clamp(2.1rem, 4.5vw, 2.75rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.65rem;
+  color: var(--g-text);
+}
+
+.gallery-lede {
+  margin: 0;
+  font-size: 0.98rem;
+  line-height: 1.55;
+  color: var(--g-muted);
+}
+
+/* Grille 3 colonnes (2 lignes) — comme maquette */
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 3rem; /* Spacing between cards like in screenshot */
+  grid-template-columns: 1fr;
+  gap: 1.75rem;
 }
 
-@media (max-width: 1024px) {
+@media (min-width: 640px) {
   .gallery-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem 1.25rem;
   }
 }
 
-@media (max-width: 640px) {
+@media (min-width: 960px) {
   .gallery-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.75rem 1.5rem;
   }
 }
 
-.gallery-item {
-  position: relative;
-  border-radius: 16px;
-  overflow: hidden;
+.gallery-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  border: none;
+  padding: 0;
+  background: transparent;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* very light shadow */
-  background: white;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: left;
+  border-radius: var(--g-radius);
+  animation: card-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.gallery-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.gallery-img {
+.gallery-card:focus-visible {
+  outline: 2px solid var(--g-gold);
+  outline-offset: 4px;
+}
+
+.gallery-card__frame {
+  position: relative;
+  border-radius: var(--g-radius);
+  overflow: hidden;
+  background: var(--g-card);
+  box-shadow: var(--g-shadow);
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+}
+
+.gallery-card:hover .gallery-card__frame,
+.gallery-card:focus-visible .gallery-card__frame {
+  transform: translateY(-4px);
+  box-shadow: var(--g-shadow-hover);
+}
+
+.gallery-card__img {
   width: 100%;
-  height: 280px;
+  aspect-ratio: 16 / 10;
   object-fit: cover;
+  object-position: center;
   display: block;
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Modal styles */
+.gallery-card:hover .gallery-card__img,
+.gallery-card:focus-visible .gallery-card__img {
+  transform: scale(1.03);
+}
+
+/* Pastille logo — haut gauche */
+.gallery-card__badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 2;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.gallery-card__badge img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* QR décoratif — bas droite (2 premières cartes) */
+.gallery-card__qr {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  z-index: 2;
+  width: 52px;
+  height: 52px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.gallery-card__qr-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.gallery-card__kit {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.14);
+  backdrop-filter: blur(6px);
+}
+
+.gallery-card__kit-logo {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: contain;
+}
+
+.gallery-card__kit-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.05;
+}
+
+.gallery-card__kit-top {
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: #152033;
+  text-transform: uppercase;
+}
+
+.gallery-card__kit-bottom {
+  font-size: 0.66rem;
+  font-weight: 900;
+  letter-spacing: 0.22em;
+  color: #1a4a7a;
+  text-transform: uppercase;
+}
+
+.gallery-card__caption {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--g-text);
+  padding: 0 0.15rem;
+  letter-spacing: -0.01em;
+}
+
+.gallery-credits {
+  margin: 2.75rem 0 0;
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--g-muted);
+}
+
+.gallery-credits a {
+  color: #3d5a80;
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(61, 90, 128, 0.35);
+}
+
+.gallery-credits a:hover {
+  color: var(--g-text);
+  border-bottom-color: var(--g-text);
+}
+
+/* Modal */
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.85);
+  background-color: rgba(18, 24, 40, 0.88);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
-  padding: 2rem;
+  padding: 1.5rem;
+  backdrop-filter: blur(8px);
 }
 
 .modal-content {
   position: relative;
-  max-width: 90vw;
-  max-height: 90vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.modal-image {
-  max-width: 100%;
-  max-height: 90vh;
-  border-radius: 8px;
-  object-fit: contain;
+  max-width: min(94vw, 1120px);
+  max-height: 92vh;
 }
 
 .close-btn {
   position: absolute;
-  top: -40px;
-  right: -40px;
+  top: -2.6rem;
+  right: 0;
   background: transparent;
   border: none;
-  color: #ffffff;
-  font-size: 3rem;
+  color: #fff;
+  font-size: 2.35rem;
   cursor: pointer;
   line-height: 1;
-  transition: color 0.3s ease, transform 0.3s ease;
-}
-
-@media (max-width: 768px) {
-  .close-btn {
-    top: -40px;
-    right: 0;
-  }
+  padding: 0.25rem 0.5rem;
+  transition: color 0.2s ease, transform 0.2s ease;
+  z-index: 2;
 }
 
 .close-btn:hover {
-  transform: scale(1.1);
+  color: var(--g-gold);
+  transform: scale(1.06);
+}
+
+.modal-figure {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.modal-image {
+  max-width: 100%;
+  max-height: min(80vh, 820px);
+  border-radius: 14px;
+  object-fit: contain;
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.45);
+}
+
+.modal-caption {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.88);
+  text-align: center;
+  max-width: 36rem;
+}
+
+@media (max-width: 640px) {
+  .close-btn {
+    top: -2.4rem;
+    right: -0.2rem;
+  }
 }

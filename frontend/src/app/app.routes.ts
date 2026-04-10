@@ -35,6 +35,9 @@ export const routes: Routes = [
       { path: 'groupes', component: DashboardPlaceholder, data: { title: 'Groupes' } },
       {path:"boutique",component:DashboardBoutique,canActivate:[adminFileGuard]},
       {path:"boutique/add-produit",component:AddProduit,canActivate:[adminFileGuard]}
+      {path: 'messages',Component: MessagesComponent},
+    
+
 
     ]},
 

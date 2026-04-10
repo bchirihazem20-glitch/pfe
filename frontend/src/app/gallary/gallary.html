@@ -1,33 +1,62 @@
-<section class="gallery-container">
-  <!-- Title, if needed, kept minimal and dark for light theme -->
-  <div class="gallery-header">
-  <!-- The screenshot doesn't show a title, but if we have one it should be dark text -->
-  </div>
+<section class="gallery-page gallery-page--light" aria-labelledby="gallery-heading">
+  <div class="gallery-inner">
+    <header class="gallery-intro">
+      <p class="gallery-eyebrow">Star Academy Mednine</p>
+      <h2 id="gallery-heading" class="gallery-title">Galerie</h2>
+      <p class="gallery-lede">
+        Moments forts, équipes et ambiance — une vitrine moderne pour l’académie.
+      </p>
+    </header>
 
-  <!-- Grid images -->
-  <div class="gallery-grid">
-    <div 
-      *ngFor="let img of images; let i = index"
-      class="gallery-item"
-      (click)="openImage(img)"
-    >
-      <img 
-        [src]="img" 
-        alt="Galerie Image"
-        class="gallery-img"
-      />
+    <div class="gallery-grid" role="list">
+      <button
+        type="button"
+        *ngFor="let photo of photos; let i = index"
+        class="gallery-card"
+        role="listitem"
+        [style.animation-delay.ms]="i * 60"
+        (click)="openImage(photo)"
+      >
+        <div class="gallery-card__frame">
+          <span class="gallery-card__badge" aria-hidden="true">
+            <img [src]="badgeSrc" alt="" width="40" height="40" loading="lazy" decoding="async" />
+          </span>
+
+          <div *ngIf="photo.showQr" class="gallery-card__qr" aria-hidden="true" title="">
+            <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" class="gallery-card__qr-svg">
+              <rect width="64" height="64" rx="6" fill="#fff" />
+              <path fill="#1a2744" d="M8 8h20v20H8V8zm4 4v12h12V12H12zm24 0h20v8H36v-8zm0 12h8v8h-8v-8zm12 0h8v20h-8V24zM8 36h20v20H8V36zm4 4v12h12V40H12zm28 0h8v8h-8v-8zm12 0h12v12H52V40zm-12 12h8v8h-8v-8z" />
+            </svg>
+          </div>
+
+          <!-- Marquage de tenue (logo + texte) -->
+          <div *ngIf="photo.showKitMark" class="gallery-card__kit" aria-label="STAR ACADEMY MEDNINE">
+            <img class="gallery-card__kit-logo" [src]="badgeSrc" alt="" width="28" height="28" loading="lazy" decoding="async" />
+            <span class="gallery-card__kit-text">
+              <span class="gallery-card__kit-top">{{ kitTextTop }}</span>
+              <span class="gallery-card__kit-bottom">{{ kitTextBottom }}</span>
+            </span>
+          </div>
+
+          <img [src]="photo.src" [alt]="photo.alt" class="gallery-card__img" loading="lazy" decoding="async" />
+        </div>
+        <span class="gallery-card__caption">{{ photo.caption }}</span>
+      </button>
     </div>
+
+    <p class="gallery-credits">
+      Photos d’illustration haute qualité ·
+      <a href="https://unsplash.com" target="_blank" rel="noopener noreferrer">Unsplash</a>
+    </p>
   </div>
 
-  <!-- Modal -->
-  <div 
-    *ngIf="selectedImage"
-    class="modal-backdrop"
-    (click)="closeImage()"
-  >
+  <div *ngIf="selected" class="modal-backdrop" role="dialog" aria-modal="true" aria-label="Aperçu" (click)="closeImage()">
     <div class="modal-content" (click)="$event.stopPropagation()">
-      <button class="close-btn" (click)="closeImage()">×</button>
-      <img [src]="selectedImage" class="modal-image" />
+      <button type="button" class="close-btn" (click)="closeImage()" aria-label="Fermer">×</button>
+      <figure class="modal-figure">
+        <img [src]="selected.src" [alt]="selected.alt" class="modal-image" />
+        <figcaption *ngIf="selected.caption" class="modal-caption">{{ selected.caption }}</figcaption>
+      </figure>
     </div>
   </div>
 </section>

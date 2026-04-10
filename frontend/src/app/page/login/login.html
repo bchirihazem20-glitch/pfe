@@ -33,18 +33,27 @@
         </small>
       </div>
       <!-- Button -->
-      <button 
+      <button
+      [disabled]="isLoading"
       type="submit"
       class="w-full bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700 transition">
-        Se connecter
+       <span *ngIf="!isLoading">Se connecter</span>
+        <span *ngIf="isLoading">Connecter...</span>
       </button>
       <!-- Lien inscription -->
       <p class="text-center text-sm mt-4">
         Vous n'avez pas de compte ?
-        <a routerLink="/inscription" class="text-blue-600 hover:underline">
+        <a routerLink="/inscription" class="text-blue-600 hover:underline cursor-pointer">
           S'inscrire
         </a>
       </p>
     </form>
+      <div *ngIf="successMessage" class="bg-green-100 text-green-700 p-2 rounded-lg text-center">
+        {{ successMessage }}
+      </div>
+
+      <div *ngIf="errorMessage" class="bg-red-100 text-red-700 p-2 rounded-lg text-center">
+        {{ errorMessage }}
+      </div>
   </div>
 </div>

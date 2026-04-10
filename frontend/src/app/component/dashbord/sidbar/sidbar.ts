@@ -20,7 +20,6 @@ export class Sidebar implements OnInit {
   this.auth.getProfile().subscribe({
     next: (u) => {
       this.user = u;
-      console.log(u);
       this.cd.detectChanges(); // 🔥 الحل
     },
     error: () => (this.user = null),

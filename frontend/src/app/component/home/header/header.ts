@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../../service/auth/auth';
@@ -14,7 +14,7 @@ export class Header {
   user: any = null;
   menuOpen = false;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private cd: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.loadUser();
@@ -22,7 +22,10 @@ export class Header {
 
   loadUser() {
     this.authService.getProfile().subscribe({
-      next: (data) => this.user = data,
+      next: (data) => {
+        this.user = data;
+        this.cd.detectChanges();
+      },
       error: () => this.user = null
     });
   }

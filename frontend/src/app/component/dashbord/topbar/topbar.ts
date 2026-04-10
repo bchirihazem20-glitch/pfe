@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../service/auth/auth';
 
@@ -13,11 +13,12 @@ export class Topbar {
 
   user: any;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService,private cd: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.authService.getProfile().subscribe(res => {
       this.user = res;
+      this.cd.detectChanges();
     });
   }
 

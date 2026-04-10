@@ -12,7 +12,7 @@ interface Message {
   selector: 'app-messages',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './messages.html',
+  templateUrl: './message.html',
 })
 export class MessagesComponent {
 

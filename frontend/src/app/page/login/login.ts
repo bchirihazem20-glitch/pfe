@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../service/auth/auth';
@@ -12,14 +12,20 @@ import { CommonModule } from '@angular/common';
 })
 export class Login implements OnInit {
   loginForm!: FormGroup;
+  errorMessage: string = '';
+  successMessage: string = '';
+  isLoading: boolean = false;
 
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private cd:ChangeDetectorRef
+    
   ) {}
 
   ngOnInit(): void {
+    
 
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -33,24 +39,32 @@ export class Login implements OnInit {
   }
 
   onSubmit() {
+     this.errorMessage = '';
+    this.successMessage = '';
 
     if (this.loginForm.valid) {
-
+      this.isLoading = true;
       this.authService.login(this.loginForm.value).subscribe({
-
         next: (res) => {
           console.log("Connexion réussie", res);
 
-          alert("Connexion réussie");
+          this.successMessage = "Connexion réussie";
+          this.isLoading = false;
+          this.cd.markForCheck();
 
-          // redirection vers dashboard
-          this.router.navigate(['/']);
-        },
+        setTimeout(() => {
+          this.router.navigate(['/dashboard']);
+        }, 1500);
+      },
 
-        error: (err) => {
-          console.error("Erreur login", err);
-          alert("Email ou mot de passe incorrect");
+        error: () => {
+          console.error("Erreur login");
+          this.errorMessage = "Email ou mot de passe incorrect";
+          this.isLoading = false;
+          this.cd.markForCheck();
+
         }
+        
 
       });
 

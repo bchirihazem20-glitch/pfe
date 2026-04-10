@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
   selector: 'app-tableau-entrainement',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './tableau-entrainement.html',
+  templateUrl: './emploi.html',
 })
 export class TableauEntrainementComponent {
 

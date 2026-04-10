@@ -17,7 +17,6 @@
       <li><a routerLink="/" fragment="galerie" class="hover:text-yellow-400">Galerie</a></li>
     </ul>
 
-    <!-- Partie droite (alignée à droite, même largeur flexible que la gauche) -->
     <div class="hidden md:flex flex-1 min-w-0 items-center justify-end gap-3 relative">
 
       <!-- NON CONNECTÉ -->
@@ -36,7 +35,7 @@
       <!-- CONNECTÉ -->
       <ng-container *ngIf="user">
 
-        <div class="relative">
+        <div class="relative  cursor-pointer">
 
           <!-- Avatar -->
           <div (click)="toggleMenu()"

@@ -10,7 +10,7 @@ import { AddProduit } from './page/dashboard/addproduit/addproduit';
 import { adminFileGuard } from './guards/admin-file-guard';
 import { DashboardPlaceholder } from './page/dashboard/placeholder/dashboard-placeholder';
 import { AnalyseComponent } from './dashbord/analyse-donneer/analyse-donneer';
-import { MessagesComponent } from './dashbord/message/message';
+import { Message } from './dashbord/message/message';
 
 
 export const routes: Routes = [
@@ -34,7 +34,7 @@ export const routes: Routes = [
       { path: 'groupes', component: DashboardPlaceholder, data: { title: 'Groupes' } },
       {path:"boutique",component:DashboardBoutique,canActivate:[adminFileGuard]},
       {path:"boutique/add-produit",component:AddProduit,canActivate:[adminFileGuard]},
-      {path: "messages",component: MessagesComponent},
+      {path: "messages",component: Message},
     
 
 

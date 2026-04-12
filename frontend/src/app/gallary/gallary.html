@@ -4,7 +4,7 @@
       <p class="gallery-eyebrow">Star Academy Mednine</p>
       <h2 id="gallery-heading" class="gallery-title">Galerie</h2>
       <p class="gallery-lede">
-        Moments forts, équipes et ambiance — une vitrine moderne pour l’académie.
+        Séances, collectif et technique — visuels harmonisés sur la tenue d’entraînement officielle de l’académie (identité bleu & blanc).
       </p>
     </header>
 
@@ -17,7 +17,21 @@
         [style.animation-delay.ms]="i * 60"
         (click)="openImage(photo)"
       >
-        <div class="gallery-card__frame">
+        <div
+          class="gallery-card__frame"
+          [class.gallery-card__frame--bw-blue]="photo.blueWhiteLook"
+          [class.gallery-card__frame--mark-br]="photo.kitMarkBottomRight"
+        >
+          <!-- Image en premier pour que logo / texte restent au-dessus -->
+          <img
+            [src]="photo.src"
+            [alt]="photo.alt"
+            class="gallery-card__img"
+            [class.gallery-card__img--filtered]="photo.blueWhiteLook"
+            loading="lazy"
+            decoding="async"
+          />
+
           <span class="gallery-card__badge" aria-hidden="true">
             <img [src]="badgeSrc" alt="" width="40" height="40" loading="lazy" decoding="async" />
           </span>
@@ -29,23 +43,25 @@
             </svg>
           </div>
 
-          <!-- Marquage de tenue (logo + texte) -->
-          <div *ngIf="photo.showKitMark" class="gallery-card__kit" aria-label="STAR ACADEMY MEDNINE">
+          <div
+            *ngIf="photo.showKitMark"
+            class="gallery-card__kit"
+            [class.gallery-card__kit--br]="photo.kitMarkBottomRight"
+            aria-label="STAR ACADEMY MEDNINE"
+          >
             <img class="gallery-card__kit-logo" [src]="badgeSrc" alt="" width="28" height="28" loading="lazy" decoding="async" />
             <span class="gallery-card__kit-text">
               <span class="gallery-card__kit-top">{{ kitTextTop }}</span>
               <span class="gallery-card__kit-bottom">{{ kitTextBottom }}</span>
             </span>
           </div>
-
-          <img [src]="photo.src" [alt]="photo.alt" class="gallery-card__img" loading="lazy" decoding="async" />
         </div>
         <span class="gallery-card__caption">{{ photo.caption }}</span>
       </button>
     </div>
 
     <p class="gallery-credits">
-      Photos d’illustration haute qualité ·
+      Photo académie locale + visuels d’illustration ·
       <a href="https://unsplash.com" target="_blank" rel="noopener noreferrer">Unsplash</a>
     </p>
   </div>

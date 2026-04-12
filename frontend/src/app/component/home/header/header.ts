@@ -26,7 +26,10 @@ export class Header {
         this.user = data;
         this.cd.detectChanges();
       },
-      error: () => this.user = null
+      error: () =>{
+        this.user = null;
+        window.localStorage.removeItem("token")
+      }
     });
   }
 

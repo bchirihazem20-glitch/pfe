@@ -10,11 +10,12 @@ import {
 } from '@angular/forms';
 import { AuthService } from '../../service/auth/auth';
 import { MatIconModule } from '@angular/material/icon';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MatIconModule],
+  imports: [CommonModule, ReactiveFormsModule, MatIconModule,RouterModule],
   templateUrl: './inscripition.html',
   styleUrl: './inscripition.css',
 })

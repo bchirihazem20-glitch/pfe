@@ -41,12 +41,12 @@
         <span *ngIf="isLoading">Connecter...</span>
       </button>
       <!-- Lien inscription -->
-      <p class="text-center text-sm mt-4">
+      <div class="text-center text-sm mt-4 text-black">
         Vous n'avez pas de compte ?
         <a routerLink="/inscription" class="text-blue-600 hover:underline cursor-pointer">
           S'inscrire
         </a>
-      </p>
+      </div>
     </form>
       <div *ngIf="successMessage" class="bg-green-100 text-green-700 p-2 rounded-lg text-center">
         {{ successMessage }}

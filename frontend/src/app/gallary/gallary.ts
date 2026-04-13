@@ -46,7 +46,7 @@ export class Galerie {
       blueWhiteLook: true,
     },
     {
-      src: '',
+      src: 'assets/image/img4.jpg',
       alt: 'Équipe célébrant sur le terrain en tenue identique',
       caption: 'Collectif & célébration',
       showKitMark: true,

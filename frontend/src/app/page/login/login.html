@@ -1,59 +1,106 @@
 <div class="min-h-screen flex items-center justify-center bg-gray-100">
   <div class="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
+
     <h2 class="text-2xl font-bold text-center text-blue-600 mb-6">
       Connexion
     </h2>
+
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="space-y-4">
+
       <!-- Email -->
       <div>
         <input 
-        type="email"
-        placeholder="Email"
-        formControlName="email"
-        class="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-400">
+          type="email"
+          placeholder="Email"
+          formControlName="email"
+          class="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-400">
+
         <small class="text-red-500"
-        *ngIf="f['email'].touched && f['email'].errors?.['required']">
+          *ngIf="f['email'].touched && f['email'].errors?.['required']">
           Email obligatoire
         </small>
+
         <small class="text-red-500"
-        *ngIf="f['email'].errors?.['email']">
+          *ngIf="f['email'].errors?.['email']">
           Email invalide
         </small>
       </div>
-      <!-- Password -->
-      <div>
+
+      <!-- Password + 👁️ -->
+      <div class="relative">
         <input 
-        type="password"
-        placeholder="Mot de passe"
-        formControlName="password"
-        class="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-400">
+          [type]="showPassword ? 'text' : 'password'"
+          placeholder="Mot de passe"
+          formControlName="password"
+          class="w-full border p-2 rounded-lg focus:ring-2 focus:ring-blue-400 pr-10">
+
+        <!-- 👁️ SVG (بدون FontAwesome) -->
+        <span 
+          (click)="togglePassword()"
+          class="absolute right-3 top-2.5 cursor-pointer text-gray-500">
+
+          <!-- Eye -->
+          <svg *ngIf="!showPassword" xmlns="http://www.w3.org/2000/svg" 
+            class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+              d="M2.458 12C3.732 7.943 7.523 5 12 5
+                 c4.477 0 8.268 2.943 9.542 7
+                 -1.274 4.057-5.065 7-9.542 7
+                 -4.477 0-8.268-2.943-9.542-7z"/>
+          </svg>
+
+          <!-- Eye Slash -->
+          <svg *ngIf="showPassword" xmlns="http://www.w3.org/2000/svg" 
+            class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+              d="M13.875 18.825A10.05 10.05 0 0112 19
+                 c-4.478 0-8.27-2.943-9.543-7
+                 a9.956 9.956 0 012.223-3.592M6.7 6.7
+                 A9.956 9.956 0 0112 5
+                 c4.478 0 8.27 2.943 9.543 7
+                 a9.965 9.965 0 01-4.293 5.154M15 12
+                 a3 3 0 11-6 0 3 3 0 016 0z"/>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+              d="M3 3l18 18"/>
+          </svg>
+
+        </span>
+
         <small class="text-red-500"
-        *ngIf="f['password'].touched && f['password'].errors?.['required']">
+          *ngIf="f['password'].touched && f['password'].errors?.['required']">
           Mot de passe obligatoire
         </small>
       </div>
+
       <!-- Button -->
       <button
-      [disabled]="isLoading"
-      type="submit"
-      class="w-full bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700 transition">
-       <span *ngIf="!isLoading">Se connecter</span>
-        <span *ngIf="isLoading">Connecter...</span>
+        [disabled]="isLoading"
+        type="submit"
+        class="w-full bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700 transition">
+        <span *ngIf="!isLoading">Se connecter</span>
+        <span *ngIf="isLoading">Connexion...</span>
       </button>
-      <!-- Lien inscription -->
+
+      <!-- Inscription -->
       <div class="text-center text-sm mt-4 text-black">
         Vous n'avez pas de compte ?
         <a routerLink="/inscription" class="text-blue-600 hover:underline cursor-pointer">
           S'inscrire
         </a>
       </div>
-    </form>
-      <div *ngIf="successMessage" class="bg-green-100 text-green-700 p-2 rounded-lg text-center">
-        {{ successMessage }}
-      </div>
 
-      <div *ngIf="errorMessage" class="bg-red-100 text-red-700 p-2 rounded-lg text-center">
-        {{ errorMessage }}
-      </div>
+    </form>
+
+    <!-- Messages -->
+    <div *ngIf="successMessage" class="bg-green-100 text-green-700 p-2 rounded-lg text-center mt-4">
+      {{ successMessage }}
+    </div>
+
+    <div *ngIf="errorMessage" class="bg-red-100 text-red-700 p-2 rounded-lg text-center mt-4">
+      {{ errorMessage }}
+    </div>
+
   </div>
 </div>

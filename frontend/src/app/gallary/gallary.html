@@ -23,13 +23,14 @@
           [class.gallery-card__frame--mark-br]="photo.kitMarkBottomRight"
         >
           <!-- Image en premier pour que logo / texte restent au-dessus -->
-          <img
+          <img 
             [src]="photo.src"
             [alt]="photo.alt"
             class="gallery-card__img"
             [class.gallery-card__img--filtered]="photo.blueWhiteLook"
             loading="lazy"
             decoding="async"
+            
           />
 
           <span class="gallery-card__badge" aria-hidden="true">

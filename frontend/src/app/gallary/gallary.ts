@@ -31,7 +31,7 @@ export class Galerie {
   /** Visuels orientés “équipe / académie” avec tenue homogène ; teinte unifiée via CSS (bleu & blanc). */
   photos: GalleryPhoto[] = [
     {
-      src: 'assets/image/gallery_training_academy.png',
+      src: 'assets/image/img3.png',
       alt: 'Jeunes joueurs Stars Academy Mednine — esprit d’équipe sur le terrain',
       caption: 'Photo académie — tenue d’entraînement',
       showKitMark: true,
@@ -39,14 +39,14 @@ export class Galerie {
       kitMarkBottomRight: true,
     },
     {
-      src: 'https://images.unsplash.com/photo-1751394217845-fbd294ab53a6?auto=format&fit=crop&w=1600&q=85',
+      src: 'assets/image/gallery_training_academy.png',
       alt: 'Équipe de football posant en photo de groupe avec maillots assortis',
       caption: 'Photo officielle — même kit académie',
       showKitMark: true,
       blueWhiteLook: true,
     },
     {
-      src: 'https://images.unsplash.com/photo-1748111406426-2f74b550c75a?auto=format&fit=crop&w=1600&q=85',
+      src: '',
       alt: 'Équipe célébrant sur le terrain en tenue identique',
       caption: 'Collectif & célébration',
       showKitMark: true,

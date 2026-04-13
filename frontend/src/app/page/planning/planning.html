@@ -1,50 +1,21 @@
 <div class="min-h-screen bg-gray-50 py-16 px-6">
 
-  <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-10 items-start">
+  <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-10 items-stretch">
 
-    <!-- TABLEAU -->
-    <div class="bg-white shadow-lg rounded-xl p-6 overflow-x-auto">
+    <!-- IMAGE -->
+    <div class="relative bg-white shadow-lg rounded-xl overflow-hidden h-full flex items-center justify-center">
 
-      <h2 class="text-2xl font-bold mb-4 text-gray-800">
-        Programme d'entraînement
-      </h2>
+      <!-- Background Blur -->
+      <img 
+        src="assets/image/img1.jpeg"
+        class="absolute w-full h-full object-cover blur-lg scale-110 opacity-40"
+      >
 
-      <table class="w-full text-center border">
-
-        <thead class="bg-gray-200">
-          <tr>
-            <th class="p-3">Cat</th>
-            <th>Lun</th>
-            <th>Mar</th>
-            <th>Mer</th>
-            <th>Jeu</th>
-            <th>Ven</th>
-            <th>Sam</th>
-            <th>Dim</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr *ngFor="let p of planning" class="border-t hover:bg-gray-50">
-
-            <td class="font-bold">{{ p.cat }}</td>
-
-            <td>{{ p.lundi }}</td>
-            <td>{{ p.mardi }}</td>
-            <td>{{ p.mercredi }}</td>
-            <td>{{ p.jeudi }}</td>
-            <td>{{ p.vendredi }}</td>
-            <td>{{ p.samedi }}</td>
-
-            <!-- DIMANCHE -->
-            <td class="font-semibold">
-              {{ p.dimanche }}
-            </td>
-
-          </tr>
-        </tbody>
-
-      </table>
+      <!-- Main Image -->
+      <img 
+        src="assets/image/img1.jpeg"
+        class="relative max-h-full max-w-full object-contain"
+      >
 
     </div>
 
@@ -61,12 +32,10 @@
       </p>
 
       <ul class="space-y-4 text-lg">
-
         <li>Entraînements par catégorie</li>
         <li>Séances toute la semaine</li>
         <li>Programme structuré</li>
         <li>Match chaque dimanche</li>
-
       </ul>
 
       <!-- MOTIVATION -->

@@ -1,0 +1,47 @@
+<div class="container">
+
+  <h2>Liste des utilisateurs</h2>
+
+  <table>
+
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Email</th>
+        <th>Statut</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let user of users">
+
+        <td>{{ user.nom }}</td>
+        <td>{{ user.email }}</td>
+
+        <td>
+          <span *ngIf="user.status === 'en_attente'" class="status-attente">En attente</span>
+          <span *ngIf="user.status === 'valide'" class="status-valide">Validé</span>
+          <span *ngIf="user.status === 'refuse'" class="status-refuse">Refusé</span>
+        </td>
+
+        <td>
+
+          <button (click)="valider(user.id)" class="btn-valider">✔️</button>
+
+          <button (click)="refuser(user.id)" class="btn-refuser">❌</button>
+
+          <button (click)="consulter(user)" class="btn-details">👁️</button>
+
+          <button (click)="modifier(user)" class="btn-modifier">✏️</button>
+
+          <button (click)="supprimer(user.id)" class="btn-supprimer">🗑️</button>
+
+        </td>
+
+      </tr>
+    </tbody>
+
+  </table>
+
+</div>

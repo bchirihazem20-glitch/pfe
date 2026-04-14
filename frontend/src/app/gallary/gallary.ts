@@ -53,7 +53,7 @@ export class Galerie {
       blueWhiteLook: true,
     },
     {
-      src: 'https://images.unsplash.com/photo-1606925797300-0b35e9d1794e?auto=format&fit=crop&w=1600&q=85',
+      src: 'assets/image/img5.jpg',
       alt: 'Séance d’entraînement football — joueurs en tenue de club',
       caption: 'Séance terrain',
       showKitMark: true,

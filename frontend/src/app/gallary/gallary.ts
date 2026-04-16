@@ -67,7 +67,7 @@ export class Galerie {
       blueWhiteLook: true,
     },
     {
-      src: 'assets/image/img8.jpgQ',
+      src: 'assets/image/img12.jpg',
       alt: 'Ballon de football sur la ligne — préparation séance',
       caption: 'Préparation & focus',
       showKitMark: true,

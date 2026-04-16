@@ -93,8 +93,10 @@
 }
 
 .lux-nav__dropdown {
-  position: absolute;
-  right: 0;
+  position: fixed;
+  top: calc(100% + 0.5rem);    /* Position it just below the header height */
+  right: 1.5rem;               /* Distance from right edge */
+  z-index: 100;    
   margin-top: 0.5rem;
   width: 14rem;
   padding: 0.85rem;

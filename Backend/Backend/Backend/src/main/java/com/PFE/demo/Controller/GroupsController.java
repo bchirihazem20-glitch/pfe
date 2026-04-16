@@ -153,18 +153,18 @@ public class GroupsController {
     public ResponseEntity<?> autoGroupByAge(@RequestBody AutoGroupRequest req) {
 
         int maxSize = 15;
-
-        // 1. Get coach
         User coach = userRepository.findById(req.getCoachId())
                 .orElseThrow(() -> new RuntimeException("Coach not found"));
 
-        // 2. Filter ONLY players of selected age category
         List<User> players = userRepository.findAll()
-                .stream()
+              .stream()
                 .filter(u -> u.getDateNaissance() != null)
                 .filter(u -> groupJoueursRepository.findByJoueurId(u.getId()).isEmpty())
-                .filter(u -> ageService.getCategory(u.getDateNaissance()) == req.getAge())
-                .toList();
+                .filter(u ->
+                    ageService.getCategory(u.getDateNaissance())
+                        .name()
+                        .equals(req.getAge())
+                ).toList();
 
         if (players.isEmpty()) {
             return ResponseEntity.badRequest().body("No available players for this age category");

@@ -6,7 +6,7 @@ public class AutoGroupRequest {
     private Long coachId;
     private String groupName;
     private int numberOfGroups;
-    private AgeCategory age;
+    private String age;
 
     public int getNumberOfGroups() {
         return numberOfGroups;
@@ -32,8 +32,8 @@ public class AutoGroupRequest {
         this.numberOfGroups = numberOfGroups;
     }
 
-    public AgeCategory getAge() {
+    public String getAge() {
         return age;
     }
-    public void setAge(AgeCategory age) {}
+    public void setAge(String age) {this.age = age;}
 }

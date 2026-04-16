@@ -9,6 +9,7 @@ import java.util.List;
 public interface GroupJoueursRepository extends JpaRepository<GroupJoueurs, Long> {
 
     List<GroupJoueurs> findByGroupId(Long groupId);
+    List<GroupJoueurs> findByJoueurId(Long joueurId);
 
     void deleteByGroupIdAndJoueurId(Long groupId, Long joueurId);
 }

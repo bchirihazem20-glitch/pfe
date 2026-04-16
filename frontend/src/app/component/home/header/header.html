@@ -50,7 +50,7 @@
             <!-- Info user -->
             <div class="lux-nav__dropdown-head">
               <p class="font-semibold">{{ user.nom }}</p>
-              <p class="text-sm text-black/50">{{ user.role }}</p>
+              <p class="text-sm text-black/50">{{ user.role === "ADMIN" ? "administrateur" :  user.role.toLowerCase()}}</p>
             </div>
 
             <!-- Liens -->

@@ -8,6 +8,7 @@ import { AuthService } from '../../../service/auth/auth';
   standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './header.html',
+  styleUrl:"./header.css"
 })
 export class Header {
 

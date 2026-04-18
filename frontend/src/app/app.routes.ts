@@ -11,11 +11,13 @@ import { adminFileGuard } from './guards/admin-file-guard';
 import { DashboardPlaceholder } from './page/dashboard/placeholder/dashboard-placeholder';
 import { AnalyseComponent } from './dashbord/analyse-donneer/analyse-donneer';
 import { Message } from './dashbord/message/message';
+import { Groupes } from './page/groupes/groupes';
 
 
 export const routes: Routes = [
     {path: "login", component:Login,canActivate:[guestGuard]},
     {path: "", component:Home},
+     { path: "groupes", component: Groupes },
     {path: "inscription", component:Inscripition,canActivate:[guestGuard]},
     {path: "dashboard", component:Dashboard,canActivate:[authGuard],children:[
       { path: '', component: AnalyseComponent , canActivate: [adminFileGuard] },
@@ -31,7 +33,7 @@ export const routes: Routes = [
       { path: 'rapports', component: DashboardPlaceholder, data: { title: 'Rapports' } },
       { path: 'utilisateurs', component: DashboardPlaceholder, data: { title: 'Liste utilisateurs' } },
       { path: 'tableau-entrainement', component: DashboardPlaceholder, data: { title: 'Tableau d\'entraînement' } },
-      { path: 'groupes', component: DashboardPlaceholder, data: { title: 'Groupes' } },
+      // { path: 'groupes', component: Groupes, data: { title: 'Groupes' } },
       {path:"boutique",component:DashboardBoutique,canActivate:[adminFileGuard]},
       {path:"boutique/add-produit",component:AddProduit,canActivate:[adminFileGuard]},
       {path: "messages",component: Message},

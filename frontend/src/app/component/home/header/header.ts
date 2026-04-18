@@ -21,18 +21,22 @@ export class Header {
     this.loadUser();
   }
 
-  loadUser() {
-    this.authService.getProfile().subscribe({
-      next: (data) => {
-        this.user = data;
-        this.cd.detectChanges();
-      },
-      error: () =>{
-        this.user = null;
-        window.localStorage.removeItem("token")
-      }
-    });
-  }
+loadUser() {
+  this.authService.getProfile().subscribe({
+    next: (data) => {
+      this.user = data;
+
+      // 🔥 AJOUT ICI
+      console.log("USER DATA :", this.user);
+
+      this.cd.detectChanges();
+    },
+    error: () =>{
+      this.user = null;
+      window.localStorage.removeItem("token")
+    }
+  });
+}
 
   getInitials(): string {
     if (!this.user) return '';

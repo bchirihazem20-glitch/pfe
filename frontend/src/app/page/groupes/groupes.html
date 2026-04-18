@@ -1,0 +1,163 @@
+<app-header></app-header>
+
+<section class="groupes-page groupes-page--light" aria-labelledby="groupes-heading">
+  <div class="groupes-inner">
+    <header class="groupes-intro">
+      <h2 id="groupes-heading" class="groupes-title">Nos Groupes</h2>
+      <p class="groupes-lede">
+        Découvrez les différents groupes de la Stars Academy Médenine. Chaque groupe est pensé selon l’âge,
+        le niveau et les objectifs de progression de nos jeunes talents.
+      </p>
+
+      <div class="groupes-toolbar">
+        <button type="button" class="add-groupe-btn" (click)="openCreateModal()">
+          + Ajouter un groupe
+        </button>
+      </div>
+    </header>
+
+    <div *ngIf="loading" class="loading-msg">
+      Chargement des groupes...
+    </div>
+
+    <div class="groupes-grid" role="list" *ngIf="!loading">
+      <article
+        *ngFor="let groupe of groupes; let i = index"
+        class="groupe-card"
+        role="listitem"
+        [style.animation-delay.ms]="i * 70"
+      >
+        <div class="groupe-card__frame">
+          <img
+            src="assets/image/img9.png"
+            [alt]="groupe.libelle"
+            class="groupe-card__img"
+            loading="lazy"
+            decoding="async"
+          />
+
+          <span class="groupe-card__badge" aria-hidden="true">
+            <img
+              [src]="badgeSrc"
+              alt=""
+              width="42"
+              height="42"
+              loading="lazy"
+              decoding="async"
+            />
+          </span>
+        </div>
+
+        <div class="groupe-card__content">
+          <h3 class="groupe-card__title">{{ groupe.libelle }}</h3>
+          <p class="groupe-card__desc">{{ groupe.description }}</p>
+
+          <div class="groupe-card__meta">
+            <button
+              type="button"
+              class="players-toggle-btn"
+              (click)="openPlayersPopup(groupe)"
+            >
+              <span class="eye-icon">👁️</span>
+              <span>Nombre de joueurs : {{ groupe.nombreUsers || 0 }}</span>
+            </button>
+          </div>
+
+          <div class="groupe-card__actions">
+            <button
+              type="button"
+              class="groupe-btn groupe-btn--edit"
+              (click)="openEditModal(groupe)"
+            >
+              Modifier
+            </button>
+            <button
+              type="button"
+              class="groupe-btn groupe-btn--delete"
+              (click)="deleteGroupe(groupe.id)"
+            >
+              Supprimer
+            </button>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Modal ajout / modification groupe -->
+<div *ngIf="showModal" class="modal-backdrop" (click)="closeModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <button type="button" class="close-btn" (click)="closeModal()" aria-label="Fermer">×</button>
+
+    <h3 class="modal-title">
+      {{ isEditMode ? 'Modifier le groupe' : 'Ajouter un groupe' }}
+    </h3>
+
+    <div class="form-group">
+      <label>Libellé</label>
+      <input
+        type="text"
+        [(ngModel)]="formData.libelle"
+        placeholder="Ex: Groupe U10"
+      />
+    </div>
+
+    <div class="form-group">
+      <label>Description</label>
+      <textarea
+        rows="4"
+        [(ngModel)]="formData.description"
+        placeholder="Description du groupe"
+      ></textarea>
+    </div>
+
+    <div class="modal-actions">
+      <button type="button" class="modal-btn modal-btn--cancel" (click)="closeModal()">
+        Annuler
+      </button>
+      <button type="button" class="modal-btn modal-btn--save" (click)="saveGroupe()">
+        {{ isEditMode ? 'Enregistrer' : 'Créer' }}
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Popup liste joueurs -->
+<div *ngIf="showPlayersModal" class="modal-backdrop" (click)="closePlayersPopup()">
+  <div class="modal-content players-modal" (click)="$event.stopPropagation()">
+    <button
+      type="button"
+      class="close-btn"
+      (click)="closePlayersPopup()"
+      aria-label="Fermer"
+    >
+      ×
+    </button>
+
+    <h3 class="modal-title">
+      Liste des joueurs - {{ selectedGroupe?.libelle }}
+    </h3>
+
+    <div *ngIf="playersLoading" class="players-loading">
+      Chargement des joueurs...
+    </div>
+
+    <div *ngIf="playersError" class="players-error">
+      Impossible de charger les joueurs.
+    </div>
+
+    <div *ngIf="!playersLoading && !playersError && selectedPlayers.length > 0">
+      <ul class="players-list-popup">
+        <li *ngFor="let player of selectedPlayers" class="players-list-popup__item">
+          <span class="player-avatar">👤</span>
+          <span>{{ player.nom }} {{ player.prenom }}</span>
+        </li>
+      </ul>
+    </div>
+
+    <div *ngIf="!playersLoading && !playersError && selectedPlayers.length === 0" class="players-empty">
+      Aucun joueur dans ce groupe.
+    </div>
+  </div>
+</div>

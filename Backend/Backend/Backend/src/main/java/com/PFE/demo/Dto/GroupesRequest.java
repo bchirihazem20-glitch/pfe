@@ -1,11 +1,12 @@
 package com.PFE.demo.Dto;
 
-public class GroupRequest {
+public class GroupesRequest {
 
     private String libelle;
-    private Long coach;
-    private int numberOfGroups;
+    private String description;
 
+    public GroupesRequest() {
+    }
 
     public String getLibelle() {
         return libelle;
@@ -15,19 +16,11 @@ public class GroupRequest {
         this.libelle = libelle;
     }
 
-    public Long getCoach() {
-        return coach;
+    public String getDescription() {
+        return description;
     }
 
-    public void setCoach(Long coach) {
-        this.coach = coach;
-    }
-
-    public int getNumberOfGroups() {
-        return numberOfGroups;
-    }
-
-    public void setNumberOfGroups(int numberOfGroups) {
-        this.numberOfGroups = numberOfGroups;
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

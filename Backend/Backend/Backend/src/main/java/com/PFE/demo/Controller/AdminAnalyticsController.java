@@ -27,9 +27,9 @@ public class AdminAnalyticsController {
     @GetMapping("/summary")
     public ResponseEntity<Map<String, Object>> summary() {
         long totalUsers = userRepository.count();
-        long joueurs = userRepository.countByRole("JOUEUR");
-        long coachs = userRepository.countByRole("COACH");
-        long admins = userRepository.countByRole("ADMIN");
+        long joueurs = userRepository.countByRole_Name("JOUEUR");
+        long coachs = userRepository.countByRole_Name("COACH");
+        long admins = userRepository.countByRole_Name("ADMINISTRATEUR");
         long autres = Math.max(0, totalUsers - joueurs - coachs - admins);
         long totalProduits = produitRepository.count();
 

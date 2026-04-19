@@ -1,39 +1,35 @@
 package com.PFE.demo.Dto;
 
-import com.PFE.demo.Entity.Enum.AgeCategory;
+public class GroupesResponse {
 
-public class AutoGroupRequest {
-    private Long coachId;
-    private String groupName;
-    private int numberOfGroups;
-    private String age;
+    private Long id;
+    private String libelle;
+    private String description;
+    private int nombreUsers;
 
-    public int getNumberOfGroups() {
-        return numberOfGroups;
+    public GroupesResponse() {
     }
 
-    public String getGroupName() {
-        return groupName;
+    public GroupesResponse(Long id, String libelle, String description, int nombreUsers) {
+        this.id = id;
+        this.libelle = libelle;
+        this.description = description;
+        this.nombreUsers = nombreUsers;
     }
 
-    public Long getCoachId() {
-        return coachId;
+    public Long getId() {
+        return id;
     }
 
-    public void setCoachId(Long coachId) {
-        this.coachId = coachId;
+    public String getLibelle() {
+        return libelle;
     }
 
-    public void setGroupName(String groupName) {
-        this.groupName = groupName;
+    public String getDescription() {
+        return description;
     }
 
-    public void setNumberOfGroups(int numberOfGroups) {
-        this.numberOfGroups = numberOfGroups;
+    public int getNombreUsers() {
+        return nombreUsers;
     }
-
-    public String getAge() {
-        return age;
-    }
-    public void setAge(String age) {this.age = age;}
 }

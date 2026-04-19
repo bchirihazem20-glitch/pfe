@@ -1,8 +1,9 @@
 package com.PFE.demo.Security;
 
-
-import jakarta.servlet.*;
-import jakarta.servlet.http.*;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -25,6 +26,17 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     }
 
     @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+        String path = request.getServletPath();
+
+        return path.startsWith("/api/users")
+                || path.startsWith("/api/auth")
+                || path.startsWith("/api/groupes")
+                || path.startsWith("/api/groups")
+                || path.startsWith("/uploads");
+    }
+
+    @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain filterChain)
@@ -37,17 +49,14 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             return;
         }
 
-        String token = authHeader.substring(7);
-
         try {
+            String token = authHeader.substring(7);
             String email = jwtService.extractEmail(token);
 
             if (email != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-
                 UserDetails userDetails = userDetailsService.loadUserByUsername(email);
 
                 if (jwtService.isValid(token, userDetails.getUsername())) {
-
                     UsernamePasswordAuthenticationToken authToken =
                             new UsernamePasswordAuthenticationToken(
                                     userDetails,
@@ -62,9 +71,12 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                     SecurityContextHolder.getContext().setAuthentication(authToken);
                 }
             }
+
             System.out.println("TOKEN: " + token);
             System.out.println("EMAIL: " + email);
+
         } catch (Exception e) {
+            SecurityContextHolder.clearContext();
             System.out.println("JWT ERROR: " + e.getMessage());
         }
 

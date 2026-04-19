@@ -1,4 +1,5 @@
 package com.PFE.demo.Entity;
+
 import jakarta.persistence.*;
 import java.time.LocalDate;
 
@@ -13,24 +14,41 @@ public class User {
     @Column(nullable = false)
     private String nom;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String email;
 
+    @Column(nullable = false)
     private String password;
 
-    private String role = "client" ;
-    // constructor empty
-     private LocalDate dateNaissance;
+    // 🔥 Remplacement du String role par relation
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
 
+    private LocalDate dateNaissance;
+
+    // constructor empty
     public User() {}
 
     // constructor
-    public User(String nom, String email, String password,String role,LocalDate dateNaissance) {
+    public User(String nom, String email, String password, Role role, LocalDate dateNaissance) {
         this.nom = nom;
         this.email = email;
         this.password = password;
         this.role = role;
-        this.dateNaissance =dateNaissance;
+        this.dateNaissance = dateNaissance;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "groupe_id")
+    private Groupes groupe;
+
+    public Groupes getGroupe() {
+        return groupe;
+    }
+
+    public void setGroupe(Groupes groupe) {
+        this.groupe = groupe;
     }
 
     // getters & setters
@@ -45,12 +63,10 @@ public class User {
     public String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }
 
-    public String getRole() { return role; }
-    public void setRole(String role) { this.role= role; }
+    // 🔥 Getter/Setter corrigés
+    public Role getRole() { return role; }
+    public void setRole(Role role) { this.role = role; }
 
     public LocalDate getDateNaissance() { return dateNaissance; }
-    public void setDateNaissance(LocalDate dateNaissance ) { this.dateNaissance= dateNaissance; }
-
+    public void setDateNaissance(LocalDate dateNaissance) { this.dateNaissance = dateNaissance; }
 }
-
-

@@ -34,7 +34,7 @@ public class securityConfig {
                         .requestMatchers("/api/groups/**").permitAll()
                         .requestMatchers("/api/groupes/**").permitAll()
                         .requestMatchers("/api/users/**").permitAll()
-
+                        .requestMatchers("/api/auth/register/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);

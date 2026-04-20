@@ -13,7 +13,7 @@ export interface Player {
 })
 export class PlayerService {
 
-  private apiUrl = 'http://localhost:8082/api/users'; 
+  private apiUrl = 'http://localhost:8080/api/users'; 
 
   constructor(private http: HttpClient) {}
 

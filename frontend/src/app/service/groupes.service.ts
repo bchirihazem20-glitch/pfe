@@ -13,7 +13,7 @@ export interface Groupe {
   providedIn: 'root'
 })
 export class GroupesService {
-  private apiUrl = 'http://localhost:8082/api/groupes';
+  private apiUrl = 'http://localhost:8080/api/groupes';
 
   constructor(private http: HttpClient) {}
 

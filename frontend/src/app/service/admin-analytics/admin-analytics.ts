@@ -15,7 +15,7 @@ export interface AdminAnalyticsSummary {
   providedIn: 'root',
 })
 export class AdminAnalyticsService {
-  private readonly apiUrl = 'http://localhost:8082/api/admin/analytics';
+  private readonly apiUrl = 'http://localhost:8080/api/admin/analytics';
 
   constructor(private http: HttpClient) {}
 

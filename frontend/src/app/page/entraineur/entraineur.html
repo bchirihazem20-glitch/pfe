@@ -1,0 +1,45 @@
+<div class="container">
+
+  <h2>Gestion des Entraîneurs</h2>
+
+  <!-- FORM -->
+  <div class="form">
+    <input [(ngModel)]="entraineur.nom" placeholder="Nom" />
+    <input [(ngModel)]="entraineur.prenom" placeholder="Prénom" />
+    <input [(ngModel)]="entraineur.specialite" placeholder="Spécialité" />
+    <input [(ngModel)]="entraineur.email" placeholder="Email" />
+    <input [(ngModel)]="entraineur.telephone" placeholder="Téléphone" />
+
+    <button (click)="save()">
+      {{ isEdit ? 'Modifier' : 'Ajouter' }}
+    </button>
+
+    <button (click)="reset()">Reset</button>
+  </div>
+
+  <!-- TABLE -->
+  <table border="1">
+    <tr>
+      <th>Nom</th>
+      <th>Prénom</th>
+      <th>Spécialité</th>
+      <th>Email</th>
+      <th>Téléphone</th>
+      <th>Actions</th>
+    </tr>
+
+    <tr *ngFor="let e of entraineurs">
+      <td>{{ e.nom }}</td>
+      <td>{{ e.prenom }}</td>
+      <td>{{ e.specialite }}</td>
+      <td>{{ e.email }}</td>
+      <td>{{ e.telephone }}</td>
+
+      <td>
+        <button (click)="edit(e)">Modifier</button>
+        <button (click)="delete(e.id)">Supprimer</button>
+      </td>
+    </tr>
+  </table>
+
+</div>

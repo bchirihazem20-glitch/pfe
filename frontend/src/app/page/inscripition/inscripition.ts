@@ -103,6 +103,7 @@ export class Inscripition implements OnInit {
     this.showConfirmPassword = !this.showConfirmPassword;
   }
 
+<<<<<<< HEAD
   onSubmit(): void {
     if (this.registerForm.invalid) {
       this.registerForm.markAllAsTouched();
@@ -130,5 +131,34 @@ export class Inscripition implements OnInit {
         console.error('Erreur inscription :', err);
       }
     });
+=======
+  get f() {
+    return this.registerForm.controls;
   }
+
+  onSubmit() {
+  if (this.registerForm.valid) {
+    this.authService.register(this.registerForm.value).subscribe({
+      next: () => {
+        alert('✅ Inscription réussie !');
+        this.registerForm.reset();
+      },
+      error: (err) => {
+        console.log(err);
+
+        // 🔥 cas email déjà utilisé
+        if (err.status === 409 || err.error?.message?.includes('email')) {
+          alert('❌ Cet email est déjà utilisé. Veuillez en choisir un autre.');
+        } 
+        // 🔥 autre erreur
+        else {
+          alert('❌ Erreur lors de l’inscription !');
+        }
+      }
+    });
+  } else {
+    this.registerForm.markAllAsTouched();
+>>>>>>> aae08d83d8169ac5916fa657ee2f22d4f97420cb
+  }
+}
 }

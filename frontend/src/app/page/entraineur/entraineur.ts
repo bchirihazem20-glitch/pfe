@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../service/userService';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-entraineur',
+  imports:[FormsModule,CommonModule],
   templateUrl: './entraineur.html',
   styleUrls: ['./entraineur.css']
 })

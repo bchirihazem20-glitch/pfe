@@ -3,8 +3,8 @@ import { UserService } from '../../service/userService';
 
 @Component({
   selector: 'app-entraineur',
-  templateUrl: './entraineur.html',
-  styleUrls: ['./entraineur.css']
+templateUrl: './entraineur.component.html',
+styleUrls: ['./entraineur.component.css']
 })
 export class EntraineurComponent implements OnInit {
 

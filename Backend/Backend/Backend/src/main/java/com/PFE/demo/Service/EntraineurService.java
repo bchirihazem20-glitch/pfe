@@ -1,5 +1,7 @@
 package com.PFE.demo.Service;
 
+import com.PFE.demo.Entity.User;
+import com.PFE.demo.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,28 +12,29 @@ import java.util.List;
 public class EntraineurService {
 
     @Autowired
-    private EntraineurRepository repo;
+    private UserRepository repo;
 
     // Ajouter
-    public Entraineur ajouter(Entraineur e) {
+    public User ajouter(User e) {
         return repo.save(e);
     }
 
     // Afficher tout
-    public List<Entraineur> getAll() {
+    public List<User> getAll() {
         return repo.findAll();
     }
 
     // Modifier
-    public Entraineur modifier(Long id, Entraineur newE) {
+    public User modifier(Long id, User newE) {
         return repo.findById(id).map(e -> {
             e.setNom(newE.getNom());
             e.setPrenom(newE.getPrenom());
-            e.setSpecialite(newE.getSpecialite());
             e.setEmail(newE.getEmail());
-            e.setTelephone(newE.getTelephone());
             return repo.save(e);
         }).orElseThrow(() -> new RuntimeException("Entraineur non trouvé"));
+    }
+    public List<User> getCoachs() {
+        return repo.findByRole("COACH");
     }
 
     // Supprimer

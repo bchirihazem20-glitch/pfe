@@ -15,7 +15,7 @@ public class User {
     private String nom;
 
     // ✅ nouveau champ
-    @Column(nullable = false)
+    
     private String prenom;
 
     @Column(unique = true, nullable = false)

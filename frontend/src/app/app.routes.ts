@@ -12,6 +12,7 @@ import { DashboardPlaceholder } from './page/dashboard/placeholder/dashboard-pla
 import { AnalyseComponent } from './dashbord/analyse-donneer/analyse-donneer';
 import { Message } from './dashbord/message/message';
 import { Groupes } from './page/groupes/groupes';
+import { EntraineurComponent } from './page/entraineur/entraineur';
 
 
 export const routes: Routes = [
@@ -37,6 +38,7 @@ export const routes: Routes = [
       {path:"boutique",component:DashboardBoutique,canActivate:[adminFileGuard]},
       {path:"boutique/add-produit",component:AddProduit,canActivate:[adminFileGuard]},
       {path: "messages",component: Message},
+      { path: 'entraineurs', component: EntraineurComponent },
     
 
 

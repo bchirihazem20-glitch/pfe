@@ -15,7 +15,35 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public List<User> getUsersByGroupeId(Long groupeId) {
-        return userRepository.findByGroupe_Id(groupeId);
+    // 🔥 GET ALL USERS
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+    // 🔥 GET ONLY COACHS
+    public List<User> getCoachs() {
+        return userRepository.findByRole_Id(2L); // 2 = COACH
+    }
+
+    // 🔥 UPDATE USER
+    public User updateUser(Long id, User user) {
+        User existing = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        existing.setNom(user.getNom());
+        existing.setPrenom(user.getPrenom());
+        existing.setEmail(user.getEmail());
+        existing.setTelephone(user.getTelephone());
+        existing.setPassword(user.getPassword());
+        existing.setDateNaissance(user.getDateNaissance());
+        existing.setRole(user.getRole());
+        existing.setGroupe(user.getGroupe());
+
+        return userRepository.save(existing);
+    }
+
+    // 🔥 DELETE USER
+    public void deleteUser(Long id) {
+        userRepository.deleteById(id);
     }
 }

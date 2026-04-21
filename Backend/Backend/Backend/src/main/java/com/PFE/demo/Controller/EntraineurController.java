@@ -1,40 +1,25 @@
 package com.PFE.demo.Controller;
 
-import com.PFE.demo.Service.EntraineurService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.PFE.demo.Entity.User;
+import com.PFE.demo.Service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/entraineurs")
+@RequestMapping("/api/users")
 @CrossOrigin("*")
 public class EntraineurController {
 
-    @Autowired
-    private EntraineurService service;
+    private final UserService userService;
 
-    // Ajouter
-    @PostMapping
-    public Entraineur ajouter(@RequestBody Entraineur e) {
-        return service.ajouter(e);
+    public EntraineurController(UserService userService) {
+        this.userService = userService;
     }
 
-    // Afficher
-    @GetMapping
-    public List<Entraineur> getAll() {
-        return service.getAll();
-    }
-
-    // Modifier
-    @PutMapping("/{id}")
-    public Entraineur modifier(@PathVariable Long id, @RequestBody Entraineur e) {
-        return service.modifier(id, e);
-    }
-
-    // Supprimer
-    @DeleteMapping("/{id}")
-    public void supprimer(@PathVariable Long id) {
-        service.supprimer(id);
+    // 🔥 Afficher seulement les coachs
+    @GetMapping("/coachs")
+    public List<User> getCoachs() {
+        return userService.getCoachs();
     }
 }

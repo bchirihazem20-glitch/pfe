@@ -9,10 +9,13 @@ export const adminFileGuard: CanActivateFn = () => {
   const authService = inject(AuthService);
 
   return authService.getProfile().pipe(
-    map(user => {
-      if (user?.role === 'ADMIN') return true;
+    map((user: any) => {
+      if (user?.role === 'ADMIN') {
+        return true;
+      }
+
       return router.createUrlTree(['/']);
     }),
-    catchError(() => of(router.createUrlTree(['/'])))
+    catchError(() => of(router.createUrlTree(['/login'])))
   );
 };

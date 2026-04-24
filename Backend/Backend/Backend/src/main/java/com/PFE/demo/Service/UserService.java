@@ -18,4 +18,7 @@ public class UserService {
     public List<User> getUsersByGroupeId(Long groupeId) {
         return userRepository.findByGroupe_Id(groupeId);
     }
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
 }

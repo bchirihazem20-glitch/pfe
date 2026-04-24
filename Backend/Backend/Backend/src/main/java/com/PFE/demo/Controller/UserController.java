@@ -8,7 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
-@CrossOrigin(origins = "*") // pour Angular
+@CrossOrigin(origins = "*")
 public class UserController {
 
     private final UserService userService;
@@ -17,7 +17,11 @@ public class UserController {
         this.userService = userService;
     }
 
-    // 🔥 GET users by groupeId
+    @GetMapping
+    public List<User> getAllUsers() {
+        return userService.getAllUsers();
+    }
+
     @GetMapping("/groupe/{groupeId}")
     public List<User> getUsersByGroupe(@PathVariable Long groupeId) {
         return userService.getUsersByGroupeId(groupeId);

@@ -1,77 +1,118 @@
-<nav class="lux-nav fixed top-0 left-0 w-full z-50 border-b border-[#D4AF37]/25 bg-black/88 backdrop-blur-md text-white" aria-label="Navigation principale — Stars Academy Médenine">
-
+<nav
+  class="lux-nav fixed top-0 left-0 w-full z-50 border-b border-[#D4AF37]/25 bg-black/88 backdrop-blur-md text-white"
+  aria-label="Navigation principale — Stars Academy Médenine"
+>
   <div class="max-w-7xl mx-auto px-6 py-3.5 flex items-center w-full">
 
-    <!-- Équilibre gauche : même flex que la droite → menu visuellement centré -->
     <div class="hidden md:block flex-1 min-w-0" aria-hidden="true"></div>
 
-    <!-- Menu (centré sur la page) -->
+    <!-- Menu centré -->
     <ul class="hidden md:flex items-center justify-center gap-1 lg:gap-2 font-medium shrink-0">
-
       <li><a routerLink="/" fragment="accueil" class="lux-nav__link">Accueil</a></li>
       <li><a routerLink="/" fragment="concept" class="lux-nav__link">Concept</a></li>
       <li><a routerLink="/" fragment="activites" class="lux-nav__link">Activités</a></li>
       <li><a routerLink="/" fragment="planning" class="lux-nav__link">Planning</a></li>
       <li><a routerLink="/" fragment="contact" class="lux-nav__link">Contact</a></li>
       <li><a routerLink="/" fragment="boutique" class="lux-nav__link">Boutique</a></li>
-      <li><a routerLink="/" fragment="galerie" class="hover:text-yellow-400">Galerie</a></li>
-<li>
-  <a routerLink="/groupes" class="lux-nav__link">Groupes</a>
-</li>    </ul>
+      <li><a routerLink="/" fragment="galerie" class="lux-nav__link">Galerie</a></li>
+      <!-- <li><a routerLink="/groupes" class="lux-nav__link">Groupes</a></li> -->
+    </ul>
 
     <div class="hidden md:flex flex-1 min-w-0 items-center justify-end gap-3 relative">
+<!-- Non connecté -->
+<ng-container *ngIf="!user">
+  <a routerLink="/login" class="lux-nav__btn-outline">
+    Login
+  </a>
 
-      <!-- NON CONNECTÉ -->
-      <ng-container *ngIf="!user">
-        <a routerLink="/login"
-           class="lux-nav__btn-outline">
-          Login
-        </a>
+  <a routerLink="/inscription" class="lux-nav__btn-solid">
+    S'inscrire
+  </a>
+</ng-container>
 
-        <a routerLink="/inscription"
-           class="lux-nav__btn-solid">
-          S'inscrire
-        </a>
-      </ng-container>
+<!-- Connecté -->
+<ng-container *ngIf="user">
+  <button
+    type="button"
+    (click)="logout()"
+    class="lux-nav__btn-outline"
+  >
+    Déconnexion
+  </button>
+</ng-container>
 
-      <!-- CONNECTÉ -->
+      <!-- Connecté -->
       <ng-container *ngIf="user">
 
-        <div class="relative  cursor-pointer">
+        <!-- Admin -->
+        <a
+          *ngIf="user.role === 'ADMIN'"
+          routerLink="/adminPage"
+          class="lux-nav__btn-solid"
+        >
+          Admin
+        </a>
+
+        <div class="relative cursor-pointer">
 
           <!-- Avatar -->
-          <div (click)="toggleMenu()"
-               class="lux-nav__avatar">
+          <button
+            type="button"
+            (click)="toggleMenu()"
+            class="lux-nav__avatar"
+          >
             {{ getInitials() }}
-          </div>
+          </button>
 
-          <!-- Menu dropdown -->
-          <div *ngIf="menuOpen"
-               class="lux-nav__dropdown">
+          <!-- Dropdown -->
+          <div *ngIf="menuOpen" class="lux-nav__dropdown">
 
-            <!-- Info user -->
             <div class="lux-nav__dropdown-head">
               <p class="font-semibold">{{ user.nom }}</p>
-              <p class="text-sm text-black/50">{{ user.role === "ADMIN" ? "administrateur" :  user.role.toLowerCase()}}</p>
+              <p class="text-sm text-black/50">
+                {{ user.role === 'ADMIN' ? 'administrateur' : user.role?.toLowerCase() }}
+              </p>
             </div>
 
-            <!-- Liens -->
             <ul class="space-y-0.5">
 
               <li>
-                <a routerLink="/dashboard" class="lux-nav__dropdown-link">
+                <a
+                  *ngIf="user.role === 'ADMIN'"
+                  routerLink="/adminPage"
+                  class="lux-nav__dropdown-link"
+                  (click)="menuOpen = false"
+                >
+                  Page Admin
+                </a>
+              </li>
+
+              <li>
+                <a
+                  routerLink="/dashboard"
+                  class="lux-nav__dropdown-link"
+                  (click)="menuOpen = false"
+                >
                   Tableau de bord
                 </a>
               </li>
 
               <li>
-                <a routerLink="/parametres" class="lux-nav__dropdown-link">
+                <a
+                  routerLink="/parametres"
+                  class="lux-nav__dropdown-link"
+                  (click)="menuOpen = false"
+                >
                   Paramètres
                 </a>
               </li>
 
               <li>
-                <button (click)="logout()" class="lux-nav__dropdown-logout">
+                <button
+                  type="button"
+                  (click)="logout()"
+                  class="lux-nav__dropdown-logout"
+                >
                   Déconnexion
                 </button>
               </li>
@@ -81,16 +122,17 @@
           </div>
 
         </div>
-
       </ng-container>
 
-      <!-- Logo de 2.5x2.5 cm, descendu de 2 cm -->
+      <!-- Logo -->
       <div class="absolute top-[80px] right-2 hidden md:block">
-        <img src="assets/image/logo_academy_2026.png" alt="Stars Academy Logo" class="h-[95px] w-[95px] object-contain opacity-100 drop-shadow-md" />
+        <!-- <img
+          src="assets/image/logo_academy_2026.png"
+          alt="Stars Academy Logo"
+          class="h-[95px] w-[95px] object-contain opacity-100 drop-shadow-md"
+        /> -->
       </div>
 
     </div>
-
   </div>
-
 </nav>

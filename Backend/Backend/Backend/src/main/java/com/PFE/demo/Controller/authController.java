@@ -1,7 +1,10 @@
 package com.PFE.demo.Controller;
 
+import com.PFE.demo.Dto.RegisterRequest;
+import com.PFE.demo.Entity.Groupes;
 import com.PFE.demo.Entity.Role;
 import com.PFE.demo.Entity.User;
+import com.PFE.demo.Repository.GroupesRepository;
 import com.PFE.demo.Repository.RoleRepository;
 import com.PFE.demo.Repository.UserRepository;
 import com.PFE.demo.Security.JwtService;
@@ -19,20 +22,24 @@ public class authController {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final GroupesRepository groupesRepository;
     private final JwtService jwtService;
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public authController(UserRepository userRepository,
                           RoleRepository roleRepository,
+                          GroupesRepository groupesRepository,
                           JwtService jwtService) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+        this.groupesRepository = groupesRepository;
         this.jwtService = jwtService;
     }
 
     @PostMapping("/register")
-    public Object register(@RequestBody User user) {
-        if (userRepository.existsByEmail(user.getEmail())) {
+    public Object register(@RequestBody RegisterRequest request) {
+
+        if (userRepository.existsByEmail(request.getEmail())) {
             return ResponseEntity.status(HttpStatus.CONFLICT)
                     .body(Map.of("message", "Email already exists!"));
         }
@@ -43,8 +50,25 @@ public class authController {
                     .body(Map.of("message", "Role JOUEUR not found"));
         }
 
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        Groupes groupe = null;
+
+        if (request.getGroupId() != null) {
+            groupe = groupesRepository.findById(request.getGroupId())
+                    .orElse(null);
+
+            if (groupe == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body(Map.of("message", "Groupe not found"));
+            }
+        }
+
+        User user = new User();
+        user.setNom(request.getNom());
+        user.setEmail(request.getEmail());
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setRole(role);
+        user.setDateNaissance(request.getDateNaissance());
+        user.setGroupe(groupe);
 
         userRepository.save(user);
 
@@ -82,8 +106,6 @@ public class authController {
                 .getAuthentication()
                 .getName();
 
-        System.out.println("EMAIL FROM CONTEXT: " + email);
-
         User user = userRepository.findByEmail(email);
 
         if (user == null) {
@@ -96,7 +118,8 @@ public class authController {
                 "nom", user.getNom(),
                 "email", user.getEmail(),
                 "role", user.getRole().getName(),
-                "dateNaissance", user.getDateNaissance()
+                "dateNaissance", user.getDateNaissance(),
+                "groupId", user.getGroupe() != null ? user.getGroupe().getId() : null
         ));
     }
 }

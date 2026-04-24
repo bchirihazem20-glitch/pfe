@@ -1,6 +1,6 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../service/auth/auth';
 
 @Component({
@@ -8,48 +8,63 @@ import { AuthService } from '../../../service/auth/auth';
   standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './header.html',
-  styleUrl:"./header.css"
+  styleUrl: './header.css'
 })
-export class Header {
-
+export class Header implements OnInit {
   user: any = null;
   menuOpen = false;
 
-  constructor(private authService: AuthService, private cd: ChangeDetectorRef) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private cd: ChangeDetectorRef
+  ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.loadUser();
   }
 
-loadUser() {
-  this.authService.getProfile().subscribe({
-    next: (data) => {
-      this.user = data;
+  loadUser(): void {
+    const token = localStorage.getItem('token');
 
-      // 🔥 AJOUT ICI
-      console.log("USER DATA :", this.user);
-
-      this.cd.detectChanges();
-    },
-    error: () =>{
+    if (!token) {
       this.user = null;
-      window.localStorage.removeItem("token")
+      this.cd.detectChanges();
+      return;
     }
-  });
-}
+
+    this.authService.getProfile().subscribe({
+      next: (data: any) => {
+        this.user = data;
+        this.cd.detectChanges();
+      },
+      error: () => {
+        this.user = null;
+        localStorage.removeItem('token');
+        this.cd.detectChanges();
+      }
+    });
+  }
 
   getInitials(): string {
-    if (!this.user) return '';
+    if (!this.user?.nom) return '';
     return this.user.nom.charAt(0).toUpperCase();
   }
 
-  toggleMenu() {
+  toggleMenu(): void {
     this.menuOpen = !this.menuOpen;
   }
 
-  logout() {
+  logout(): void {
     this.authService.logout();
+
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+
     this.user = null;
     this.menuOpen = false;
+
+    this.cd.detectChanges();
+    this.router.navigate(['/login']);
   }
 }

@@ -1,0 +1,59 @@
+<!-- admin-page.component.html -->
+
+<div class="min-h-screen bg-gray-100">
+
+  <app-header></app-header>
+
+  <div class="flex">
+
+    <!-- Sidebar -->
+    <aside class="w-64 bg-[#111827] text-white shadow-xl min-h-screen p-5 border-r border-[#D4AF37]/20">
+
+      <ul class="space-y-3">
+
+        <li>
+          <a
+            href="#"
+            class="block p-3 rounded-lg hover:bg-[#D4AF37] hover:text-black transition font-medium">
+            Dashboard
+          </a>
+        </li>
+
+       <li>
+  <button
+    type="button"
+    (click)="goToUtilisateurs()"
+    class="w-full text-left block p-3 rounded-lg hover:bg-[#D4AF37] hover:text-black transition font-medium">
+    Utilisateurs
+  </button>
+</li>
+
+        <li>
+          <button
+            type="button"
+            (click)="goToGroupes()"
+            class="w-full text-left block p-3 rounded-lg hover:bg-[#D4AF37] hover:text-black transition font-medium">
+            Groupes
+          </button>
+        </li>
+
+        <li>
+          <a
+            href="#"
+            class="block p-3 rounded-lg hover:bg-[#D4AF37] hover:text-black transition font-medium">
+            Paramètres
+          </a>
+        </li>
+
+      </ul>
+
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 p-8">
+      <router-outlet></router-outlet>
+    </main>
+
+  </div>
+
+</div>

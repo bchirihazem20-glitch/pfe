@@ -1,0 +1,158 @@
+<section class="users-page">
+  <div class="page-header">
+    <div>
+      <h2>Utilisateurs</h2>
+   
+    </div>
+    <div class="stats-row">
+      <div class="stat-chip">
+        <span class="stat-num">{{ users.length }}</span>
+        <span class="stat-label">Total</span>
+      </div>
+      <div class="stat-chip admin">
+        <span class="stat-num">{{ adminCount }}</span>
+        <span class="stat-label">Admins</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <div class="search-wrap">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" placeholder="Rechercher nom, email…" [(ngModel)]="searchTerm" (ngModelChange)="applyFilters()" />
+    </div>
+    <div class="filters">
+      <select [(ngModel)]="filterRole" (ngModelChange)="applyFilters()">
+        <option value="">Tous les rôles</option>
+        <option *ngFor="let r of availableRoles" [value]="r">{{ r }}</option>
+      </select>
+      <select [(ngModel)]="filterGroupe" (ngModelChange)="applyFilters()">
+        <option value="">Tous les groupes</option>
+        <option *ngFor="let g of availableGroupes" [value]="g">{{ g }}</option>
+      </select>
+    </div>
+    <span class="result-count">{{ filteredUsers.length }} résultat(s)</span>
+  </div>
+
+  <div *ngIf="loading" class="loading-state">
+    <div class="spinner"></div>
+    <span>Chargement…</span>
+  </div>
+
+  <div *ngIf="!loading" class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th (click)="sortBy('id')" class="sortable">
+            ID <span class="sort-icon">{{ getSortIcon('id') }}</span>
+          </th>
+          <th (click)="sortBy('nom')" class="sortable">
+            Nom <span class="sort-icon">{{ getSortIcon('nom') }}</span>
+          </th>
+          <th>Email</th>
+          <th>Rôle</th>
+          <th>Groupe</th>
+          <th (click)="sortBy('dateNaissance')" class="sortable">
+            Naissance <span class="sort-icon">{{ getSortIcon('dateNaissance') }}</span>
+          </th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of paginatedUsers; let i = index" [class.row-even]="i % 2 === 0">
+          <td><span class="id-badge">#{{ user.id }}</span></td>
+          <td>
+            <div class="user-cell">
+              <div class="avatar">{{ getInitials(user.nom) }}</div>
+              <span>{{ user.nom }}</span>
+            </div>
+          </td>
+          <td class="email-cell">{{ user.email }}</td>
+          <td>
+            <span class="role-badge" [ngClass]="getRoleClass(user.role?.name)">
+              {{ user.role?.name || '—' }}
+            </span>
+          </td>
+          <td>
+            <span class="groupe-badge" *ngIf="user.groupe?.libelle">{{ user.groupe.libelle }}</span>
+            <span *ngIf="!user.groupe?.libelle" class="muted">—</span>
+          </td>
+          <td class="muted">{{ user.dateNaissance | date:'dd/MM/yyyy' }}</td>
+          <td class="actions">
+            <button class="btn-icon view" (click)="viewUser(user)" title="Voir">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+            <button class="btn-icon edit" (click)="openEditModal(user)" title="Modifier">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            </button>
+            <button class="btn-icon delete" (click)="deleteUser(user.id)" title="Supprimer">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+            </button>
+          </td>
+        </tr>
+        <tr *ngIf="filteredUsers.length === 0">
+          <td colspan="7" class="empty-state">
+            <div>
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              <p>Aucun utilisateur trouvé</p>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="pagination" *ngIf="totalPages > 1">
+      <button [disabled]="currentPage === 1" (click)="changePage(currentPage - 1)">‹</button>
+      <button *ngFor="let p of pageNumbers" [class.active]="p === currentPage" (click)="changePage(p)">{{ p }}</button>
+      <button [disabled]="currentPage === totalPages" (click)="changePage(currentPage + 1)">›</button>
+    </div>
+  </div>
+</section>
+
+<!-- Modal Voir -->
+<div class="modal-backdrop" *ngIf="showViewModal" (click)="closeViewModal()">
+  <div class="modal-box" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <div class="modal-avatar">{{ getInitials(selectedUser?.nom) }}</div>
+      <div>
+        <h3>{{ selectedUser?.nom }}</h3>
+        <p>{{ selectedUser?.email }}</p>
+      </div>
+      <button class="close-btn" (click)="closeViewModal()">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="info-row"><span class="info-label">ID</span><span>#{{ selectedUser?.id }}</span></div>
+      <div class="info-row"><span class="info-label">Rôle</span><span class="role-badge" [ngClass]="getRoleClass(selectedUser?.role?.name)">{{ selectedUser?.role?.name || '—' }}</span></div>
+      <div class="info-row"><span class="info-label">Groupe</span><span>{{ selectedUser?.groupe?.libelle || '—' }}</span></div>
+      <div class="info-row"><span class="info-label">Date de naissance</span><span>{{ selectedUser?.dateNaissance | date:'dd/MM/yyyy' }}</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Modifier -->
+<div class="modal-backdrop" *ngIf="showEditModal" (click)="closeEditModal()">
+  <div class="modal-box" (click)="$event.stopPropagation()">
+    <div class="modal-header edit-header">
+      <h3>Modifier l'utilisateur</h3>
+      <button class="close-btn" (click)="closeEditModal()">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label>Nom</label>
+        <input type="text" [(ngModel)]="editData.nom" placeholder="Nom complet" />
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" [(ngModel)]="editData.email" placeholder="email@exemple.com" />
+      </div>
+      <div class="form-group">
+        <label>Date de naissance</label>
+        <input type="date" [(ngModel)]="editData.dateNaissance" />
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-cancel" (click)="closeEditModal()">Annuler</button>
+      <button class="btn-save" (click)="updateUser()">Enregistrer</button>
+    </div>
+  </div>
+</div>

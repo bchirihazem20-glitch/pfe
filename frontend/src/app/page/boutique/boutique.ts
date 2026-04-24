@@ -18,7 +18,7 @@ export class Boutique {
       nom: 'Maillot Académie (avec logo)',
       prix: 80,
       promo: 10,
-      image: 'assets/image/star_academy_jersey.png'
+      // image: 'assets/image/star_academy_jersey.png'
     },
     {
       id: 2,

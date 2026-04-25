@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../service/userService';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-entraineur',
-templateUrl: './entraineur.component.html',
-styleUrls: ['./entraineur.component.css']
+  imports:[FormsModule,CommonModule],
+  templateUrl: './entraineur.html',
+  styleUrls: ['./entraineur.css']
 })
 export class EntraineurComponent implements OnInit {
 

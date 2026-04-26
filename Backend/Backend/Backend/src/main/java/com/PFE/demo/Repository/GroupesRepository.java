@@ -1,7 +1,11 @@
-package com.PFE.demo.Repository;
+package com.academy.repository;
 
-import com.PFE.demo.Entity.Groupes;
+import com.academy.entity.Groupe;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import java.util.List;
 
-public interface GroupesRepository extends JpaRepository<Groupes, Long> {
+@Repository
+public interface GroupeRepository extends JpaRepository<Groupe, Long> {
+    List<Groupe> findByCategorie(String categorie);
 }

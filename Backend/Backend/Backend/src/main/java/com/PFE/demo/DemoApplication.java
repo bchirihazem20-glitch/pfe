@@ -1,13 +1,11 @@
-package com.PFE.demo;
+package com.academy;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DemoApplication {
-
+public class Football AcademyApplication {
 	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, args);
+		SpringApplication.run(Football AcademyApplication.class, args);
 	}
-
 }

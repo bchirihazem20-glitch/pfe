@@ -1,11 +1,19 @@
-package com.PFE.demo.Entity;
+package com.academy.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
-@Table(name = "users")
-public class User {
+@Table(name = "utilisateurs")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Utilisateur {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,71 +22,39 @@ public class User {
     @Column(nullable = false)
     private String nom;
 
-    // ✅ nouveau champ
-    
+    @Column(nullable = false)
     private String prenom;
 
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Column(nullable = false)
-    private String password;
+    private String motDePasse;
 
-    // ✅ nouveau champ
     private String telephone;
 
-    @ManyToOne
-    @JoinColumn(name = "role_id")
-    private Role role;
+    private String adresse;
 
+    @Column(name = "date_naissance")
     private LocalDate dateNaissance;
 
-    @ManyToOne
-    @JoinColumn(name = "groupe_id")
-    private Groupes groupe;
+    @Column(name = "nom_pere")
+    private String nomPere;
 
-    // constructor vide
-    public User() {}
+    @Column(name = "telephone_pere")
+    private String telephonePere;
 
-    // ✅ constructor corrigé
-    public User(String nom, String prenom, String email, String password,
-                String telephone, Role role, LocalDate dateNaissance) {
-        this.nom = nom;
-        this.prenom = prenom;
-        this.email = email;
-        this.password = password;
-        this.telephone = telephone;
-        this.role = role;
-        this.dateNaissance = dateNaissance;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Role role = Role.JOUEUR;
+
+    @Column(name = "is_active")
+    private boolean isActive = false;
+
+    @Column(name = "created_at")
+    private LocalDate createdAt = LocalDate.now();
+
+    public enum Role {
+        JOUEUR, COACH, ADMIN
     }
-
-    // getters & setters
-
-    public Long getId() { return id; }
-
-    public String getNom() { return nom; }
-    public void setNom(String nom) { this.nom = nom; }
-
-    // ✅ prenom
-    public String getPrenom() { return prenom; }
-    public void setPrenom(String prenom) { this.prenom = prenom; }
-
-    public String getEmail() { return email; }
-    public void setEmail(String email) { this.email = email; }
-
-    public String getPassword() { return password; }
-    public void setPassword(String password) { this.password = password; }
-
-    // ✅ telephone
-    public String getTelephone() { return telephone; }
-    public void setTelephone(String telephone) { this.telephone = telephone; }
-
-    public Role getRole() { return role; }
-    public void setRole(Role role) { this.role = role; }
-
-    public LocalDate getDateNaissance() { return dateNaissance; }
-    public void setDateNaissance(LocalDate dateNaissance) { this.dateNaissance = dateNaissance; }
-
-    public Groupes getGroupe() { return groupe; }
-    public void setGroupe(Groupes groupe) { this.groupe = groupe; }
 }

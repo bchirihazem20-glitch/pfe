@@ -1,32 +1,40 @@
-package com.PFE.demo.Entity;
+package com.academy.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
 
 @Entity
+@Table(name = "paiements")
+@Data
+@NoArgsConstructor
 public class Paiement {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private double prix;
+    @Column(name = "date_paiement")
+    private LocalDate datePaiement;
 
-    private String type; // ex: carte, paypal, cash
+    @Column(nullable = false)
+    private Double montant;
 
-    // Relation MANY-TO-ONE avec Produit
+    @Column(name = "mois_concerne")
+    private String moisConcerne;
+
+    @Enumerated(EnumType.STRING)
+    private StatutPaiement statut = StatutPaiement.EN_ATTENTE;
+
+    private String description;
+
     @ManyToOne
-    @JoinColumn(name = "produit_id")
-    private Produit produit;
+    @JoinColumn(name = "joueur_id")
+    private Joueur joueur;
 
-    // Getters & Setters
-    public Long getId() { return id; }
-
-    public double getPrix() { return prix; }
-    public void setPrix(double prix) { this.prix = prix; }
-
-    public String getType() { return type; }
-    public void setType(String type) { this.type = type; }
-
-    public Produit getProduit() { return produit; }
-    public void setProduit(Produit produit) { this.produit = produit; }
+    public enum StatutPaiement {
+        EN_ATTENTE, PAYE, REFUSE
+    }
 }

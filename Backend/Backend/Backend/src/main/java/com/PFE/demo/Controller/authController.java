@@ -1,102 +1,43 @@
-package com.PFE.demo.Controller;
+package com.academy.controller;
 
-import com.PFE.demo.Entity.Role;
-import com.PFE.demo.Entity.User;
-import com.PFE.demo.Repository.RoleRepository;
-import com.PFE.demo.Repository.UserRepository;
-import com.PFE.demo.Security.JwtService;
-import org.springframework.http.HttpStatus;
+import com.academy.dto.AuthDto;
+import com.academy.entity.Utilisateur;
+import com.academy.service.AuthService;
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
 @RestController
 @RequestMapping("/api/auth")
-public class authController {
+@CrossOrigin(origins = "*")
+public class AuthController {
 
-    private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
-    private final JwtService jwtService;
-    private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+    @Autowired
+    private AuthService authService;
 
-    public authController(UserRepository userRepository,
-                          RoleRepository roleRepository,
-                          JwtService jwtService) {
-        this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
-        this.jwtService = jwtService;
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@Valid @RequestBody AuthDto.LoginRequest request) {
+        try {
+            AuthDto.AuthResponse response = authService.login(request);
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(Map.of("message", "Email ou mot de passe incorrect"));
+        }
     }
 
     @PostMapping("/register")
-    public Object register(@RequestBody User user) {
-        if (userRepository.existsByEmail(user.getEmail())) {
-            return ResponseEntity.status(HttpStatus.CONFLICT)
-                    .body(Map.of("message", "Email already exists!"));
+    public ResponseEntity<?> register(@Valid @RequestBody AuthDto.RegisterRequest request) {
+        try {
+            Utilisateur user = authService.register(request);
+            return ResponseEntity.ok(Map.of(
+                    "message", "Inscription réussie! Votre compte est en attente de validation.",
+                    "userId", user.getId()
+            ));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(Map.of("message", e.getMessage()));
         }
-
-        Role role = roleRepository.findByName("JOUEUR");
-        if (role == null) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(Map.of("message", "Role JOUEUR not found"));
-        }
-
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRole(role);
-
-        userRepository.save(user);
-
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(Map.of("message", "User registered successfully!"));
-    }
-
-    @PostMapping("/login")
-    public Object login(@RequestBody User user) {
-        User foundAccount = userRepository.findByEmail(user.getEmail());
-
-        if (foundAccount == null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body(Map.of("message", "User not found"));
-        }
-
-        boolean matches = passwordEncoder.matches(user.getPassword(), foundAccount.getPassword());
-        if (!matches) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body(Map.of("message", "Password incorrect"));
-        }
-
-        String token = jwtService.generateToken(foundAccount.getEmail());
-
-        return ResponseEntity.status(HttpStatus.OK)
-                .body(Map.of(
-                        "token", token,
-                        "message", "Login successful"
-                ));
-    }
-
-    @GetMapping("/profile")
-    public ResponseEntity<?> getProfile() {
-        String email = SecurityContextHolder.getContext()
-                .getAuthentication()
-                .getName();
-
-        System.out.println("EMAIL FROM CONTEXT: " + email);
-
-        User user = userRepository.findByEmail(email);
-
-        if (user == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(Map.of("message", "User not found"));
-        }
-
-        return ResponseEntity.ok(Map.of(
-                "id", user.getId(),
-                "nom", user.getNom(),
-                "email", user.getEmail(),
-                "role", user.getRole().getName(),
-                "dateNaissance", user.getDateNaissance()
-        ));
     }
 }

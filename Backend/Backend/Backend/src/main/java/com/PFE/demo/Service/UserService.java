@@ -1,49 +1,32 @@
-package com.PFE.demo.Service;
+package com.academy.security;
 
-import com.PFE.demo.Entity.User;
-import com.PFE.demo.Repository.UserRepository;
+import com.academy.entity.Utilisateur;
+import com.academy.repository.UtilisateurRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Collections;
 
 @Service
-public class UserService {
+public class UserDetailsServiceImpl implements UserDetailsService {
 
-    private final UserRepository userRepository;
+    @Autowired
+    private UtilisateurRepository utilisateurRepository;
 
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Utilisateur user = utilisateurRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("Utilisateur non trouvé: " + email));
 
-    // 🔥 GET ALL USERS
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
-    }
-
-    // 🔥 GET ONLY COACHS
-    public List<User> getCoachs() {
-        return userRepository.findByRole_Id(2L); // 2 = COACH
-    }
-
-    // 🔥 UPDATE USER
-    public User updateUser(Long id, User user) {
-        User existing = userRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("User not found"));
-
-        existing.setNom(user.getNom());
-        existing.setPrenom(user.getPrenom());
-        existing.setEmail(user.getEmail());
-        existing.setTelephone(user.getTelephone());
-        existing.setPassword(user.getPassword());
-        existing.setDateNaissance(user.getDateNaissance());
-        existing.setRole(user.getRole());
-        existing.setGroupe(user.getGroupe());
-
-        return userRepository.save(existing);
-    }
-
-    // 🔥 DELETE USER
-    public void deleteUser(Long id) {
-        userRepository.deleteById(id);
+        return new User(
+                user.getEmail(),
+                user.getMotDePasse(),
+                Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + user.getRole().name()))
+        );
     }
 }
